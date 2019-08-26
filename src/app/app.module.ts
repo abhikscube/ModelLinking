@@ -35,7 +35,7 @@ import { WaitingModulesComponent } from './components/waiting-modules/waiting-mo
     AppComponent,
     AppheaderComponent,
     AppfooterComponent,
-    AppmenuComponent,
+    // AppmenuComponent,
     AppsettingsComponent,
     ProductComponent,
     HomeComponent,
