@@ -26,6 +26,7 @@ import { SelectModelPlanComponent } from './components/select-model-plan/select-
 import { LandingpageComponentComponent } from './components/dashboard/landingpage-component/landingpage-component.component';
 import { PulledModelComponent } from './components/pulled-model/pulled-model.component';
 import { WaitingModulesComponent } from './components/waiting-modules/waiting-modules.component';
+import { GeneratePlanComponent } from './components/generate-plan/generate-plan.component';
 
 
 
@@ -43,7 +44,8 @@ import { WaitingModulesComponent } from './components/waiting-modules/waiting-mo
     SelectModelPlanComponent,
     LandingpageComponentComponent,
     PulledModelComponent,
-    WaitingModulesComponent
+    WaitingModulesComponent,
+    GeneratePlanComponent
     
   ],
   imports: [

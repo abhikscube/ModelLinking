@@ -1,0 +1,185 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">Generate Plan</h3>
+  </div>
+  <!-- /.box-header -->
+  <!-- form start -->
+  <form role="form">
+    <div class="box-body">
+      <div class="col-lg-6">
+      <div class="form-group">
+          <label>
+              Select Model
+            </label>
+          <select class="form-control"><option label="Model_one">Model_one</option><option label="Model_Two" value="object:16687" selected="selected">Model_Two</option><option label="BUMillenials" value="object:16688">BUMillenials</option></select>
+      </div></div>
+
+      <div class="col-lg-6">
+      </div>
+
+      <div class="clearfix"></div>
+
+
+      <div class="col-sm-3">
+          <div class="form-group">
+            <label>
+              Plan Type
+            </label>
+            <br>
+            <label class="radio-inline">
+              <input type="radio" ng-model="asc.analysis.planType" value="GEN" data-ng-click="asc.changePlanType(asc.analysis.planType)" class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" name="63">
+              Simple
+            </label>
+            <label class="radio-inline">
+              <input type="radio" ng-model="asc.analysis.planType" value="STEP" data-ng-click="asc.changePlanType(asc.analysis.planType)" class="ng-pristine ng-valid ng-not-empty ng-touched" name="64">Stepwise
+            </label>
+          </div>
+        </div>
+
+
+
+
+        <div class="col-sm-6">
+            <div class="form-group">
+              <label>
+                Value Type
+              </label>
+              <br>
+              <label class="radio-inline">
+                <input type="radio" ng-model="asc.analysis.valueType" value="P" class="" name="73">Change Percentage
+              </label>
+              <label class="radio-inline">
+                <input type="radio" ng-model="asc.analysis.valueType" value="A" class="" name="74">Change Absolute
+              </label>
+              <!-- ngIf: asc.showAbsolute --><label class="radio-inline">
+                <input type="radio" ng-model="asc.analysis.valueType" value="D" class="" name="80">Put Absolute
+              </label><!-- end ngIf: asc.showAbsolute -->
+              <br>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="col-sm-4">
+          <div class="form-group">
+              <label>
+                Existing Plan Name
+              </label>
+              <select class="form-control" ng-model="asc.analysis.selectPlan" ng-options="h.basePlanName for h in asc.headerData" data-ng-change="asc.changeSliderDate(asc.analysis.selectPlan)"><option label="Media Base Market Plan" value="object:70" selected="selected">Media Base Market Plan</option><option label="NewModel2Plan" value="object:71">NewModel2Plan</option></select>
+              <!-- ngIf: asc.error.planName -->
+            </div></div>
+
+            <div class="col-sm-4">
+            <div class="form-group">
+                <label>
+                  New Plan Name
+                  <span style="color:red;">*</span>
+                </label>
+                <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" data-ng-model="asc.analysis.newPlanName" placeholder="New Plan Name" data-ng-change="asc.checkNewPlanName(asc.analysis.newPlanName)">
+                <!-- ngIf: asc.error.newPlanNameError -->
+              </div>      </div>
+
+
+
+              <div class="col-sm-4">
+              <div class="form-group">
+									<label class="ng-binding">
+										Change Grps Impr value
+										<span style="color:red;">*</span>
+									</label>
+
+									<input type="text" class="form-control " placeholder="Change Grps Impr value">
+								 
+                </div>	</div>
+                
+
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>
+                        Brand
+                        <!-- ngIf: asc.showLoaderBrand -->
+                      </label>
+                      <select  class="form-control" multiple><option label="B_MetLife" value="object:5348">B_MetLife</option><option label="B_AIG" value="object:5349">B_AIG</option><option label="B_Allianz" value="object:5350">B_Allianz</option><option label="B_AXA" value="object:5351">B_AXA</option><option label="B_Fidelity" value="object:5352">B_Fidelity</option><option label="B_Jackson" value="object:5353">B_Jackson</option><option label="B_Lincoln" value="object:5354">B_Lincoln</option><option label="B_MassMutual" value="object:5355">B_MassMutual</option><option label="B_Nationwide" value="object:5356">B_Nationwide</option><option label="B_NewYorkLife" value="object:5357">B_NewYorkLife</option><option label="B_PacificLife" value="object:5358">B_PacificLife</option><option label="B_Prudential" value="object:5359">B_Prudential</option><option label="B_Transamerica" value="object:5360">B_Transamerica</option><option label="B_Voya" value="object:5361">B_Voya</option><option label="B_BHF" value="object:5362">B_BHF</option></select>
+
+
+    
+                    </div>
+                  </div>
+
+
+                  <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>
+                          Sub-Brand
+                          <!-- ngIf: asc.showLoaderBrand -->
+      
+                        </label>
+                        <select class="form-control" ng-model="asc.analysis.selectSubBrand" data-ng-options="sb.name for sb in asc.subBrands | listFilter" data-ng-change="asc.showSelectedSubBrand(asc.analysis.selectSubBrand,asc.analysis.selectData)" multiple=""><option label="B_Allianz" value="object:22246">B_Allianz</option></select>
+      
+                      </div>
+                    </div>
+
+
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                          <label>
+                            Product
+                          </label>
+                          <select class="form-control" ng-model="asc.analysis.selectProduct" data-ng-options="p.name for p in asc.products | listFilter" data-ng-change="asc.showSelectedProduct(asc.analysis.selectProduct)" multiple=""></select>
+        
+                        </div>
+                      </div>
+
+
+
+                      <div class="col-sm-4">
+                      <label>
+                          Media Type
+                        </label>
+                      
+                      <select   class="form-control"  multiple="">
+                        <option> 1</option>
+
+
+                      </select>
+                      
+                      
+                      </div>
+
+
+
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                              <label>
+                                Change Awareness Probability
+                              </label>
+                              <!--<input type="number" class="form-control"  data-ng-model="asc.analysis.awareness" placeholder="Change Awareness Probability"/>-->
+                              <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" data-ng-model="asc.analysis.awareness" placeholder="Change Awareness Probability" data-ng-change="asc.error.awarProb = validate(asc.analysis.awareness).by('awareness')" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                              <!-- ngIf: asc.error.awarProb[0] -->
+                            </div>
+                          </div>
+
+
+                          <div class="col-sm-4">
+                              <div class="form-group">
+                                <label>
+                                  Change Persuasion
+                                </label>
+                                <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" data-ng-model="asc.analysis.persuation" placeholder="Change Persuasion" data-ng-change="asc.error.persuasion = validate(asc.analysis.persuation).by('persuasion')" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                <!-- ngIf: asc.error.persuasion[0] -->
+                                <!--<input type="number" class="form-control"  data-ng-model="asc.analysis.persuation" placeholder="Change Persuation"/>-->
+                              </div>
+                            </div>
+
+
+
+ 
+    </div>
+    <!-- /.box-body -->
+
+    <div class="box-footer">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
