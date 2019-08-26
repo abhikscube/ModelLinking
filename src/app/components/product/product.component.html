@@ -1,0 +1,429 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box box-default">
+      <div class="box-body">
+          <div class="col-xs-6">
+              <div class="form-group">
+                <label>Select Model</label>
+                <select class="form-control" (change)="onChangeModelList($event.target.value)">                  
+                  <option value='-1' >Select a Model</option>
+                   <ng-container *ngFor="let item of modelList">
+                    <option [value]="item.id">{{item.name}}</option>
+                   </ng-container>
+                 </select>
+              </div>
+              </div>           
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+
+      <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Brand(s) VS GRP(s)</h3>         
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <div>
+                  <nvd3 [options]="options_Brand_GRP" [data]="data_Brand_GRP"></nvd3>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+      </div>
+
+
+</div>
+
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Media VS GRP(s)</h3>         
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+
+        <div class="box box-default">
+          <div class="box-body">
+              <div class="col-xs-6">
+                  <div class="form-group">
+                    <label *ngIf="load_brand_list==2">Select Brand(s)</label>
+                    <select class="form-control" (change)="onChangeMultiBrandListForMediaVsGRP($event.target)" multiple *ngIf="load_brand_list==2">                  
+                       <ng-container *ngFor="let item of brand_list">
+                        <option [value]="item.id">{{item.value}}</option>
+                       </ng-container>
+                     </select>
+                     <div>
+                        <i class="fa fa-refresh fa-spin" *ngIf="load_brand_list==1"></i>
+                    </div>  
+                  </div>
+                  </div>           
+          </div>
+        </div>
+
+        <div class="box-body">
+          <div class="chart">
+            <div>
+              <nvd3 [options]="options_Media_GRP" [data]="data_Media_GRP" *ngIf="load_media_grp==2"></nvd3>
+            </div>
+            <div>
+              <i class="fa fa-refresh fa-spin" *ngIf="load_media_grp==1"></i>
+          </div>             
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">TimeSeries : GRP(s) by Brand</h3>         
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box box-default">
+          <div class="box-body">
+              <div class="col-xs-6">
+                  <div class="form-group">
+                    <label *ngIf="load_media_list==2">Select Media List(s)</label>
+                    <select class="form-control" (change)="onChangeMultiModelListForTimeSeriesGRPvsBrand($event.target)" multiple *ngIf="load_media_list==2">                  
+                       <ng-container *ngFor="let item of media_list">
+                        <option [value]="item.id">{{item.value}}</option>
+                       </ng-container>
+                     </select>
+                     <div>
+                        <i class="fa fa-refresh fa-spin" *ngIf="load_media_list==1"></i>
+                    </div>  
+                  </div>
+              </div>                                     
+          </div>
+        </div>        
+        <div class="box box-default">
+          <div class="box-body">
+            <div>
+              <nvd3 [options]="options_TimeSeries_GRP_Brand" [data]="data_TimeSeries_GRP_Brand" *ngIf="load_time_line_grp==2"></nvd3>
+            </div>
+            <div>
+                <i class="fa fa-refresh fa-spin" *ngIf="load_time_line_grp==1"></i>
+            </div>             
+          </div>
+        </div>
+
+      </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">TimeSeries : GRP(s) by Media Type</h3>         
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box box-default">
+          <div class="box-body">
+              <div class="col-xs-6">
+                  <div class="form-group">
+                    <label *ngIf="load_brand_list==2">Select Brand List(s)</label>
+                    <select class="form-control" (change)="onChangeMultiBrandListForTimeSeriesGRPvsMediaType($event.target)" multiple *ngIf="load_brand_list==2">                  
+                       <ng-container *ngFor="let item of brand_list">
+                        <option [value]="item.id">{{item.value}}</option>
+                       </ng-container>
+                     </select>
+                     <div>
+                        <i class="fa fa-refresh fa-spin" *ngIf="load_brand_list==1"></i>
+                    </div>  
+                  </div>
+              </div>                                     
+          </div>
+        </div>        
+        <div class="box box-default">
+          <div class="box-body">
+            <div>
+              <nvd3 [options]="options_time_line_grp_media" [data]="data_time_line_grp_media" *ngIf="load_time_line_grp_media==2"></nvd3>
+            </div>
+            <div>
+                <i class="fa fa-refresh fa-spin" *ngIf="load_time_line_grp_media==1"></i>
+            </div>             
+          </div>
+        </div>
+
+      </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">TimeSeries : GRP(s) by Media Plan</h3>         
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <div>
+              <nvd3 [options]="options_TimeSeries_GRP_Media_plan" [data]="data_TimeSeries_GRP_Media_plan"></nvd3>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+
+
+</div>
+
+<!--
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">TimeSeries : Sales Unit/Sales Dollars by Brands</h3>         
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box box-default">
+          <div class="box-body">
+              <div class="col-xs-6">
+                  <div class="form-group" *ngIf="load_brand_list==2">
+                  <label>Select Chart Type</label>
+                    <select class="form-control" (change)="onChangeChartType($event.target.value)">                  
+                        <option value="-1">Select</option>
+                        <option value="1">SALES__UNIT</option> 
+                        <option value="2">SALES__DOLLARS</option>                          
+                     </select>
+                     <div>
+                        <i class="fa fa-refresh fa-spin" *ngIf="load_brand_list==1"></i>
+                    </div>  
+                  </div>
+                  </div>           
+          </div>
+        </div>         
+        <div class="box-body">
+          <div class="chart">
+            <div *ngIf="loading_status==2">
+              <nvd3 [options]="options_TimeSeries_unit_sales_dollar_brand" [data]="data_TimeSeries_unit_sales_dollar_brand"></nvd3>
+            </div>
+            <div>
+              <i class="fa fa-refresh fa-spin" *ngIf="loading_status==1"></i>
+          </div>            
+          </div>
+        </div>
+
+      </div>
+  </div>
+
+
+</div>
+
+-->
+
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">TimeSeries : Sales unit/Doller By Simulation</h3>         
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box box-default">
+          <div class="box-body">
+              <div class="col-xs-6">
+                  <div class="form-group" *ngIf="load_brand_list==2">
+                  <label>Select Chart Type</label>
+                    <select class="form-control" (change)="onChangeSimulationChartType($event.target.value)">                  
+                        <option value="-1">Select</option>
+                        <option value="1">SALES__UNIT</option> 
+                        <option value="2">SALES__DOLLARS</option>                          
+                     </select>
+                     <div>
+                        <i class="fa fa-refresh fa-spin" *ngIf="load_brand_list==1"></i>
+                    </div>  
+                  </div>
+                  </div>           
+          </div>
+        </div>         
+        <div class="box-body">
+          <div class="chart">
+            <div *ngIf="loading_status_simulation==2">
+              <nvd3 [options]="options_TimeSeries_unit_sales_dollar_simulation" [data]="data_TimeSeries_unit_sales_dollar_simulation"></nvd3>
+            </div>
+            <div>
+              <i class="fa fa-refresh fa-spin" *ngIf="loading_status_simulation==1"></i>
+          </div>            
+          </div>
+        </div>
+
+      </div>
+  </div>
+
+
+</div>
+
+
+
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Attribute Vs Average Score</h3>         
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>      
+        <div class="box-body">
+          <div class="chart">
+            <div>
+              <nvd3 [options]="options_attribute_vs_avarage_score" [data]="data_attribute_vs_avarage_score"></nvd3>
+            </div>          
+          </div>
+        </div>
+
+      </div>
+  </div>
+
+
+</div>
+
+
+
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">TimeSeries : Awareness by Simulation</h3>         
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <div>
+              <nvd3 [options]="options_time_series_awareness_simulation" [data]="data_time_series_awareness_simulation"></nvd3>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+</div>
+
+
+<!--
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">TimeSeries : Persuation by Simulation</h3>         
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <div>
+              <nvd3 [options]="options_timeseries_persuation_simulation" [data]="data_timeseries_persuation_simulation"></nvd3>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+</div>
+-->
+
+<div class="row">
+
+
+  <div class="col-md-12">
+    <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">ROMI Vs Simulation</h3>         
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>      
+        <div class="box-body">
+          <div class="chart">
+            <div>
+              <nvd3 [options]="options_romi_simulation" [data]="data_romi_simulation"></nvd3>
+            </div>          
+          </div>
+        </div>
+
+      </div>
+  </div>
+
+
+</div>

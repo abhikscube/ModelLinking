@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box box-default">
+      <div class="box-body">
+          <div class="col-xs-6">
+              <div class="form-group">
+                <label>Select Model</label>
+                <select class="form-control" (change)="onChangeModelList($event.target.value)">                  
+                  <option value='-1' >Select a Model</option>
+                   <ng-container *ngFor="let item of modelList | async">
+                    <option [value]="item.id">{{item.name}}</option>
+                   </ng-container>
+                 </select>
+              </div>
+              </div>           
+              <div class="col-xs-6">
+                  <div class="form-group">
+                    <label>Select Plan</label>
+                    <select class="form-control"
+                    (change)="onChangePlanList($event.target.value)"
+                   >
+                      <option value='-1'>Select a Plan</option>
+                       <option [value]="item.id" *ngFor="let item of planlist">{{item.name}}</option>
+                    </select>
+                  </div>
+                </div>    
+      </div>
+    </div>
+  </div>
+</div>

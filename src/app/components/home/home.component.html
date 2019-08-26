@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Model List</h3>
+      </div>
+      <!-- /.box-header -->
+      <table datatable [dtOptions]="dtOptions" *ngIf="load_media_grp==2" class="row-border hover">
+        <thead>
+          <tr>
+            <th>Model Name</th>
+            <th>Start Date</th>
+            <th>Model Description</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of modeldataList">
+            <tr>
+              <td>{{item.name}}</td>
+              <td>{{item.startDate | date}}</td>
+              <td>{{item.description}}</td>             
+              <td><a href="#">
+                  <div class="tools">
+                      <i class="fa fa-edit"></i>
+                    </div>
+                    </a>                
+              </td>
+              <td><a href="#">
+                  <div class="tools">
+                      <i class="fa fa-trash-o"></i>
+                    </div> 
+                  </a>               
+              </td>             
+            </tr>            
+          </ng-container>
+        </tbody>
+      </table>
+
+    </div>
+    <!-- /.box -->
+
+  </div>
+  <!-- /.col -->
+
+  <!-- /.col -->
+</div>

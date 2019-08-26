@@ -1,0 +1,41 @@
+<div class="box box-danger">
+  <div class="box-header">
+    <i class="ion ion-clipboard"></i>
+
+    <h3 class="box-title">Models waiting for import</h3>
+
+    
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+    <ul class="todo-list">
+
+        <ng-container *ngFor="let item of WatingModelList">
+
+            <li>
+              <!-- drag handle -->
+              <span class="handle">
+                    <i class="fa fa-ellipsis-v"></i>
+                    <i class="fa fa-ellipsis-v"></i>
+                  </span>
+              <!-- checkbox -->
+            
+              <!-- todo text -->
+              <span class="text">{{item.name}}</span>
+              <!-- Emphasis label -->
+              
+              <!-- General tools such as edit or delete-->
+              <div class="tools">
+                <i class="fa fa-download"></i>
+              </div>
+            </li>
+
+        </ng-container>    
+    </ul>
+  </div>
+  <!-- /.box-body -->
+  <div class="box-footer clearfix no-border">
+    <button type="button" class="btn btn-default pull-right"><i class="fa fa-arrow-circle-right"></i>Show all</button>
+  </div>
+</div>
