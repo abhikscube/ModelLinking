@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { NvD3Module } from 'ng2-nvd3';
 import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
-
+import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars'; //date picker syncfusion.com/kb/9967/how-to-create-an-angular-7-daterangepicker-component
+import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { AppComponent } from './app.component';
 import { AppheaderComponent } from './components/appheader/appheader.component';
 import { AppfooterComponent } from './components/appfooter/appfooter.component';
-import { AppmenuComponent } from './components/appmenu/appmenu.component';
 import { AppsettingsComponent } from './components/appsettings/appsettings.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductComponent } from './components/product/product.component';
@@ -27,6 +27,8 @@ import { LandingpageComponentComponent } from './components/dashboard/landingpag
 import { PulledModelComponent } from './components/pulled-model/pulled-model.component';
 import { WaitingModulesComponent } from './components/waiting-modules/waiting-modules.component';
 import { GeneratePlanComponent } from './components/generate-plan/generate-plan.component';
+//import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -54,7 +56,7 @@ import { GeneratePlanComponent } from './components/generate-plan/generate-plan.
     NvD3Module,
     AppRoutingModule,
     DataTablesModule,
-    HttpClientModule
+    HttpClientModule,DateRangePickerModule,TreeViewModule
   ],
   providers: [ModelListService,
     PlanlistService,
@@ -62,4 +64,6 @@ import { GeneratePlanComponent } from './components/generate-plan/generate-plan.
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+}
