@@ -15,6 +15,19 @@ export class GeneratePlanComponent implements OnInit {
   
   constructor() { }
 
+  public brandWithSubbrand :Object[]=
+  [
+    {id:1,name:'B_Aflac',hasChild:true},
+    {id:2,pid:1,name:'B_aflac_accident'},
+    {id:3,pid:1,name:'B_aflac_dental'}
+
+  ];
+// maps the appropriate column to fields property
+public brandSubbrand: Object = { dataSource: this.brandWithSubbrand, 
+  id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
+// set the CheckBox to the TreeView
+public showBrandCheckBox: boolean = true;
+
   public countries: Object[] = [
     { id: 1, name: 'Australia', hasChild: true, expanded: true },
     { id: 2, pid: 1, name: 'New South Wales' },

@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { NvD3Module } from 'ng2-nvd3';
 import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
+
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars'; //date picker syncfusion.com/kb/9967/how-to-create-an-angular-7-daterangepicker-component
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
+
 import { AppComponent } from './app.component';
 import { AppheaderComponent } from './components/appheader/appheader.component';
 import { AppfooterComponent } from './components/appfooter/appfooter.component';
