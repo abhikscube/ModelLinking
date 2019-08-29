@@ -24,7 +24,7 @@ export class ProjectLinkModulesComponent implements OnInit {
     this.dtOptions = {
 
       pagingType: 'full_numbers',
-      pageLength: 4,
+      pageLength: 100,
       lengthMenu: [2,10,30,100],
       columnDefs: [
         { "orderable": false, "targets": [2,3,4] } ,
@@ -41,13 +41,14 @@ export class ProjectLinkModulesComponent implements OnInit {
 
   }
 
-  openModal(id:any) {
+  openModal(jsonIndex:number) {
 
       const modalRef = this.modalService.open(ProjectLinkModalComponent);
-      modalRef.componentInstance.id = id;
+      modalRef.componentInstance.jsonIndex = jsonIndex;
+      modalRef.componentInstance.name = this.ModelList[jsonIndex].name;
       modalRef.componentInstance.ModelList = this.ModelList;
 
-      modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      modalRef.componentInstance.passEntry.subscribe((receivedEntry: any) => {
 
       this.ModeljsondadaService.updateData(receivedEntry);
      // console.log(receivedEntry)
@@ -55,6 +56,12 @@ export class ProjectLinkModulesComponent implements OnInit {
 
 
     });
+  }
+
+  unlinkModel(i:any){
+
+    this.ModeljsondadaService.unlinkModelservice(i);
+
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Modeljson } from 'src/app/model/modeljson';
 
 @Component({
   selector: 'app-project-link-modal',
@@ -9,18 +10,21 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProjectLinkModalComponent implements OnInit {
 
-  @Input() public id;  
-  @Input() public ModelList;
+  @Input() public jsonIndex: number;  
+  @Input() public name:string; 
+  @Input() public ModelList:Modeljson[];
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
-  public selectedModel: Array<any>;
+
+  public selectedModel: number=-1;
   public returnVlaue:any[];  
+  public displayStatus:string='Hide';
   
 
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
 
-    console.log(this.id);   
+    console.log(this.jsonIndex);   
   }
 
   passBack(){
@@ -30,11 +34,26 @@ export class ProjectLinkModalComponent implements OnInit {
     this.activeModal.dismiss();
     //console.log(this.selectedModel); 
 
-    returnVlaue.push(this.id);
-    returnVlaue.push(this.selectedModel);
+    // returnVlaue.push(this.jsonIndex);
+    // returnVlaue.push(this.selectedModel);
 
-    console.log(returnVlaue); 
+    returnVlaue['jsonIndex']=this.jsonIndex;
+    returnVlaue['selectedModel']=this.selectedModel;
+    
+    console.log('returnVlaue'); 
+    console.log(returnVlaue);
+
     this.passEntry.emit(returnVlaue); 
+  }
+
+  toggleButtn(){
+
+    if(this.selectedModel==-1){
+      this.displayStatus='Hide';
+    }else{
+      this.displayStatus='Show';     
+    }
+
   }
 
 }
