@@ -110,16 +110,38 @@
       </div>
 
 
-
       <div class="col-sm-4">
-        <div class="form-group">
-          <label>Brand/SubBrand</label>
-          <div id='treebrand'>
-              <ejs-treeview id='treeSubBrand' [fields]='brandSubbrand' [showCheckBox]='showBrandCheckBox'></ejs-treeview>
-          </div>
-        </div>
+        <label>
+         Brand
+        </label>
+         <div id="brandslist">
+          <ejs-multiselect 
+              id='multiselectelement' 
+              [dataSource]='brandsData' 
+              [fields]='brandsField'
+              (filtering)='onFiltering($event)' 
+              [mode]='mode' 
+              [placeholder]='placeholder'>
+              </ejs-multiselect>
+         </div>
       </div>
-    
+     
+      <div class="col-sm-4">
+        <label>
+          Sub Brand
+        </label>
+        <div id="brandslist">
+          <ejs-multiselect 
+              id='multiselectelement' 
+              [dataSource]='brandsData' 
+              [fields]='brandsField'
+              (filtering)='onFiltering($event)' 
+              [mode]='mode' 
+              [placeholder]='placeholder'>
+              </ejs-multiselect>
+         </div>
+      </div>
+      
 
       <div class="col-sm-4">
         <label>

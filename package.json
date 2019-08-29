@@ -21,6 +21,7 @@
     "@angular/router": "^7.2.15",
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "@syncfusion/ej2-angular-calendars": "^17.2.46",
+    "@syncfusion/ej2-angular-dropdowns": "^17.2.47",
     "@syncfusion/ej2-angular-navigations": "^17.2.46",
     "@types/jquery": "^3.3.31",
     "angular-datatables": "^8.0.0",

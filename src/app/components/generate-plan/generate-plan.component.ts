@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { enableRipple } from '@syncfusion/ej2-base';
+import { CheckBoxSelectionService, FilteringEventArgs } from '@syncfusion/ej2-angular-dropdowns';
 enableRipple(true);
 
 
@@ -12,21 +13,24 @@ export class GeneratePlanComponent implements OnInit {
 
   public start: Date = new Date ("02/07/2013"); 
   public end: Date = new Date ("11/25/2017");
+  public mode:String;
   
   constructor() { }
 
-  public brandWithSubbrand :Object[]=
-  [
-    {id:1,name:'B_Aflac',hasChild:true},
-    {id:2,pid:1,name:'B_aflac_accident'},
-    {id:3,pid:1,name:'B_aflac_dental'}
-
-  ];
+public brandsData:Object[]=[
+  { id: '1682', brand: 'ALL' },
+  { id: '1683', brand: 'B_Aflac_Accident' },
+  { id: '1684', brand: 'B_Aflac_Cancer' },
+  { id: '1685', brand: 'B_Aflac_Dental' },
+  { id: '1686', brand: 'B_Aflac_Hospital Ind' }
+];
 // maps the appropriate column to fields property
-public brandSubbrand: Object = { dataSource: this.brandWithSubbrand, 
-  id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
-// set the CheckBox to the TreeView
-public showBrandCheckBox: boolean = true;
+public brandsField: Object = { text: 'brand', value: 'id' };
+
+ // set placeholder to MultiSelect input element
+ public placeholder: string = 'Select brands';
+ //Bind the filter event
+
 
   public countries: Object[] = [
     { id: 1, name: 'Australia', hasChild: true, expanded: true },
@@ -57,7 +61,8 @@ public showBrandCheckBox: boolean = true;
     { id: 25, pid: 21, name: 'Punjab' }
 ];
 // maps the appropriate column to fields property
-public field: Object = { dataSource: this.countries, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
+public field: Object = { dataSource: this.countries, id: 'id', 
+parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
 // set the CheckBox to the TreeView
 public showCheckBox: boolean = true;
 
