@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import { NvD3Module } from 'ng2-nvd3';
 import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
+
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars'; //date picker syncfusion.com/kb/9967/how-to-create-an-angular-7-daterangepicker-component
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
+import {MultiSelectModule} from '@syncfusion/ej2-angular-dropdowns';
+
 import { AppComponent } from './app.component';
 import { AppheaderComponent } from './components/appheader/appheader.component';
 import { AppfooterComponent } from './components/appfooter/appfooter.component';
@@ -31,6 +34,7 @@ import { GeneratePlanComponent } from './components/generate-plan/generate-plan.
 import { ProjectLinkModulesComponent } from './components/project-link-modules/project-link-modules.component';
 import { ProjectLinkModalComponent } from './components/project-link-modal/project-link-modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { from } from 'rxjs';
 
 
 
@@ -64,7 +68,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     DateRangePickerModule,
     TreeViewModule,
-    NgbModule
+    NgbModule,MultiSelectModule
   ],
   providers: [ModelListService,
     PlanlistService,
