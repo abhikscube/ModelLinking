@@ -5,12 +5,14 @@ import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
 import { LandingpageComponentComponent } from './components/dashboard/landingpage-component/landingpage-component.component';
 import { GeneratePlanComponent } from './components/generate-plan/generate-plan.component';
+import { ProjectLinkModulesComponent } from './components/project-link-modules/project-link-modules.component';
 
 const routes: Routes = [
   { path: '', component: LandingpageComponentComponent, pathMatch: 'full' },
   { path: 'product', component: ProductComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'plan', component: GeneratePlanComponent }
+  { path: 'plan', component: GeneratePlanComponent },
+  { path: 'modulelist', component: ProjectLinkModulesComponent}
 ];
 
 @NgModule({

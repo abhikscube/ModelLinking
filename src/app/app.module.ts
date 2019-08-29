@@ -16,6 +16,7 @@ import { ModelListService} from './service/modellist.service';
 import { PlanlistService } from './service/planlist.service';
 import { ChartDataService } from './service/chartdata.service';
 import { ModellistComponent } from './components/modellist/modellist.component';
+import {ModeljsondadaService} from './service/modeljsondada.service';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -27,7 +28,9 @@ import { LandingpageComponentComponent } from './components/dashboard/landingpag
 import { PulledModelComponent } from './components/pulled-model/pulled-model.component';
 import { WaitingModulesComponent } from './components/waiting-modules/waiting-modules.component';
 import { GeneratePlanComponent } from './components/generate-plan/generate-plan.component';
-//import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ProjectLinkModulesComponent } from './components/project-link-modules/project-link-modules.component';
+import { ProjectLinkModalComponent } from './components/project-link-modal/project-link-modal.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -47,7 +50,9 @@ import { GeneratePlanComponent } from './components/generate-plan/generate-plan.
     LandingpageComponentComponent,
     PulledModelComponent,
     WaitingModulesComponent,
-    GeneratePlanComponent
+    GeneratePlanComponent,
+    ProjectLinkModulesComponent,
+    ProjectLinkModalComponent
     
   ],
   imports: [
@@ -56,13 +61,18 @@ import { GeneratePlanComponent } from './components/generate-plan/generate-plan.
     NvD3Module,
     AppRoutingModule,
     DataTablesModule,
-    HttpClientModule,DateRangePickerModule,TreeViewModule
+    HttpClientModule,
+    DateRangePickerModule,
+    TreeViewModule,
+    NgbModule
   ],
   providers: [ModelListService,
     PlanlistService,
-    ChartDataService 
+    ChartDataService,
+    ModeljsondadaService  
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ ProjectLinkModalComponent ]
 })
 export class AppModule { 
 
