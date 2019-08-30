@@ -3,46 +3,335 @@
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
         <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <!-- ngIf: !asc.currentSelectedClient.clientImage --><img src="../assets/images/nopic.png" data-ng-if="!asc.currentSelectedClient.clientImage" class="img-circle ng-scope" alt="Client Image"><!-- end ngIf: !asc.currentSelectedClient.clientImage -->
+            <!-- ngIf: asc.currentSelectedClient.clientImage -->
+          </div>
+          <div class="pull-left info">
+            <!-- <p>
+              {{ asc.user.username }}
+            </p> -->
+            <a style="cursor: default;" class="ng-binding">
+              <i class="fa fa-circle text-success">
+              </i>
+              Aflac
+            </a>
+          </div>
+        </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu" data-widget="tree">
-          <li class="treeview">
-            <a href="#">
-              <i class="fa  fa-bullseye"></i> <span>Model Setup</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
+        <ul class="sidebar-menu">
+          <!-- ngIf: user.hasPerm('createUser') --><li class="treeview ng-scope active" data-ng-class="{ 'active' : asc.currentViewMode =='administration' }" data-ng-if="user.hasPerm('createUser')">
+            <a data-ng-click="asc.toggleItemView('administration'); asc.showModelListModal('models')">
+              <i class="fa fa-dashboard">
+              </i>
+              <span>
+                Administration
+              </span>
+              <i class="fa fa-angle-left pull-right">
+              </i>
+            </a>
+            <ul class="treeview-menu displayBlock" data-ng-class="{ 'displayBlock' : asc.getItemView('administration') }">
+              <!-- ngIf: user.hasPerm('createClient') -->
+              <!-- ngIf: user.hasPerm('createClient') -->
+              <!-- ngIf: user.hasPerm('createUser') --><li data-ng-if="user.hasPerm('createUser')" data-ng-class="{ 'active' : asc.state =='users' }" class="ng-scope">
+                <a ui-sref="users" href="#/users">
+                  <i class="fa fa-users">
+                  </i>
+                  User Management
+                </a>
+              </li><!-- end ngIf: user.hasPerm('createUser') -->
+              <!--<li data-ng-if="user.hasPerm('createModel')" data-ng-class="{ 'active' : asc.state =='audits' }">
+                <a ui-sref="audits">
+                  <i class="fa fa-pencil">
+                  </i>
+                  Audit Trail
+                </a>
+              </li>-->
+              <!-- ngIf: user.hasPerm('createModel') --><li data-ng-if="user.hasPerm('createModel')" data-ng-class="{ 'active' : asc.state =='models' }" class="ng-scope active">
+                <a ui-sref="models" href="#/models">
+                  <i class="fa fa-cubes" aria-hidden="true">
+                  </i>
+                  Model Setup
+                </a>
+              </li><!-- end ngIf: user.hasPerm('createModel') -->
+              <!-- ngIf: user.hasPerm('createModel') --><li data-ng-if="user.hasPerm('createModel')" data-ng-class="{ 'active' : asc.state =='modelInfo' }" class="ng-scope">
+                <a ui-sref="modelInfo" href="#/modelInfo">
+                  <i class="fa fa-download" aria-hidden="true">
+                  </i>
+                  Import Model
+                </a>
+              </li><!-- end ngIf: user.hasPerm('createModel') -->
+              <!-- ngIf: user.hasPerm('createModel') --><li data-ng-if="user.hasPerm('createModel')" data-ng-class="{ 'active' : asc.state =='modelExport' }" class="ng-scope">
+                <a ui-sref="modelExport" href="#/modelExport">
+                  <i class="fa fa-upload" aria-hidden="true">
+                  </i>
+                  Export Model
+                </a>
+              </li><!-- end ngIf: user.hasPerm('createModel') -->
+              
+              <!-- ngIf: user.hasPerm('createClient') -->
+              <li data-ng-class="{ 'active' : asc.state =='add-simulation'}" style="display:none">
+                <a ui-sref="add-simulation" href="#/add-simulation">
+                  <i class="fa fa-plus" aria-hidden="true">
+                  </i>
+                  Add Simulation
+                </a>
+              </li>
+            </ul>
+          </li><!-- end ngIf: user.hasPerm('createUser') -->
+          <!-- ngIf: user.hasPerm('createMarketSetUp') --><li class="treeview ng-scope" data-ng-class="{ 'active' : asc.currentViewMode =='marketSetup' }" data-ng-if="user.hasPerm('createMarketSetUp')">
+            <a data-ng-click="asc.toggleItemView('marketSetup'); asc.showModelListModal('manufacturers')">
+              <i class="fa fa-map-marker" aria-hidden="true">
+              </i>
+              <span>
+                Market Setup
+              </span>
+              <i class="fa fa-angle-left pull-right">
+              </i>
+            </a>
+            <!-- ngIf: user.hasPerm('createMarketSetUp') --><ul class="treeview-menu ng-scope" data-ng-if="user.hasPerm('createMarketSetUp')" data-ng-class="{ 'displayBlock' : asc.getItemView('marketSetup') }" data-ng-hide="asc.showee">
+              <li data-ng-class="{ 'active' : asc.state =='manufacturers' }">
+                <a>
+                  <i class="fa fa-industry">
+                  </i>
+                  <span ui-sref="manufacturers" href="#/manufacturers">
+                    Manufacturer
+                  </span>
+                  <i data-ng-click="asc.toggleItemView('manufacturers')">
+                  </i>
+                </a>
+                <!--<ul class="treeview-menu" data-ng-class="{ 'displayBlock' : asc.getItemView('manufacturers') }">
+                  <li data-ng-class="{ 'active' : asc.state =='brands'}">
+                    <a>
+                      <i class="fa fa-circle-o">
+                      </i>
+                      <span ui-sref="brands">
+                        Brand
+                      </span>
+                      <i class="fa fa-angle-left pull-right" data-ng-click="asc.toggleItemView('brands')">
+                      </i>
+                    </a>
+                    <ul  class="treeview-menu" data-ng-class="{ 'displayBlock' : asc.getItemView('brands') }">
+                      <li data-ng-class="{ 'active' : asc.state =='sub-brands'}">
+                        <a>
+                          <i class="fa fa-circle-o">
+                          </i>
+                          <span ui-sref="sub-brands">
+                            Sub-Brand
+                          </span>
+                          <i class="fa fa-angle-left pull-right" data-ng-click="asc.toggleItemView('sub-brands')">
+                          </i>
+                        </a>
+                        <ul class="treeview-menu" data-ng-class="{ 'displayBlock' : asc.getItemView('sub-brands') }">
+                          <li data-ng-class="{ 'active' : asc.state =='products'}">
+                            <a ui-sref="products">
+                              <i class="fa fa-circle-o">
+                              </i>
+                              <span>
+                                Product
+                              </span>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>-->
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='brands'}">
+                <a ui-sref="brands" href="#/brands">
+                  <i class="fa fa-bold">
+                  </i>
+                  Brands
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='sub-brands'}">
+                <a ui-sref="sub-brands" href="#/sub-brands">
+                  <i class="fa fa-road">
+                  </i>
+                  Sub-Brands
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='products'}">
+                <a ui-sref="products" href="#/products">
+                  <i class="fa fa-shopping-bag" aria-hidden="true">
+                  </i>
+                  Product
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='dist-channels'}">
+                <a ui-sref="dist-channels" href="#/dist-channels">
+                  <i class="fa fa-sitemap">
+                  </i>
+                  Distribution channel
+                </a>
+              </li>
+  
+              <li data-ng-class="{ 'active' : asc.state =='segments'}">
+                <a ui-sref="segments" href="#/segments">
+                  <i class="fa fa-clone">
+                  </i>
+                  Segment
+                </a>
+              </li>
+  
+              <li data-ng-class="{ 'active' : asc.state =='regions'}">
+                <a ui-sref="regions" href="#/regions">
+                  <i class="fa fa-globe">
+                  </i>
+                  Region
+                </a>
+              </li>
+  
+              <li data-ng-class="{ 'active' : asc.state =='media-channels'}">
+                <a ui-sref="media-channels" href="#/media-channels">
+                  <i class="fa fa-video-camera">
+                  </i>
+                  Media Channel
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='campaigns'}">
+                <a ui-sref="campaigns" href="#/campaigns">
+                  <i class="fa fa-area-chart">
+                  </i>
+                  Campaign
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='roll-ups'}">
+                <a ui-sref="roll-ups" href="#/roll-ups">
+                  <i class="fa fa-circle-o">
+                  </i>
+                  Roll-Up
+                </a>
+              </li>
+              <!-- <li>
+                <a href="#">
+                  <i class="fa fa-circle-o">
+                  </i>
+                  Relationships
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-circle-o">
+                  </i>
+                  Adstocks
+                </a>
+              </li>
+              -->
+            </ul><!-- end ngIf: user.hasPerm('createMarketSetUp') -->
+          </li><!-- end ngIf: user.hasPerm('createMarketSetUp') -->
+          <!-- ngIf: user.hasPerm('fileUpload') --><li class="treeview ng-scope" data-ng-class="{ 'active' : asc.currentViewMode =='data' }" data-ng-if="user.hasPerm('fileUpload')">
+            <a data-ng-click="asc.toggleItemView('data'); asc.showModelListModal('sales')">
+              <!--  asc.showModelListModal('sales') -->
+              <i class="fa fa-th">
+              </i>
+              <span>
+                Data
+              </span>
+              <i class="fa fa-angle-left pull-right">
+              </i>
+            </a>
+            <ul class="treeview-menu" data-ng-class="{ 'displayBlock' : asc.getItemView('data') }" data-ng-hide="asc.showee">
+              <li data-ng-class="{ 'active' : asc.state =='sales'}">
+                <a ui-sref="sales" href="#/sales">
+                  <i class="fa fa-shopping-cart" aria-hidden="true">
+                  </i>
+                  Sales
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='price'}">
+                <a ui-sref="price" href="#/price">
+                  <i class="fa fa-usd" aria-hidden="true">
+                  </i>
+                  Price
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='distribution'}">
+                <a ui-sref="distribution" href="#/distribution">
+                  <i class="fa fa-glass" aria-hidden="true">
+                  </i>
+                  Distribution
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='media-plan'}">
+                <a ui-sref="media-plan" href="#/media-plan">
+                  <i class="fa fa-map-pin" aria-hidden="true">
+                  </i>
+                  Media Plan
+                </a>
+              </li>
+              <!-- <li data-ng-class="{ 'active' : asc.state =='simulation'}">
+                <a ui-sref="simulation">
+                  <i class="fa fa-circle" aria-hidden="true">
+                  </i>
+                  Simulation Result
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='simulation-sales-unit'}">
+                <a ui-sref="simulation-sales-unit">
+                  <i class="fa fa-scribd" aria-hidden="true"></i>
+                  Simulation-Diminishing
+                </a>
+              </li> -->
+              <li data-ng-class="{ 'active' : asc.state =='external-factors'}">
+                <a ui-sref="external-factors" href="#/external-factors">
+                  <i class="fa fa-eye" aria-hidden="true">
+                  </i>
+                  External Factors
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='product-attributes'}">
+                <a ui-sref="product-attributes" href="#/product-attributes">
+                  <i class="fa fa-flask" aria-hidden="true">
+                  </i>
+                  Product Attributes
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='market-utility'}">
+                <a ui-sref="market-utility" href="#/market-utility">
+                  <i class="fa fa-compass" aria-hidden="true">
+                  </i>
+                  Market Utility
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='consumer-preferences'}">
+                <a ui-sref="consumer-preferences" href="#/consumer-preferences">
+                  <i class="fa fa-cube" aria-hidden="true">
+                  </i>
+                  Consumer Preferences
+                </a>
+              </li>
+              <li data-ng-class="{ 'active' : asc.state =='product-definition'}">
+                <a ui-sref="product-definition" href="#/product-definition">
+                  <i class="fa fa-crosshairs" aria-hidden="true">
+                  </i>
+                  Product Definition
+                </a>
+              </li>
+            </ul>
+          </li><!-- end ngIf: user.hasPerm('fileUpload') -->
+          <!-- ngIf: user.hasPerm('viewDashBoard') --><li class="treeview ng-scope" data-ng-if="user.hasPerm('viewDashBoard')" data-ng-class="{ 'active' : asc.state =='run-simulation' }">
+            <a data-ng-click="asc.toggleItemView('run-simulation'); asc.showModelListModal('run-simulation')">
+              <i class="fa fa-cog" aria-hidden="true">
+              </i>
+                Simulation
+            </a>
+          </li><!-- end ngIf: user.hasPerm('viewDashBoard') -->
+          <!-- ngIf: user.hasPerm('viewDashBoard') --><li class="treeview ng-scope" data-ng-if="user.hasPerm('viewDashBoard')" data-ng-class="{ 'active' : asc.state =='analysis'}">
+            <a data-ng-click="asc.toggleItemView('Analysis'); asc.showModelListModal('analysis')">
+              <!--ui-sref="analysis"-->
+              <i class="fa fa-bar-chart-o">
+              </i>
+              <span>
+                Analysis
               </span>
             </a>
-            <ul class="treeview-menu">
-              <li class="active"><a routerLink="/home"><i class="fa fa-circle-o"></i>Model Setup</a></li>
-              <li><a routerLink="/product"><i class="fa fa-clone"></i>Model Import</a></li>
-            </ul>
-            
-          </li>
-
-
-
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-bar-chart"></i> <span>Chart</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li class="active"><a routerLink="/product"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-            </ul>
-          </li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-files-o"></i> <span>Component</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li class="active"><a routerLink="/home"><i class="fa fa-circle-o"></i>Data Table</a></li>
-            </ul>
-          </li>         
+  
+          </li><!-- end ngIf: user.hasPerm('viewDashBoard') -->
+        
+          
         </ul>
       </section>
       <!-- /.sidebar -->
