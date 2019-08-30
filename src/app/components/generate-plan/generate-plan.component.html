@@ -121,7 +121,7 @@
               [fields]='brandsField'
               (filtering)='onFiltering($event)' 
               [mode]='mode' 
-              [placeholder]='placeholder'>
+              [placeholder]='placeholder' (select)="changeValue($event)">
               </ejs-multiselect>
          </div>
       </div>
