@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { enableRipple } from '@syncfusion/ej2-base';
 import { CheckBoxSelectionService, FilteringEventArgs } from '@syncfusion/ej2-angular-dropdowns';
+import {ModeljsondadaService} from '../../service/modeljsondada.service';
+import {Modeljson} from '../../model/modeljson';
 enableRipple(true);
 
 
@@ -14,8 +16,9 @@ export class GeneratePlanComponent implements OnInit {
   public start: Date = new Date ("02/07/2013"); 
   public end: Date = new Date ("11/25/2017");
   public mode:String;
+  ModelList: Modeljson[]=[];
   
-  constructor() { }
+  constructor(public ModeljsondadaService: ModeljsondadaService) { }
 
 public brandsData:Object[]=[
   { id: '1682', brand: 'ALL' },
@@ -67,6 +70,9 @@ parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
 public showCheckBox: boolean = true;
 
   ngOnInit() {
+
+    this.ModelList=this.ModeljsondadaService.modeldada;
+
   }
 
 }

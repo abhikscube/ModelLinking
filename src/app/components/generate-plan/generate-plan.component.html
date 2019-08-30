@@ -12,9 +12,9 @@
             Select Model
           </label>
           <select class="form-control">
-            <option label="Model_one">Model_one</option>
-            <option label="Model_Two" value="object:16687" selected="selected">Model_Two</option>
-            <option label="BUMillenials" value="object:16688">BUMillenials</option>
+              <ng-container *ngFor="let item of ModelList;let i = index">
+                <option label="Model_one" *ngIf="item.status=='N'">{{item.name}}</option>
+              </ng-container>
           </select>
         </div>
       </div>

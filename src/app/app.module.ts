@@ -20,6 +20,7 @@ import { PlanlistService } from './service/planlist.service';
 import { ChartDataService } from './service/chartdata.service';
 import { ModellistComponent } from './components/modellist/modellist.component';
 import {ModeljsondadaService} from './service/modeljsondada.service';
+import {AppmenuComponent} from './components/appmenu/appmenu.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -45,7 +46,7 @@ import { from } from 'rxjs';
     AppComponent,
     AppheaderComponent,
     AppfooterComponent,
-    // AppmenuComponent,
+    AppmenuComponent,
     AppsettingsComponent,
     ProductComponent,
     HomeComponent,
