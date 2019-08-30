@@ -11,17 +11,22 @@
             <th>Model ID</th>
             <th>Model Name</th>
             <th>Model Description</th>
-            <th></th>
-            <th></th>
+            <th>Status</th>            
+            <th colspan="2">Action</th>
             <th></th>            
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let item of ModelList;let i = index">
+          <ng-container *ngFor="let item of ModelList;let jsonIndex = index">
             <tr>
               <td>{{item.id}}</td>
-              <td>{{item.name}} </td>
-              <td>{{item.status}}</td>             
+              <td>
+                <span  *ngIf="item.status=='Normal';then without_status else with_status"></span>
+                <ng-template #without_status>{{item.name}}</ng-template>
+                <ng-template #with_status>{{item.name}} ({{item.status}})</ng-template>
+              </td>
+              <td>{{item.name}}</td> 
+              <td>Imported</td>                          
               <td><a href="#">
                   <div class="tools">
                       <i class="fa fa-edit"></i>
@@ -35,7 +40,9 @@
                   </a>               
               </td>
               <td>
-                  <button (click)="openModal(i)" *ngIf="item.status=='N'">Link</button>
+                  <button (click)="openModal(jsonIndex)" *ngIf="item.status=='Normal'">Link</button>
+                  <button (click)="unlinkModel(jsonIndex)" *ngIf="item.status=='Consumer'">Unlink</button>
+
               </td>             
             </tr>            
           </ng-container>

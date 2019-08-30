@@ -8,12 +8,12 @@ export class ModeljsondadaService{
 
 
         this.modeldada=[
-                            {"id":1,"name":"MoAflac Distribution","status": "N"},
-                            {"id":2,"name":"Ceader Model","status": "N"},
-                            {"id":3,"name":"Gen X Market Plan Separator","status": "N"},
-                            {"id":4,"name":"BUMillenials","status": "N"},
-                            {"id":5,"name":"BuGenX","status": "N"},
-                            {"id":6,"name":"BabyBoomer","status": "N"}                         
+                            {"id":1,"name":"MoAflac Distribution","parent":-1,"status": "Normal"},
+                            {"id":2,"name":"Ceader Model","parent":-1,"status": "Normal"},
+                            {"id":3,"name":"Gen X Market Plan Separator","parent":-1,"status": "Normal"},
+                            {"id":4,"name":"BUMillenials","parent":-1,"status": "Normal"},
+                            {"id":5,"name":"BuGenX","parent":-1,"status": "Normal"},
+                            {"id":6,"name":"BabyBoomer","parent":-1,"status": "Normal"}                         
                         ];
 
     }
@@ -24,22 +24,23 @@ export class ModeljsondadaService{
         console.log(returnVlaue);
 
         
-        if(returnVlaue[1]){
+        if(returnVlaue['selectedModel']){
 
-            for (var id of returnVlaue[1]) {
-
-                this.modeldada[id].status='true';
-                this.modeldada[id].name=this.modeldada[id].name+' (Consumer)';
-            }
-    
-    
-            this.modeldada[returnVlaue[0]].status='fixed';
-            this.modeldada[returnVlaue[0]].name=this.modeldada[returnVlaue[0]].name+' (Advisors)';
+                this.modeldada[returnVlaue['selectedModel']].status='Consumer';
+                this.modeldada[returnVlaue['selectedModel']].parent=returnVlaue['jsonIndex'];
+                this.modeldada[returnVlaue['jsonIndex']].status='Advisors';
         }
 
     
       }
 
+      unlinkModelservice(index:number){
 
+        this.modeldada[index].status='Normal';
+        this.modeldada[this.modeldada[index].parent].status='Normal';
+        this.modeldada[index].parent=-1;        
+
+
+      }
 
 }
