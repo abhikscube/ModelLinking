@@ -3,6 +3,7 @@ import {Modeljson} from '../model/modeljson';
 export class ModeljsondadaService{
 
     public modeldada: Modeljson[]=[];
+   
 
     constructor(){
 
@@ -42,5 +43,8 @@ export class ModeljsondadaService{
 
 
       }
+
+
+      
 
 }
