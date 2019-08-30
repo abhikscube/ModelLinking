@@ -72,8 +72,9 @@ public showCheckBox: boolean = true;
   
 
    //console.log(this.subBrands);
-   let tempObj:Object[]=[];
-   this.subBrands =tempObj;
+   let tempObj:Object[]=[{id:'',subbrand:''}];
+   this.subBrands =<Object[]>tempObj;
+   console.log("First Time"+this.subBrands );
    
 
    let metalifesub_1 ={id:'1',subbrand:'aaaa'};
