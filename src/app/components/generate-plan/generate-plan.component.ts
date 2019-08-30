@@ -32,7 +32,11 @@ public brandsField: Object = { text: 'brand', value: 'id' };
 
  // set placeholder to MultiSelect input element
  public placeholder: string = 'Select brands';
- //Bind the filter event
+ 
+public subBrand:Object[]=[];
+public subBrandFields:Object = {text:'subbrand',value:'id'};
+public placeholdersub:string='Select sub barnds';
+
 
 
   public countries: Object[] = [
@@ -59,8 +63,8 @@ public showCheckBox: boolean = true;
     this.ModelList=this.ModeljsondadaService.modeldada;
 
   }
-  changeValue(value){
-    console.log(value.itemData.id);
+  changeValue(e){
+    
   }
 
 }
