@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { enableRipple } from '@syncfusion/ej2-base';
 import {ModeljsondadaService} from '../../service/modeljsondada.service';
 import {Modeljson} from '../../model/modeljson';
