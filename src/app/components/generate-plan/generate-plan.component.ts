@@ -36,6 +36,7 @@ public brandsData:Object=[
 public brandsField: Object = { text: 'brand', value: 'id' };
  // set placeholder to MultiSelect input element
  public placeholder: string = 'Select brands';
+ public box : string = 'Box';
 
 
 //sub brand object
@@ -70,9 +71,41 @@ public showCheckBox: boolean = true;
 
   }
 
-  public onRemove:EmitType<RemoveEventArgs> = (e:RemoveEventArgs)=>{
-    console.log(e.itemData);
-  };
+  // public onRemove:EmitType<RemoveEventArgs> = (e:RemoveEventArgs)=>{
+   
+  // };
+  public onRemove(e){
+
+    console.log(e.itemData.id);
+
+    if(e.itemData.id==3){
+      this.brandDatas=[];
+      this.brandDatas.push({id:'1',subbrand:'Colonial Life_Accident'});
+      this.brandDatas.push({id:'2',subbrand:'Colonial Life_Cancer'});
+      this.brandDatas.push({id:'3',subbrand:'Colonial Life_Dental'});
+
+
+      
+    }
+    if(e.itemData.id==1){
+
+      this.brandDatas=[];
+      this.brandDatas.push({id:'1',subbrand:'MetLife_Accident'});
+      this.brandDatas.push({id:'2',subbrand:'MetLife_Cancer'});
+      this.brandDatas.push({id:'3',subbrand:'MetLife_Dental'});
+      this.brandDatas.push({id:'4',subbrand:'MetLife_Hospital Ind'});
+    }
+    this.subBrands = [];
+
+    // this.refresh.fields.dataSource=brandDatas;
+    //console.log(this.brandDatas.length);
+
+    for (let i of this.brandDatas){
+      console.log(i);
+      this.subBrands.push(i);
+    }
+
+  }
 
   changeValue(e){
    // console.log(e.itemData.id);
