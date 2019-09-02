@@ -15,7 +15,7 @@
           </label>
           <select class="form-control">
               <ng-container *ngFor="let item of ModelList;let i = index">
-                <option label="Model_one" *ngIf="item.status=='N'">{{item.name}}</option>
+                <option>{{item.chnagedName}}</option>
               </ng-container>
           </select>
         </div>
@@ -153,7 +153,7 @@
           Media Type
         </label>
         <div id='treeparent'>
-          <ejs-treeview id='treeelement' [fields]='field' [showCheckBox]='showCheckBox'></ejs-treeview>
+          <ejs-treeview #treeelement id='#treeelement' [fields]='field' [showCheckBox]='showCheckBox'></ejs-treeview>
         </div>
       </div> </div>
 
