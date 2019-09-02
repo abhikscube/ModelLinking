@@ -22,6 +22,8 @@ export class GeneratePlanComponent implements OnInit {
   public mode:String;
   ModelList: Modeljson[]=[];
   public showMe:boolean=true;
+
+  @ViewChild('treeelement') private eventCategoriesTree;
   
   constructor(public ModeljsondadaService: ModeljsondadaService) { }
 
@@ -46,22 +48,8 @@ public placeholdersub:string='Select sub barnds';
 public brandDatas:Array <Object>=[];
 
 
-  public countries: Object[] = [
-    { id: 1, name: 'Australia', hasChild: true, expanded: true },
-    { id: 2, pid: 1, name: 'New South Wales' },
-    { id: 3, pid: 1, name: 'Victoria',hasChild:true },
-    {id:  26,  pid:3,name:'Sukdebpur'},
-    {id:  27,  pid:3,name:'Amtala'},
-    { id: 4, pid: 1, name: 'South Australia' },
-    { id: 21, name: 'India', hasChild: true },
-    { id: 22, pid: 21, name: 'Assam' },
-    { id: 23, pid: 21, name: 'Bihar' },
-    { id: 24, pid: 21, name: 'Tamil Nadu' },
-    { id: 25, pid: 21, name: 'Punjab' }
-];
-// maps the appropriate column to fields property
-public field: Object = { dataSource: this.countries, id: 'id', 
-parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
+public field: Object = { dataSource: this.ModeljsondadaService.brandMediaList,
+  id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild',expanded:"expanded" };
 // set the CheckBox to the TreeView
 public showCheckBox: boolean = true;
 
@@ -105,6 +93,11 @@ public showCheckBox: boolean = true;
       this.subBrands.push(i);
     }
 
+
+    this.ModeljsondadaService.removeElement(e); 
+    this.reCreateList();
+    
+
   }
 
   changeValue(e){
@@ -134,6 +127,44 @@ public showCheckBox: boolean = true;
       console.log(i);
       this.subBrands.push(i);
     }
+
+
+  
+    this.ModeljsondadaService.updateBrandMedialist(e);
+    this.reCreateList();
+
+
   }
+
+
+  reCreateList(){
+
+    let result = []
+
+    this.ModeljsondadaService.brandMediaList.forEach(function(elem:any) {
+     
+            if(elem.pid){
+                  result.push({
+                    'id': +elem.id,
+                    'name': elem.name, 
+                    'pid':elem.pid,        
+                    'hasChild': true
+                  })
+            }else{
+                result.push({
+                  'id': +elem.id,
+                  'name': elem.name,      
+                  'hasChild': true
+                })
+            }
+
+        })
+
+        this.eventCategoriesTree.fields.dataSource = result;
+
+
+
+  }
+
    
 }

@@ -3,4 +3,5 @@ id:number;
 name: string;
 status: string; 
 parent:number;
+chnagedName:string;
 }
