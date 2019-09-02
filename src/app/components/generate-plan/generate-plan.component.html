@@ -124,7 +124,7 @@
               id='multiselectelement' 
               [dataSource]='brandsData' 
               [fields]='brandsField'
-              (filtering)='onFiltering($event)' 
+              (filtering)='onFiltering($event)'  (removed)='onRemove($event)'
               [mode]='mode' 
               [placeholder]='placeholder' (select)="changeValue($event)">
               </ejs-multiselect>
@@ -136,7 +136,7 @@
           Sub Brand
         </label>
         <div id="subBrandList">
-          <ejs-multiselect 
+          <ejs-multiselect
               id='multiselectelement' 
               [dataSource]='subBrands' 
               [fields]='subBrandFields'

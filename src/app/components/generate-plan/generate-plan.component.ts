@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { enableRipple } from '@syncfusion/ej2-base';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { enableRipple, EmitType } from '@syncfusion/ej2-base';
 import { CheckBoxSelectionService, FilteringEventArgs } from '@syncfusion/ej2-angular-dropdowns';
 import {ModeljsondadaService} from '../../service/modeljsondada.service';
 import {Modeljson} from '../../model/modeljson';
@@ -7,6 +7,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { json } from 'd3';
 enableRipple(true);
 
+import{RemoveEventArgs} from '@syncfusion/ej2-angular-dropdowns';
 
 @Component({
   selector: 'app-generate-plan',
@@ -15,6 +16,7 @@ enableRipple(true);
 })
 export class GeneratePlanComponent implements OnInit {
 
+ // @ViewChild('multiselectelement') private refresh;
   public start: Date = new Date ("02/07/2013"); 
   public end: Date = new Date ("11/25/2017");
   public mode:String;
@@ -23,7 +25,7 @@ export class GeneratePlanComponent implements OnInit {
   
   constructor(public ModeljsondadaService: ModeljsondadaService) { }
 
-public brandsData:Object[]=[
+public brandsData:Object=[
   { id: '0', brand: 'ALL' },
   { id: '1', brand: 'B_Colonial Life' },
   { id: '3', brand: 'B_MetLife' },
@@ -37,10 +39,10 @@ public brandsField: Object = { text: 'brand', value: 'id' };
 
 
 //sub brand object
-public subBrands:Object[]=[];
+public subBrands:Array<Object>=[];
 public subBrandFields:Object = {text:'subbrand',value:'id'};
 public placeholdersub:string='Select sub barnds';
-public obj:Object[]=[];
+public brandDatas:Array <Object>=[];
 
 
   public countries: Object[] = [
@@ -67,41 +69,38 @@ public showCheckBox: boolean = true;
     this.ModelList=this.ModeljsondadaService.modeldada;
 
   }
+
+  public onRemove:EmitType<RemoveEventArgs> = (e:RemoveEventArgs)=>{
+    console.log(e.itemData);
+  };
+
   changeValue(e){
-    //** Sub brand population */
-  
+   // console.log(e.itemData.id);
 
-   //console.log(this.subBrands);
-   let tempObj:Object[]=[{id:'',subbrand:''}];
-   this.subBrands =<Object[]>tempObj;
-   console.log("First Time"+this.subBrands );
-   
-
-   let metalifesub_1 ={id:'1',subbrand:'aaaa'};
-   let smetalifesub_2= {id:'2',subbrand:'MetLissssdfe_Cancer'};
-   let metalifesub_3= {id:'3',subbrand:'MetLife_Denfsdfhsdfhsfkhtal'};
-   //********************* */
-
-   let B_Colonial_1 ={id:'4',subbrand:'Colonial Life_Accident'};
-   let B_Colonial_2= {id:'5',subbrand:'Colonial Life_Cancer'};
-   let B_Colonial_3= {id:'6',subbrand:'Colonial Life_Dental'};
-    //  this.subBrands.push (metalifesub_1);
-    //   this.subBrands.push(smetalifesub_2);
-    //   this.subBrands.push(metalifesub_3);
-
+    
     if(e.itemData.id==3){
-     this.obj[0]=metalifesub_1;
-     this.obj[1]=smetalifesub_2;
-     this.obj[2]=metalifesub_3;
+      this.brandDatas.push({id:'1',subbrand:'MetLife_Accident'});
+      this.brandDatas.push({id:'2',subbrand:'MetLife_Cancer'});
+      this.brandDatas.push({id:'4',subbrand:'MetLife_Dental'});
+      this.brandDatas.push({id:'5',subbrand:'MetLife_Hospital Ind'});
+
     }
     if(e.itemData.id==1){
-      this.obj[3]=B_Colonial_1;
-      this.obj[4]=B_Colonial_2;
-      this.obj[5]=B_Colonial_3;
-    }
-    this.subBrands =this.obj;
-    this.subBrandFields = {text:'subbrand',value:'id'};
-      console.log(this.subBrands);
-  }
+      this.brandDatas.push({id:'6',subbrand:'Colonial Life_Accident'});
+      this.brandDatas.push({id:'7',subbrand:'Colonial Life_Cancer'});
+      this.brandDatas.push({id:'8',subbrand:'Colonial Life_Dental'});
+      
 
+    }
+    this.subBrands = [];
+
+    // this.refresh.fields.dataSource=brandDatas;
+    //console.log(this.brandDatas.length);
+
+    for (let i of this.brandDatas){
+      console.log(i);
+      this.subBrands.push(i);
+    }
+  }
+   
 }
