@@ -1,13 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { enableRipple, EmitType } from '@syncfusion/ej2-base';
-import { CheckBoxSelectionService, FilteringEventArgs } from '@syncfusion/ej2-angular-dropdowns';
+import { Component, OnInit } from '@angular/core';
+import { enableRipple } from '@syncfusion/ej2-base';
 import {ModeljsondadaService} from '../../service/modeljsondada.service';
 import {Modeljson} from '../../model/modeljson';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
-import { json } from 'd3';
 enableRipple(true);
 
-import{RemoveEventArgs} from '@syncfusion/ej2-angular-dropdowns';
 
 @Component({
   selector: 'app-generate-plan',
