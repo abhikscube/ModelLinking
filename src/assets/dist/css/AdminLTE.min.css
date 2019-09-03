@@ -212,12 +212,16 @@ table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.
 
 }
 
-.generate_plan_bx .row{    background: #fffdfe;
-    margin-bottom: 10px;
-    padding: 10px 0px;
+.generate_plan_bx .row{      background: #fffdfe;
+    margin-bottom: 0px;
+    padding: 10px 0px 0px 0px;
     width: 100%;
     margin-left: 0px;
     border: 1px solid #ffffff;
+}
+
+.generate_plan_bx  .form-group{
+    margin-bottom:0px;
 }
 .generate_plan_bx label{       color: #920146;
     font-weight: 600;
@@ -244,4 +248,15 @@ border:1px solid #e8c9d8;
     border-radius: 2px;
     border: 1px solid #920146;
     padding: 10px 30px;
+}
+table.dataTable tbody th, table.dataTable tbody td{
+    font-size:14.5px;
+}
+
+body{
+    font-size:14px!important;
+}
+.radio-inline  input[type=radio]{
+    position:relative;
+    top:3px;
 }
