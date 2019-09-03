@@ -54,8 +54,8 @@
                   </i>
                   Model Setup
                 </a>
-              </li><!-- end ngIf: user.hasPerm('createModel') -->
-              <!-- ngIf: user.hasPerm('createModel') --><li data-ng-if="user.hasPerm('createModel')" data-ng-class="{ 'active' : asc.state =='modelInfo' }" class="ng-scope">
+              </li>
+              <li data-ng-if="user.hasPerm('createModel')" data-ng-class="{ 'active' : asc.state =='modelInfo' }" class="ng-scope">
                 <a ui-sref="modelInfo" href="#/modulelist">
                   <i class="fa fa-download" aria-hidden="true">
                   </i>
@@ -66,7 +66,7 @@
                 <a ui-sref="modelExport" href="#/plan">
                   <i class="fa fa-upload" aria-hidden="true">
                   </i>
-                 Generate Plan
+                 Export Model
                 </a>
               </li><!-- end ngIf: user.hasPerm('createModel') -->
               
@@ -327,6 +327,15 @@
               <span>
                 Analysis
               </span>
+            </a>
+            <a href="#/market-utility">
+              <i class="fa fa-map-marker" aria-hidden="true">
+              </i>
+              <span>
+                Generate Plan
+              </span>
+              <i class="fa fa-angle-left pull-right">
+              </i>
             </a>
   
           </li><!-- end ngIf: user.hasPerm('viewDashBoard') -->
