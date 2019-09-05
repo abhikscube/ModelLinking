@@ -53,7 +53,7 @@ export class ProjectLinkModulesComponent implements OnInit {
       this.ModeljsondadaService.updateData(receivedEntry);
      // console.log(receivedEntry)
 
-
+      //  console.log(this.ModeljsondadaService.modeldada);
 
     });
   }

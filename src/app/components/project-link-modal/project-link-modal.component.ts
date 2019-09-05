@@ -40,8 +40,8 @@ export class ProjectLinkModalComponent implements OnInit {
     returnVlaue['jsonIndex']=this.jsonIndex;
     returnVlaue['selectedModel']=this.selectedModel;
     
-    console.log('returnVlaue'); 
-    console.log(returnVlaue);
+    //console.log('returnVlaue'); 
+    //console.log(returnVlaue);
 
     this.passEntry.emit(returnVlaue); 
   }

@@ -8,9 +8,9 @@
       <table datatable [dtOptions]="dtOptions"  class="row-border hover">
         <thead>
           <tr>
-            <th>Model ID</th>
             <th>Model Name</th>
             <th>Model Description</th>
+            <th>Linked with</th>          
             <th>Status</th>            
             <th colspan="2">Action</th>
             <th></th>            
@@ -19,13 +19,18 @@
         <tbody>
           <ng-container *ngFor="let item of ModelList;let jsonIndex = index">
             <tr>
-              <td>{{item.id}}</td>
               <td>
                 <span  *ngIf="item.status=='Normal';then without_status else with_status"></span>
                 <ng-template #without_status>{{item.name}}</ng-template>
                 <ng-template #with_status>{{item.name}} ({{item.status}})</ng-template>
               </td>
-              <td>{{item.name}}</td> 
+              <td>{{item.name}}</td>
+              <td>
+                  <span *ngIf="item.advisors!='' then advisory_text"></span>
+                  <span *ngIf="item.consumer!='' then consumer_text"></span>
+                  <ng-template #advisory_text>{{item.advisors}}</ng-template>
+                  <ng-template #consumer_text>{{item.consumer}}</ng-template>
+                </td>               
               <td>Imported</td>                          
               <td><a href="#">
                   <div class="tools">

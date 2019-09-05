@@ -11,9 +11,10 @@
       <div class="col-lg-6">
         <div class="form-group">
           <label>
-            Select Model
+            Model
           </label>
           <select class="form-control">
+              <option disabled>Select Model</option>
               <ng-container *ngFor="let item of ModelList;let i = index">
                 <option>{{item.chnagedName}}</option>
               </ng-container>
@@ -75,10 +76,9 @@
           <label>
             Existing Plan Name
           </label>
-          <select class="form-control" ng-model="asc.analysis.selectPlan"
-            ng-options="h.basePlanName for h in asc.headerData"
-            data-ng-change="asc.changeSliderDate(asc.analysis.selectPlan)">
-            <option label="Media Base Market Plan" value="object:70" selected="selected">Media Base Market Plan</option>
+          <select class="form-control">
+            <option disabled>Select Existing Plan Name</option>
+            <option label="Media Base Market Plan" value="object:70">Media Base Market Plan</option>
             <option label="NewModel2Plan" value="object:71">NewModel2Plan</option>
           </select>
           <!-- ngIf: asc.error.planName -->
@@ -92,7 +92,7 @@
             <span style="color:red;">*</span>
           </label>
           <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-            data-ng-model="asc.analysis.newPlanName" placeholder="New Plan Name"
+            data-ng-model="asc.analysis.newPlanName" placeholder="Enter Plan Name"
             data-ng-change="asc.checkNewPlanName(asc.analysis.newPlanName)">
           <!-- ngIf: asc.error.newPlanNameError -->
         </div>
@@ -103,11 +103,11 @@
       <div class="pull-left col-sm-4">
         <div class="form-group">
           <label class="ng-binding">
-            Change Grps Impr value
+            Change GRPs/Impression value
             <span style="color:red;">*</span>
           </label>
 
-          <input type="text" class="form-control " placeholder="Change Grps Impr value">
+          <input type="text" class="form-control " placeholder="Enter GRPs/Impression value">
 
         </div>
       </div> </div>
@@ -121,11 +121,12 @@
         </label>
          <div id="brandslist">
           <ejs-multiselect 
-              id='multiselectelement' 
+              #multiselectelement 
+              id='#multiselectelement'
               [dataSource]='brandsData' 
               [fields]='brandsField'
               (filtering)='onFiltering($event)'  (removed)='onRemove($event)'
-              [mode]='box' 
+              [mode]='mode' 
               [placeholder]='placeholder' (select)="changeValue($event)">
               </ejs-multiselect>
          </div>
@@ -166,7 +167,7 @@
           <label>
             Change Awareness Probability
           </label>
-          <input type="text" class="form-control " placeholder="Change Awareness Probability">
+          <input type="text" class="form-control " placeholder="Select the value between 0 to 1">
         </div>
       </div>
 
@@ -177,7 +178,7 @@
             Change Persuasion
           </label>
           <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched"
-            data-ng-model="asc.analysis.persuation" placeholder="Change Persuasion"
+            data-ng-model="asc.analysis.persuation" placeholder="Select the value between 0 to 1"
             data-ng-change="asc.error.persuasion = validate(asc.analysis.persuation).by('persuasion')"
             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
           <!-- ngIf: asc.error.persuasion[0] -->
