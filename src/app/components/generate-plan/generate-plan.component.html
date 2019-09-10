@@ -121,12 +121,11 @@
         </label>
          <div id="brandslist">
           <ejs-multiselect 
-              #multiselectelement 
-              id='#multiselectelement'
+              #multiselectBrandList 
+              id='#multiselectBrandList'
               [dataSource]='brandsData' 
               [fields]='brandsField'
-              (filtering)='onFiltering($event)'  (removed)='onRemove($event)'
-              [mode]='mode' 
+              (filtering)='onFiltering($event)'  (removed)='onRemove($event)' 
               [placeholder]='placeholder' (select)="changeValue($event)">
               </ejs-multiselect>
          </div>
@@ -138,11 +137,11 @@
         </label>
         <div id="subBrandList">
           <ejs-multiselect
-              id='multiselectelement' 
+              #multiselectSubBrandList
+              id='#multiselectSubBrandList' 
               [dataSource]='subBrands' 
               [fields]='subBrandFields'
               (filtering)='onFiltering($event)' 
-              [mode]='box' 
               [placeholder]='placeholdersub' >
               </ejs-multiselect>
          </div>

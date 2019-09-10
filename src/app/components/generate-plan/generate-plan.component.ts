@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { enableRipple } from '@syncfusion/ej2-base';
-import { CheckBoxSelectionService, FilteringEventArgs } from '@syncfusion/ej2-angular-dropdowns';
 import {ModeljsondadaService} from '../../service/modeljsondada.service';
 import {Modeljson} from '../../model/modeljson';
 enableRipple(true);
@@ -21,7 +20,8 @@ export class GeneratePlanComponent implements OnInit {
   public showMe:boolean=true;
 
   @ViewChild('treeelement') private eventCategoriesTree;
-  @ViewChild('multiselectelement') private multiselectelement;
+  @ViewChild('multiselectBrandList') private multiselectBrandList;
+  @ViewChild('multiselectSubBrandList') private multiselectSubBrandList;
   
   constructor(public ModeljsondadaService: ModeljsondadaService) { }
 
@@ -54,7 +54,8 @@ public showCheckBox: boolean = true;
   ngOnInit() {
 
     this.ModelList=this.ModeljsondadaService.modeldada;
-    this.multiselectelement.mode='CheckBox';
+    this.multiselectBrandList.mode='CheckBox';
+    this.multiselectSubBrandList.mode='CheckBox';
 
   }
 
