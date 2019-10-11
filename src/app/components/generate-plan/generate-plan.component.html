@@ -13,10 +13,15 @@
           <label>
             Model
           </label>
-          <select class="form-control">
+          <select class="form-control" (change)="onChangeModelList($event.target.value)">
               <option disabled>Select Model</option>
-              <ng-container *ngFor="let item of ModelList;let i = index">
-                <option>{{item.chnagedName}}</option>
+              <ng-container *ngFor="let item of linkedModelListDrp;let i = index">
+
+                  <span  *ngIf="item.modelType=='A';then with_status else without_status"></span>
+                  <ng-template #with_status><option [value]="item.modelId">{{item.modelName}}/{{item.modelLinkedWith}}</option></ng-template>
+                  <ng-template #without_status><option [value]="item.modelId">{{item.modelName}}</option></ng-template>
+
+                
               </ng-container>
           </select>
         </div>
@@ -76,11 +81,12 @@
           <label>
             Existing Plan Name
           </label>
-          <select class="form-control">
+          <select class="form-control" (change)="onChangePlanlList($event.target.value)">                  
             <option disabled>Select Existing Plan Name</option>
-            <option label="Media Base Market Plan" value="object:70">Media Base Market Plan</option>
-            <option label="NewModel2Plan" value="object:71">NewModel2Plan</option>
-          </select>
+             <ng-container *ngFor="let item of planList">
+              <option [value]="item.base_market_plan_id">{{item.base_plan_name}}</option>
+             </ng-container>
+           </select>
           <!-- ngIf: asc.error.planName -->
         </div>
       </div>

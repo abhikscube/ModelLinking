@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Modeljson } from 'src/app/model/modeljson';
+import { ModelListService } from '../../service/modellist.service';
 
 @Component({
   selector: 'app-project-link-modal',
@@ -10,21 +11,27 @@ import { Modeljson } from 'src/app/model/modeljson';
 })
 export class ProjectLinkModalComponent implements OnInit {
 
-  @Input() public jsonIndex: number;  
-  @Input() public name:string; 
-  @Input() public ModelList:Modeljson[];
+  @Input() public modelId: number;  
+  @Input() public modelName:string; 
+  //@Input() public ModelList:Modeljson[];
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
   public selectedModel: number=-1;
   public returnVlaue:any[];  
   public displayStatus:string='Hide';
-  
+  public linkedModelListDrp: any[];
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal,public ModelListService: ModelListService) { }
 
   ngOnInit() {
 
-    console.log(this.jsonIndex);   
+    console.log('this.jsonInde');  
+    console.log(this.modelId);  
+    
+    this.ModelListService.getLinkedModelListDrp().subscribe((modelResponseData)=>{
+      this.linkedModelListDrp=modelResponseData;
+   }); 
+
   }
 
   passBack(){
@@ -32,16 +39,16 @@ export class ProjectLinkModalComponent implements OnInit {
     var returnVlaue=new Array();
 
     this.activeModal.dismiss();
-    //console.log(this.selectedModel); 
+    console.log('selected model'+this.selectedModel); 
 
     // returnVlaue.push(this.jsonIndex);
     // returnVlaue.push(this.selectedModel);
 
-    returnVlaue['jsonIndex']=this.jsonIndex;
+    returnVlaue['jsonIndex']=this.modelId;
     returnVlaue['selectedModel']=this.selectedModel;
     
     //console.log('returnVlaue'); 
-    //console.log(returnVlaue);
+    console.log(returnVlaue);
 
     this.passEntry.emit(returnVlaue); 
   }

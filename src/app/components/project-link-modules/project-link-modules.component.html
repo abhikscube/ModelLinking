@@ -5,7 +5,7 @@
         <h3 class="box-title">Model List</h3>
       </div>
       <!-- /.box-header -->
-      <table datatable [dtOptions]="dtOptions"  class="row-border hover">
+      <table datatable [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class="row-border hover">
         <thead>
           <tr>
             <th>Model Name</th>
@@ -17,19 +17,21 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let item of ModelList;let jsonIndex = index">
+          <ng-container *ngFor="let item of linkedModelList;let Index = index">
             <tr>
               <td>
-                <span  *ngIf="item.status=='Normal';then without_status else with_status"></span>
-                <ng-template #without_status>{{item.name}}</ng-template>
-                <ng-template #with_status>{{item.name}} ({{item.status}})</ng-template>
+                <span  *ngIf="item.type=='A';then Advisors_status"></span>
+                <ng-template #Advisors_status>{{item.modelName}} (Advisors)</ng-template>
+                <span  *ngIf="item.type=='C';then Consumer_status"></span>
+                <ng-template #Consumer_status>{{item.modelName}} (Consumer)</ng-template>
+                <span  *ngIf="item.type=='null';then normal_status"></span>
+                <ng-template #normal_status>{{item.modelName}}</ng-template>                                
               </td>
-              <td>{{item.name}}</td>
+              <td>{{item.modelDesc}}</td>
               <td>
-                  <span *ngIf="item.advisors!='' then advisory_text"></span>
-                  <span *ngIf="item.consumer!='' then consumer_text"></span>
-                  <ng-template #advisory_text>{{item.advisors}}</ng-template>
-                  <ng-template #consumer_text>{{item.consumer}}</ng-template>
+                <span *ngIf="item.type!='null'">
+                {{item.linkedWith}}
+                </span>
                 </td>               
               <td>Imported</td>                          
               <td><a href="#">
@@ -45,8 +47,8 @@
                   </a>               
               </td>
               <td>
-                  <button (click)="openModal(jsonIndex)" *ngIf="item.status=='Normal'">Link</button>
-                  <button (click)="unlinkModel(jsonIndex)" *ngIf="item.status=='Consumer'">Unlink</button>
+                  <button (click)="openModal(item.modelId,item.modelName)" *ngIf="item.actionButton=='N'">Link</button>
+                  <button (click)="unlinkModel(item.modelId)" *ngIf="item.actionButton=='D'">Unlink</button>
 
               </td>             
             </tr>            

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { enableRipple } from '@syncfusion/ej2-base';
 import {ModeljsondadaService} from '../../service/modeljsondada.service';
+import { ModelListService } from '../../service/modellist.service';
 import {Modeljson} from '../../model/modeljson';
 enableRipple(true);
 
@@ -23,15 +24,19 @@ export class GeneratePlanComponent implements OnInit {
   @ViewChild('multiselectBrandList') private multiselectBrandList;
   @ViewChild('multiselectSubBrandList') private multiselectSubBrandList;
   
-  constructor(public ModeljsondadaService: ModeljsondadaService) { }
+  constructor(public ModeljsondadaService: ModeljsondadaService,public ModelListService: ModelListService) { }
 
-public brandsData:Object=[
-  { id: '0', brand: 'ALL' },
-  { id: '1', brand: 'B_Colonial Life' },
-  { id: '3', brand: 'B_MetLife' },
-  { id: '4', brand: 'B_Aflac_Dental' },
-  { id: '5', brand: 'B_Aflac_Hospital Ind' }
-];
+// public brandsData:Object=[
+//   { id: '0', brand: 'ALL' },
+//   { id: '1', brand: 'B_Colonial Life' },
+//   { id: '3', brand: 'B_MetLife' },
+//   { id: '4', brand: 'B_Aflac_Dental' },
+//   { id: '5', brand: 'B_Aflac_Hospital Ind' }
+// ];
+
+public brandsData: any[];
+
+
 // maps the appropriate column to fields property
 public brandsField: Object = { text: 'brand', value: 'id' };
  // set placeholder to MultiSelect input element
@@ -46,6 +51,16 @@ public placeholdersub:string='Select sub brands';
 public brandDatas:Array <Object>=[];
 
 
+
+
+public linkedModelListDrp: any[];
+
+
+public planList: any[];
+
+public selectedModelId: any;
+
+
 public field: Object = { dataSource: this.ModeljsondadaService.brandMediaList,
   id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild',expanded:"expanded" };
 // set the CheckBox to the TreeView
@@ -57,7 +72,45 @@ public showCheckBox: boolean = true;
     this.multiselectBrandList.mode='CheckBox';
     this.multiselectSubBrandList.mode='CheckBox';
 
+
+    // Load Models
+    this.ModelListService.getLinkedModelListDrp().subscribe((modelResponseData)=>{
+      this.linkedModelListDrp=modelResponseData;
+   });
+
+
   }
+
+  onChangeModelList(modelId: number){
+
+    this.selectedModelId=modelId;
+
+    this.ModelListService.getPlanList(modelId).subscribe((ResponseData)=>{
+
+      this.planList=ResponseData;
+   });
+
+
+  }
+
+
+
+
+
+  onChangePlanlList(planId: number){
+
+    
+
+    this.ModelListService.getBrandList(planId, this.selectedModelId).subscribe((ResponseData)=>{
+
+      this.brandsData=ResponseData;
+   });
+
+
+  }
+
+
+
 
   // public onRemove:EmitType<RemoveEventArgs> = (e:RemoveEventArgs)=>{
    

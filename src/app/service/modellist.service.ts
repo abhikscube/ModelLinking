@@ -69,4 +69,49 @@ this.http.get('http://localhost:8080/prorelevantservice/model/byclient/1').subsc
 
 
 
+
+getLinkedModelListDrp(): Observable<any>{
+   
+    return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getlinkedmodellistfordrp/1');
+
+}
+
+
+
+getLinkedModelList(): Observable<any>{
+   
+    return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getlinkedlistmodel/1');
+
+}
+
+
+updateLinkedModelList(receivedEntry): Observable<any>{
+   
+    return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/linkedmodel/1/'+receivedEntry['jsonIndex']+'/'+receivedEntry['selectedModel']);
+
+}
+
+
+unLinkedModel(modelId): Observable<any>{
+   
+    return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/unlinkedmodel/1/'+modelId);
+
+}
+
+
+
+getPlanList(modelId): Observable<any>{
+   
+    return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getmediaplanlistbyclientidmodelid/1/'+modelId);
+
+}
+
+getBrandList(planId,modelId): Observable<any>{
+   
+    return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getbrandlistbyclientidmodelidplanid/1/'+modelId+'/'+planId);
+
+}
+
+
+
 }
