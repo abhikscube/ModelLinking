@@ -5,7 +5,7 @@
   </div>
   <!-- /.box-header -->
   <!-- form start -->
-  <form role="form">
+  <form >
     <div class="box-body">
       <div class="row">
       <div class="col-lg-6">
@@ -16,12 +16,7 @@
           <select class="form-control" (change)="onChangeModelList($event.target.value)">
               <option disabled>Select Model</option>
               <ng-container *ngFor="let item of linkedModelListDrp;let i = index">
-
-                  <span  *ngIf="item.modelType=='A';then with_status else without_status"></span>
-                  <ng-template #with_status><option [value]="item.modelId">{{item.modelName}}/{{item.modelLinkedWith}}</option></ng-template>
-                  <ng-template #without_status><option [value]="item.modelId">{{item.modelName}}</option></ng-template>
-
-                
+                  <option [value]="item.modelId" *ngIf="item.modelType=='A'">{{item.modelName}}/{{item.modelLinkedWith}}</option>
               </ng-container>
           </select>
         </div>
@@ -40,15 +35,13 @@
           </label>
           <br>
           <label class="radio-inline">
-            <input type="radio" ng-model="asc.analysis.planType" value="GEN"
-              data-ng-click="asc.changePlanType(asc.analysis.planType)"
-              class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" name="63">
+            <input type="radio" value="GEN"
+            [(ngModel)]="planType" name="plantype">
             Simple
           </label>
           <label class="radio-inline">
-            <input type="radio" ng-model="asc.analysis.planType" value="STEP"
-              data-ng-click="asc.changePlanType(asc.analysis.planType)"
-              class="ng-pristine ng-valid ng-not-empty ng-touched" name="64">Stepwise
+            <input type="radio"  value="STEP"
+            [(ngModel)]="planType" name="plantype">Stepwise
           </label>
         </div>
       </div>
@@ -63,14 +56,14 @@
           </label>
           <br>
           <label class="radio-inline">
-            <input type="radio" ng-model="asc.analysis.valueType" value="P" class="" name="73">Change Percentage
+            <input type="radio" [(ngModel)]="valueType" name="valuetype" value="P">Change Percentage
           </label>
           <label class="radio-inline">
-            <input type="radio" ng-model="asc.analysis.valueType" value="A" class="" name="74">Change Absolute
+            <input type="radio" [(ngModel)]="valueType" name="valuetype" value="A">Change Absolute
           </label>
-          <!-- ngIf: asc.showAbsolute --><label class="radio-inline">
-            <input type="radio" ng-model="asc.analysis.valueType" value="D" class="" name="80">Put Absolute
-          </label><!-- end ngIf: asc.showAbsolute -->
+          <label class="radio-inline">
+            <input type="radio" [(ngModel)]="valueType" name="valuetype" value="D" >Put Absolute
+          </label>
           <br>
         </div>
       </div>    </div> 
@@ -98,8 +91,7 @@
             <span style="color:red;">*</span>
           </label>
           <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-            data-ng-model="asc.analysis.newPlanName" placeholder="Enter Plan Name"
-            data-ng-change="asc.checkNewPlanName(asc.analysis.newPlanName)">
+          [(ngModel)]="newPlanName" placeholder="Enter Plan Name" name="newplanname">
           <!-- ngIf: asc.error.newPlanNameError -->
         </div>
       </div>
@@ -113,7 +105,7 @@
             <span style="color:red;">*</span>
           </label>
 
-          <input type="text" class="form-control " placeholder="Enter GRPs/Impression value">
+          <input type="text" class="form-control " [(ngModel)]="grpImpression" name="grpImpression" placeholder="Enter GRPs/Impression value">
 
         </div>
       </div> </div>
@@ -128,7 +120,7 @@
          <div id="brandslist">
           <ejs-multiselect 
               #multiselectBrandList 
-              id='#multiselectBrandList'
+              id='multiselectBrandList'
               [dataSource]='brandsData' 
               [fields]='brandsField'
               (filtering)='onFiltering($event)'  (removed)='onRemove($event)' 
@@ -144,8 +136,7 @@
         <div id="subBrandList">
           <ejs-multiselect
               #multiselectSubBrandList
-              id='#multiselectSubBrandList' 
-              [dataSource]='subBrands' 
+              [dataSource]='subBrandsData' 
               [fields]='subBrandFields'
               (filtering)='onFiltering($event)' 
               [placeholder]='placeholdersub' >
@@ -159,7 +150,7 @@
           Media Type
         </label>
         <div id='treeparent'>
-          <ejs-treeview #treeelement id='#treeelement' [fields]='field' [showCheckBox]='showCheckBox'></ejs-treeview>
+          <ejs-treeview #treeelement id='#treeelement' [fields]='field' [showCheckBox]='showCheckBox'  (nodeChecked)="changeValueM($event)"></ejs-treeview>
         </div>
       </div> </div>
 
@@ -172,7 +163,7 @@
           <label>
             Change Awareness Probability
           </label>
-          <input type="text" class="form-control " placeholder="Select the value between 0 to 1">
+          <input type="text" class="form-control " [(ngModel)]="awarenessProbability" name="awarenessprobability" placeholder="Select the value between 0 to 1">
         </div>
       </div>
 
@@ -182,12 +173,7 @@
           <label>
             Change Persuasion
           </label>
-          <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched"
-            data-ng-model="asc.analysis.persuation" placeholder="Select the value between 0 to 1"
-            data-ng-change="asc.error.persuasion = validate(asc.analysis.persuation).by('persuasion')"
-            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-          <!-- ngIf: asc.error.persuasion[0] -->
-          <!--<input type="number" class="form-control"  data-ng-model="asc.analysis.persuation" placeholder="Change Persuation"/>-->
+          <input type="text" [(ngModel)]="changePersuasion" name="changepersuasion" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="Select the value between 0 to 1">
         </div>
       </div>
       <div class=" pull-left col-sm-4">
@@ -206,7 +192,7 @@
     <div>
 
       
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button  class="btn btn-primary" (click)='onSubmitForm()'>Submit</button>
     </div>
   </form>
 </div></div>

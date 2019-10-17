@@ -23,6 +23,8 @@ export class ModelListService{
 
     public modellist: any;
 
+    public submodelist: any;
+
     constructor(private http: HttpClient) {}
 
 
@@ -106,6 +108,8 @@ getPlanList(modelId): Observable<any>{
 
 }
 
+
+
 getBrandList(planId,modelId): Observable<any>{
    
     return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getbrandlistbyclientidmodelidplanid/1/'+modelId+'/'+planId);
@@ -114,4 +118,34 @@ getBrandList(planId,modelId): Observable<any>{
 
 
 
+getSubBrandList(brandListString): Observable<any>{
+   
+    return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getsubbrandlistbybrandlist/'+brandListString);
+
 }
+
+
+
+getStartDateEndDate(planId,modelId): Observable<any>{
+   
+    return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getstartdateenddate/1/'+modelId+'/'+planId);
+
+}
+
+
+
+
+getmediaListonBrand(selectedPlanId,selectedModelId,barndListStr): Observable<any>{
+      
+  return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getmediatree/1/'+selectedPlanId+'/'+selectedModelId+'/'+barndListStr);
+
+
+}
+
+
+
+
+}
+
+
+
