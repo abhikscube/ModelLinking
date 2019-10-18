@@ -136,10 +136,12 @@
         <div id="subBrandList">
           <ejs-multiselect
               #multiselectSubBrandList
+              name="muliselectsubbrands"
               [dataSource]='subBrandsData' 
               [fields]='subBrandFields'
               (filtering)='onFiltering($event)' 
-              [placeholder]='placeholdersub' >
+              [placeholder]='placeholdersub' 
+              (blur)='onSelectSubBrand($event)'>
               </ejs-multiselect>
          </div>
       </div>  </div>
@@ -193,6 +195,7 @@
 
       
       <button  class="btn btn-primary" (click)='onSubmitForm()'>Submit</button>
+
     </div>
   </form>
 </div></div>

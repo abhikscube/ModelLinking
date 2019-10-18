@@ -82,6 +82,12 @@ public grpImpression:any;
 
 public valueType:any;
 
+public subBrandListselected:any;
+
+public selectedConsumerId:any;
+
+public ModelObjList:any=[];
+
 
 public localData: Object[] = [
   { id: 1, name: 'Discover Music', hasChild: true, expanded: true },
@@ -141,7 +147,30 @@ public showCheckBox: boolean = true;
     // Load Models
     this.ModelListService.getLinkedModelListDrp().subscribe((modelResponseData)=>{
       this.linkedModelListDrp=modelResponseData;
+
+      this.ModelObjList=modelResponseData;
+      //console.log(this.linkedModelListDrp);
    });
+
+
+
+
+
+  }
+
+
+  onSelectSubBrand(e){
+
+    // console.log(e);
+    // console.log(this.subBrandListselected);
+    // console.log(this.multiselectSubBrandListssd);
+     console.log(this.multiselectSubBrandListssd.value);
+
+
+     
+     
+     
+     this.subBrandListselected=this.multiselectSubBrandListssd.value.join(',')
 
 
 
@@ -164,6 +193,19 @@ public showCheckBox: boolean = true;
 
       this.multiselectSubBrandListssd.selectAll(false);
       this.multiselectBrandList.selectAll(false);
+
+
+
+      for(let singelObj of this.ModelObjList){
+
+          if(singelObj.modelId==this.selectedModelId)
+          this.selectedConsumerId=singelObj.linkmodelId;
+
+
+      }
+
+
+      
 
 
    });
@@ -200,8 +242,8 @@ public showCheckBox: boolean = true;
     this.start=new Date(ResponseData.start_date);
     this.end=new Date(ResponseData.end_date);
 
-    console.log(this.start);
-    console.log(this.end);
+    // console.log(this.start);
+    // console.log(this.end);
 
     
  });
@@ -250,7 +292,7 @@ public showCheckBox: boolean = true;
       this.multiselectSubBrandListssd.fields.dataSource=[];
 
      // this.createMediaTree(this.selectedBrandList.join(','));
-      console.log('in bnalk');
+     // console.log('in bnalk');
       this.eventCategoriesTree.fields.dataSource = [];
 
     }
@@ -327,12 +369,12 @@ public showCheckBox: boolean = true;
       
       
       
-        alert("The selected node's id: " + this.eventCategoriesTree.checkedNodes);
-        console.log(this.eventCategoriesTree.checkedNodes);
+      //   alert("The selected node's id: " + this.eventCategoriesTree.checkedNodes);
+      //   console.log(this.eventCategoriesTree.checkedNodes);
 
        
-       console.log(this.mediaJesonsarr);
-        console.log(this.mediaTree);
+      //  console.log(this.mediaJesonsarr);
+      //   console.log(this.mediaTree);
 
       // }
       //this.mediaTree.push();
@@ -535,62 +577,101 @@ public showCheckBox: boolean = true;
 
   }
 
-
-
   onSubmitForm(){
 
 
+   // console.log(this.multiselectSubBrandListssd.value);
+    console.log(this.subBrandListselected);
+    console.log(this.selectedConsumerId);
+    console.log(this.selectedModelId);
 
-      console.log(this.newPlanName);
-      console.log(this.planType);
-      console.log(this.changePersuasion);
-      console.log(this.awarenessProbability);
-      console.log(this.valueType);
-      console.log(this.grpImpression);
-      
+    
 
-     // console.log(this.mediaTree);
+    // console.log(this.newPlanName);
+    // console.log(this.planType);
+    // console.log(this.changePersuasion);
+    // console.log(this.awarenessProbability);
+    // console.log(this.valueType);
+    // console.log(this.grpImpression);
+    
 
-      // const httpOptions = {
-      //   headers: new HttpHeaders({ 
-      //     'Access-Control-Allow-Origin':'*'
-      //   })
-      // };
 
-            // this.http.post("http://localhost:8080/prorelevantservice/simulationprocedure/mediaproc?userid=2",
-            // {
-            //   "mediaPlanId": this.selectedPlanId,
-            //   "clientId": 1,
-            //   "modelId": this.selectedModelId,
-            //   "startDateSet": this.start,
-            //   "endDateSet": this.end,
-            //   "grpsImprsChng": "102",
-            //   "awarenessProbChng": "0.1",
-            //   "persuationChange": "0.1",
-            //   "newMediaPlanName": "plan2",
-            //   "brand": "1941",
-            //   "subBrand": "1948",
-            //   "product": "%",
-            //   "mediatreeparam": this.mediaTree.join(","),
-            //   "steps": 1,
-            //   "type": "GEN",
-            //   "changeValueType": "P"
-            // } )
-            //       .subscribe(
-            //       data  => {
-            //       console.log("POST Request is successful ", data);
 
-            //       //this.form.reset();
-            //       },
-            //       error  => {
+          this.http.post("http://localhost:8080/prorelevantservice/simulationprocedure/mediaproc?userid=2",
+          {
+            "mediaPlanId": this.selectedPlanId,
+            "clientId": 1,
+            "modelId": this.selectedModelId,
+            "startDateSet": this.start,
+            "endDateSet": this.end,
+            "grpsImprsChng": this.grpImpression,
+            "awarenessProbChng": this.awarenessProbability,
+            "persuationChange": this.changePersuasion,
+            "newMediaPlanName": this.newPlanName,
+            "brand": this.selectedBrandList.join(','),
+            "subBrand": this.subBrandListselected,
+            "product": "%",
+            "mediatreeparam": "SM-B_MetLife,Website-B_MetLife,Natl_Newspaper-B_MetLife,Natl_Spot_Radio-B_MetLife,Newspaper-B_MetLife,Outdoor-B_MetLife,SM#Facebook-B_MetLife,SM#Instagram-B_MetLife,SM#Linkedin-B_MetLife,SM#Twitter-B_MetLife,SM#Youtube-B_MetLife,Website#NONE-B_MetLife,Natl_Newspaper#Annuities-B_MetLife,Natl_Newspaper#Brand-B_MetLife,Natl_Spot_Radio#Annuities-B_MetLife,Natl_Spot_Radio#Brand-B_MetLife,Newspaper#Annuities-B_MetLife,Newspaper#Brand-B_MetLife,Outdoor#Annuities-B_MetLife,Outdoor#Brand-B_MetLife,SM#Facebook##Comment-B_MetLife,SM#Facebook##Share-B_MetLife,SM#Instagram##Comment-B_MetLife,SM#Instagram##Favourite-B_MetLife,SM#Instagram##Share-B_MetLife,SM#Linkedin##Comment-B_MetLife,SM#Linkedin##Favourite-B_MetLife,SM#Linkedin##Share-B_MetLife,SM#Twitter##Comment-B_MetLife,SM#Twitter##Favourite-B_MetLife,SM#Twitter##Share-B_MetLife,SM#Youtube##Comment-B_MetLife,SM#Youtube##Favourite-B_MetLife,SM#Youtube##Share-B_MetLife,Website#NONE##Minutes-B_MetLife,Website#NONE##Reach-B_MetLife,Website#NONE##View-B_MetLife,Natl_Newspaper#Annuities##-B_MetLife,Natl_Newspaper#Brand##-B_MetLife,Natl_Spot_Radio#Annuities##-B_MetLife,Natl_Spot_Radio#Brand##-B_MetLife,Newspaper#Annuities##-B_MetLife,Newspaper#Brand##-B_MetLife,Outdoor#Annuities##-B_MetLife,Outdoor#Brand##-B_MetLife",
+            "steps": 1,
+            "type": this.planType,
+            "changeValueType": this.valueType
+          } )
+                .subscribe(
+                data  => {
+                //console.log("POST Request is successful for first post ", data);
 
-            //       console.log("Error", error);
+               
+                        console.log()
+               
+               
+                          this.http.post("http://localhost:8080/prorelevantservice/simulationprocedure/mediaproc?userid=2",
+                          {
+                            "mediaPlanId": 10754,
+                            "clientId": 1,
+                            "modelId": this.selectedConsumerId,
+                            "startDateSet": this.start,
+                            "endDateSet": this.end,
+                            "grpsImprsChng": this.grpImpression,
+                            "awarenessProbChng": this.awarenessProbability,
+                            "persuationChange": this.changePersuasion,
+                            "newMediaPlanName": this.newPlanName+'_C@#$',
+                            "brand": this.selectedBrandList.join(','),
+                            "subBrand": this.subBrandListselected,
+                            "product": "%",
+                            "mediatreeparam": "SM-B_MetLife,Website-B_MetLife,Natl_Newspaper-B_MetLife,Natl_Spot_Radio-B_MetLife,Newspaper-B_MetLife,Outdoor-B_MetLife,SM#Facebook-B_MetLife,SM#Instagram-B_MetLife,SM#Linkedin-B_MetLife,SM#Twitter-B_MetLife,SM#Youtube-B_MetLife,Website#NONE-B_MetLife,Natl_Newspaper#Annuities-B_MetLife,Natl_Newspaper#Brand-B_MetLife,Natl_Spot_Radio#Annuities-B_MetLife,Natl_Spot_Radio#Brand-B_MetLife,Newspaper#Annuities-B_MetLife,Newspaper#Brand-B_MetLife,Outdoor#Annuities-B_MetLife,Outdoor#Brand-B_MetLife,SM#Facebook##Comment-B_MetLife,SM#Facebook##Share-B_MetLife,SM#Instagram##Comment-B_MetLife,SM#Instagram##Favourite-B_MetLife,SM#Instagram##Share-B_MetLife,SM#Linkedin##Comment-B_MetLife,SM#Linkedin##Favourite-B_MetLife,SM#Linkedin##Share-B_MetLife,SM#Twitter##Comment-B_MetLife,SM#Twitter##Favourite-B_MetLife,SM#Twitter##Share-B_MetLife,SM#Youtube##Comment-B_MetLife,SM#Youtube##Favourite-B_MetLife,SM#Youtube##Share-B_MetLife,Website#NONE##Minutes-B_MetLife,Website#NONE##Reach-B_MetLife,Website#NONE##View-B_MetLife,Natl_Newspaper#Annuities##-B_MetLife,Natl_Newspaper#Brand##-B_MetLife,Natl_Spot_Radio#Annuities##-B_MetLife,Natl_Spot_Radio#Brand##-B_MetLife,Newspaper#Annuities##-B_MetLife,Newspaper#Brand##-B_MetLife,Outdoor#Annuities##-B_MetLife,Outdoor#Brand##-B_MetLife",
+                            "steps": 1,
+                            "type": this.planType,
+                            "changeValueType": this.valueType
+                          } )
+                                .subscribe(
+                                data  => {
+                                console.log("POST Request is successful for second post ", data);
+                
+                                
+                                },
+                                error  => {
+                
+                                console.log("Error in second post", error);
+                
+                                }
+                
+                                );
+  
 
-            //       }
+                },
+                error  => {
 
-            //       );
+                console.log("Error in first post", error);
 
-  }
+                }
+
+                );
+
+
+
+}
+
+  
 
    
 }

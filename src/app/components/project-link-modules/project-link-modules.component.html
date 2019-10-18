@@ -48,7 +48,7 @@
               </td>
               <td>
                   <button (click)="openModal(item.modelId,item.modelName)" *ngIf="item.actionButton=='N'">Link</button>
-                  <button (click)="unlinkModel(item.modelId)" *ngIf="item.actionButton=='D'">Unlink</button>
+                  <button class="unlink-btn" (click)="unlinkModel(item.modelId)" *ngIf="item.actionButton=='D'">Unlink</button>
 
               </td>             
             </tr>            

@@ -36,6 +36,7 @@ import { ProjectLinkModulesComponent } from './components/project-link-modules/p
 import { ProjectLinkModalComponent } from './components/project-link-modal/project-link-modal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { from } from 'rxjs';
+import { LinkingSimulationComponent } from './components/linking-simulation/linking-simulation.component';
 
 
 
@@ -57,7 +58,8 @@ import { from } from 'rxjs';
     WaitingModulesComponent,
     GeneratePlanComponent,
     ProjectLinkModulesComponent,
-    ProjectLinkModalComponent
+    ProjectLinkModalComponent,
+    LinkingSimulationComponent
     
   ],
   imports: [

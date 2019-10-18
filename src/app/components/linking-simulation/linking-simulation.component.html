@@ -1,0 +1,83 @@
+<style>
+  .box-title-select-model{
+    display: flex;
+  
+  }
+  .box-title-select-model span{        width: auto;
+      line-height: 35px;
+      padding-right: 20px;
+  
+  }
+  .box-title-select-model  select{       width: 20%;
+  
+  }
+  .generate_plan_bx .box{
+    box-shadow:none;
+  
+  }
+  .btn-group-sim .btn-primary{
+    margin-left: 0px;
+    margin-right: 10px;
+  }
+  </style>
+  
+  
+  <div class="generate_plan_bx">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title box-title-select-model">
+          <span> Select Model </span> <select class="form-control">                  
+          <option disabled>Select Existing Plan Name</option>
+          
+            <option> select 1 </option>
+            <option> select 1 </option>
+    
+         </select>  </h3>
+      </div>
+    
+    <div class="box-body">
+      <div class="row">  
+          <div class="pull-left col-sm-6">
+            <div class="form-group">
+              <label>
+               Simulation Name
+                <span style="color:red;">*</span>
+              </label>
+              <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty"
+                data-ng-model="asc.analysis.newPlanName" placeholder="Enter Plan Name"
+                data-ng-change="asc.checkNewPlanName(asc.analysis.newPlanName)">
+              <!-- ngIf: asc.error.newPlanNameError -->
+            </div>
+          </div>
+    
+    
+    
+          <div class="pull-left col-sm-6">
+            <div class="form-group">
+              <label class="ng-binding">
+               Select Simulation Template
+                <span style="color:red;">*</span>
+              </label>
+    
+              <select _ngcontent-moe-c1="" class="form-control"><option _ngcontent-moe-c1="" disabled="">Select Existing Plan Name</option><option _ngcontent-moe-c1=""> select 1 </option><option _ngcontent-moe-c1=""> select 1 </option></select>
+    
+            </div>
+          </div> </div> 
+  
+          <div class="clearfix"></div>
+  
+          <div class="row"><div class="pull-left col-sm-3"><div class="form-group"><label> Price <span style="color:red;">*</span></label><select class="form-control"><option>Select Existing Plan Name</option></select></div></div>
+          <div class="pull-left col-sm-3"><div class="form-group"><label> Media <span   style="color:red;">*</span></label><select class="form-control"><option>Select Existing Plan Name</option></select></div></div>
+          <div class="pull-left col-sm-3"><div  class="form-group"><label class="ng-binding"> Distribution <span style="color:red;">*</span></label><select class="form-control"><option>Select Existing Plan Name</option></select></div></div>
+          <div class="pull-left col-sm-3"><div  class="form-group"><label class="ng-binding"> Brand Attribute<span style="color:red;">*</span></label><select class="form-control"><option>Select Existing Plan Name</option></select></div></div>
+        </div>
+    
+        
+        <div class="btn-group-sim">
+            <div class="row">
+              <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Cancel</button> <button type="submit" class="btn btn-primary">Save & Run</button>
+  
+        </div></div></div></div>
+    
+    </div></div>
