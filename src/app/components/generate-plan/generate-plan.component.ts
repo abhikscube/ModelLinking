@@ -72,7 +72,7 @@ public mediaJesonsarr: any=[];
 
 public newPlanName:any;
 
-public planType:any;
+public planType:string='GEN';
 
 public changePersuasion:any;
 
@@ -80,13 +80,32 @@ public awarenessProbability:any;
 
 public grpImpression:any;
 
-public valueType:any;
+public valueType:string='P';
 
 public subBrandListselected:any;
 
 public selectedConsumerId:any;
 
 public ModelObjList:any=[];
+
+public ConsumerExistingPlanObjectList:any=[];
+
+public AdvisorBrandObjectList:any=[];
+
+public ConsumerBrandObjectList:any=[];
+
+
+
+public AdvisorSubBrandObjectList:any=[];
+
+public ConsumerSubBrandObjectList:any=[];
+
+public ExistingModelPlanIdForConsumer:any;
+
+public SelectedBrandArrForConsumer:any=[];
+
+public SelectedSubBrandArrForConsumer:any=[];b
+
 
 
 public localData: Object[] = [
@@ -223,11 +242,13 @@ public showCheckBox: boolean = true;
 
     this.ModelListService.getBrandList(planId, this.selectedModelId).subscribe((ResponseData)=>{
 
-     console.log(ResponseData);
+    // console.log(ResponseData);
      
       this.brandsData=ResponseData;
       this.subBrandsData=[];
       this.multiselectSubBrandListssd.selectAll(false);
+
+      this.AdvisorBrandObjectList=ResponseData;
 
       
    });
@@ -577,15 +598,27 @@ public showCheckBox: boolean = true;
 
   }
 
+  
+  onSubmitForm1(){
+
+
+
+
+  }
+  
+  
+  
   onSubmitForm(){
 
 
    // console.log(this.multiselectSubBrandListssd.value);
-    console.log(this.subBrandListselected);
-    console.log(this.selectedConsumerId);
-    console.log(this.selectedModelId);
-
+  //  console.log(this.subBrandListselected);
     
+  console.log('Selected Advisor ModelId '+this.selectedModelId);
+  console.log('Selected Consumer ModelId '+this.selectedConsumerId);
+  
+    console.log('Selected Advisor Brand Object ');
+    console.log(this.multiselectBrandList);
 
     // console.log(this.newPlanName);
     // console.log(this.planType);
@@ -595,77 +628,226 @@ public showCheckBox: boolean = true;
     // console.log(this.grpImpression);
     
 
+    this.SelectedBrandArrForConsumer.length=0;
+    this.SelectedSubBrandArrForConsumer.legth=0;
 
 
-          this.http.post("http://localhost:8080/prorelevantservice/simulationprocedure/mediaproc?userid=2",
-          {
-            "mediaPlanId": this.selectedPlanId,
-            "clientId": 1,
-            "modelId": this.selectedModelId,
-            "startDateSet": this.start,
-            "endDateSet": this.end,
-            "grpsImprsChng": this.grpImpression,
-            "awarenessProbChng": this.awarenessProbability,
-            "persuationChange": this.changePersuasion,
-            "newMediaPlanName": this.newPlanName,
-            "brand": this.selectedBrandList.join(','),
-            "subBrand": this.subBrandListselected,
-            "product": "%",
-            "mediatreeparam": "SM-B_MetLife,Website-B_MetLife,Natl_Newspaper-B_MetLife,Natl_Spot_Radio-B_MetLife,Newspaper-B_MetLife,Outdoor-B_MetLife,SM#Facebook-B_MetLife,SM#Instagram-B_MetLife,SM#Linkedin-B_MetLife,SM#Twitter-B_MetLife,SM#Youtube-B_MetLife,Website#NONE-B_MetLife,Natl_Newspaper#Annuities-B_MetLife,Natl_Newspaper#Brand-B_MetLife,Natl_Spot_Radio#Annuities-B_MetLife,Natl_Spot_Radio#Brand-B_MetLife,Newspaper#Annuities-B_MetLife,Newspaper#Brand-B_MetLife,Outdoor#Annuities-B_MetLife,Outdoor#Brand-B_MetLife,SM#Facebook##Comment-B_MetLife,SM#Facebook##Share-B_MetLife,SM#Instagram##Comment-B_MetLife,SM#Instagram##Favourite-B_MetLife,SM#Instagram##Share-B_MetLife,SM#Linkedin##Comment-B_MetLife,SM#Linkedin##Favourite-B_MetLife,SM#Linkedin##Share-B_MetLife,SM#Twitter##Comment-B_MetLife,SM#Twitter##Favourite-B_MetLife,SM#Twitter##Share-B_MetLife,SM#Youtube##Comment-B_MetLife,SM#Youtube##Favourite-B_MetLife,SM#Youtube##Share-B_MetLife,Website#NONE##Minutes-B_MetLife,Website#NONE##Reach-B_MetLife,Website#NONE##View-B_MetLife,Natl_Newspaper#Annuities##-B_MetLife,Natl_Newspaper#Brand##-B_MetLife,Natl_Spot_Radio#Annuities##-B_MetLife,Natl_Spot_Radio#Brand##-B_MetLife,Newspaper#Annuities##-B_MetLife,Newspaper#Brand##-B_MetLife,Outdoor#Annuities##-B_MetLife,Outdoor#Brand##-B_MetLife",
-            "steps": 1,
-            "type": this.planType,
-            "changeValueType": this.valueType
-          } )
-                .subscribe(
-                data  => {
-                //console.log("POST Request is successful for first post ", data);
+      //get the Existing Plan Name for consumer model
 
-               
-                        console.log()
-               
-               
-                          this.http.post("http://localhost:8080/prorelevantservice/simulationprocedure/mediaproc?userid=2",
-                          {
-                            "mediaPlanId": 10754,
-                            "clientId": 1,
-                            "modelId": this.selectedConsumerId,
-                            "startDateSet": this.start,
-                            "endDateSet": this.end,
-                            "grpsImprsChng": this.grpImpression,
-                            "awarenessProbChng": this.awarenessProbability,
-                            "persuationChange": this.changePersuasion,
-                            "newMediaPlanName": this.newPlanName+'_C@#$',
-                            "brand": this.selectedBrandList.join(','),
-                            "subBrand": this.subBrandListselected,
-                            "product": "%",
-                            "mediatreeparam": "SM-B_MetLife,Website-B_MetLife,Natl_Newspaper-B_MetLife,Natl_Spot_Radio-B_MetLife,Newspaper-B_MetLife,Outdoor-B_MetLife,SM#Facebook-B_MetLife,SM#Instagram-B_MetLife,SM#Linkedin-B_MetLife,SM#Twitter-B_MetLife,SM#Youtube-B_MetLife,Website#NONE-B_MetLife,Natl_Newspaper#Annuities-B_MetLife,Natl_Newspaper#Brand-B_MetLife,Natl_Spot_Radio#Annuities-B_MetLife,Natl_Spot_Radio#Brand-B_MetLife,Newspaper#Annuities-B_MetLife,Newspaper#Brand-B_MetLife,Outdoor#Annuities-B_MetLife,Outdoor#Brand-B_MetLife,SM#Facebook##Comment-B_MetLife,SM#Facebook##Share-B_MetLife,SM#Instagram##Comment-B_MetLife,SM#Instagram##Favourite-B_MetLife,SM#Instagram##Share-B_MetLife,SM#Linkedin##Comment-B_MetLife,SM#Linkedin##Favourite-B_MetLife,SM#Linkedin##Share-B_MetLife,SM#Twitter##Comment-B_MetLife,SM#Twitter##Favourite-B_MetLife,SM#Twitter##Share-B_MetLife,SM#Youtube##Comment-B_MetLife,SM#Youtube##Favourite-B_MetLife,SM#Youtube##Share-B_MetLife,Website#NONE##Minutes-B_MetLife,Website#NONE##Reach-B_MetLife,Website#NONE##View-B_MetLife,Natl_Newspaper#Annuities##-B_MetLife,Natl_Newspaper#Brand##-B_MetLife,Natl_Spot_Radio#Annuities##-B_MetLife,Natl_Spot_Radio#Brand##-B_MetLife,Newspaper#Annuities##-B_MetLife,Newspaper#Brand##-B_MetLife,Outdoor#Annuities##-B_MetLife,Outdoor#Brand##-B_MetLife",
-                            "steps": 1,
-                            "type": this.planType,
-                            "changeValueType": this.valueType
-                          } )
-                                .subscribe(
-                                data  => {
-                                console.log("POST Request is successful for second post ", data);
+    
+                this.ModelListService.getPlanList(this.selectedConsumerId).subscribe((ResponseData)=>{
+           
+                      for(let singelObj of ResponseData){
                 
-                                
-                                },
-                                error  => {
+                          if(singelObj.base_plan_name=='Media Base Market Plan')
+                          this.ExistingModelPlanIdForConsumer=singelObj.base_market_plan_id;
+                      }  
+            
+
+                      console.log('Selected Existing Media Plan ID (Base Plan ID) '+this.ExistingModelPlanIdForConsumer);   
+
+
+
+
+
+
+
+
+                     this.ModelListService.getBrandList(this.ExistingModelPlanIdForConsumer, this.selectedConsumerId).subscribe((ResponseData)=>{
+
+
+                      this.ConsumerBrandObjectList=ResponseData;
+    
+    
+                      var seleectedBrandNameArr:any=[];
+    
+                      seleectedBrandNameArr= this.multiselectBrandList.text.split(',')
+    
+                      console.log('Selected Brand name arr for consumer ');
+                      console.log(seleectedBrandNameArr);
+                      console.log('Brand Object List for consumer ');
+                      console.log(this.ConsumerBrandObjectList);
+    
+    
+                          for(var index=0;index < seleectedBrandNameArr.length; index++ ){
+    
+    
+                           
+    
+    
+    
+                            for(let singelAdvisorBrandObject of this.ConsumerBrandObjectList){
+    
+                                  if(singelAdvisorBrandObject.brand==seleectedBrandNameArr[index])
+                                    this.SelectedBrandArrForConsumer.push(singelAdvisorBrandObject.brand_id);
+                            }
+    
+                            
+    
+                          }
+    
                 
-                                console.log("Error in second post", error);
-                
+                      
+                          console.log('Selected Brand string for consumer '+this.SelectedBrandArrForConsumer.join(','));
+
+
+
+
+
+                          this.ModelListService.getSubBrandList(this.SelectedBrandArrForConsumer.join(',')).subscribe((ResponseData)=>{
+
+
+                            this.ConsumerSubBrandObjectList=ResponseData;
+    
+    
+                            var seleectedSubBrandNameArr:any=[];
+          
+                            seleectedSubBrandNameArr= this.multiselectSubBrandListssd.text.split(',')
+          
+                            console.log('Selected Sub Brand name arr for consumer ');
+                            console.log(seleectedSubBrandNameArr);
+                            console.log('Sub Brand Object List for consumer ');
+                            console.log(this.ConsumerSubBrandObjectList);
+          
+          
+                                for(var index=0;index < seleectedSubBrandNameArr.length; index++ ){
+          
+          
+                                 
+          
+          
+          
+                                  for(let singelAdvisorSubBrandObject of this.ConsumerSubBrandObjectList){
+          
+                                        if(singelAdvisorSubBrandObject.subbrand_name==seleectedSubBrandNameArr[index])
+                                          this.SelectedSubBrandArrForConsumer.push(singelAdvisorSubBrandObject.subbrand_id);
+                                  }
+          
+                                  
+          
                                 }
+      
+
+                                console.log('Selected Sub Brand string for consumer '+this.SelectedSubBrandArrForConsumer.join(','));
+                        
+                        
+                        
+                        
+                        
+ 
+                                this.http.post("http://localhost:8080/prorelevantservice/simulationprocedure/mediaproc?userid=2",
+                                {
+                                  "mediaPlanId": this.selectedPlanId,
+                                  "clientId": 1,
+                                  "modelId": this.selectedModelId,
+                                  "startDateSet": this.start,
+                                  "endDateSet": this.end,
+                                  "grpsImprsChng": this.grpImpression,
+                                  "awarenessProbChng": this.awarenessProbability,
+                                  "persuationChange": this.changePersuasion,
+                                  "newMediaPlanName": this.newPlanName,
+                                  "brand": this.selectedBrandList.join(','),
+                                  "subBrand": this.subBrandListselected,
+                                  "product": "%",
+                                  "mediatreeparam": this.mediaTree.join(','),
+                                  "steps": 1,
+                                  "type": this.planType,
+                                  "changeValueType": this.valueType
+                                } )
+                                      .subscribe(
+                                      data  => {
+                                      console.log("POST Request is successful for first post ", data);
+                      
+                                     
+                                             // console.log()
+                                     
+                                     
+                                                this.http.post("http://localhost:8080/prorelevantservice/simulationprocedure/mediaproc?userid=2",
+                                                {
+                                                  "mediaPlanId": this.ExistingModelPlanIdForConsumer,
+                                                  "clientId": 1,
+                                                  "modelId": this.selectedConsumerId,
+                                                  "startDateSet": this.start,
+                                                  "endDateSet": this.end,
+                                                  "grpsImprsChng": this.grpImpression,
+                                                  "awarenessProbChng": this.awarenessProbability,
+                                                  "persuationChange": this.changePersuasion,
+                                                  "newMediaPlanName": this.newPlanName+'_C@#$',
+                                                  "brand": this.SelectedBrandArrForConsumer.join(','),
+                                                  "subBrand": this.SelectedSubBrandArrForConsumer.join(','),
+                                                  "product": "%",
+                                                  "mediatreeparam": this.mediaTree.join(','),
+                                                  "steps": 1,
+                                                  "type": this.planType,
+                                                  "changeValueType": this.valueType
+                                                } )
+                                                      .subscribe(
+                                                      data  => {
+                                                      console.log("POST Request is successful for second post ", data);
+                                      
+                                                      
+                                                      },
+                                                      error  => {
+                                      
+                                                      console.log("Error in second post", error);
+                                      
+                                                      }
+                                      
+                                                      );
+                        
+                      
+                                      },
+                                      error  => {
+                      
+                                      console.log("Error in first post", error);
+                      
+                                      }
+                      
+                                      );
+                                             
+                        
+                        
+                        
+                        
+                        
+                              });
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  });
+
+
+
+
+
+
+
+
+
+
+                });
+
+
                 
-                                );
-  
+      //get selected brand list for consumer model
+      
+      
 
-                },
-                error  => {
 
-                console.log("Error in first post", error);
 
-                }
 
-                );
+
+
 
 
 
