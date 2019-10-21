@@ -144,6 +144,13 @@ getmediaListonBrand(selectedPlanId,selectedModelId,barndListStr): Observable<any
 
 
 
+getBrandListOnModelId(modelId): Observable<any>{
+      
+    return this.http.get<any>('http://localhost:8080/prorelevantservice/brand/getbrandsbymodelclient/1/'+modelId);
+  
+  
+  }
+
 
 }
 

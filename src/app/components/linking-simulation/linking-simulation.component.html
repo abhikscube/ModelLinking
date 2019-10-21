@@ -26,13 +26,14 @@
     <div class="box box-primary">
       <div class="box-header with-border">
         <h3 class="box-title box-title-select-model">
-          <span> Select Model </span> <select class="form-control">                  
-          <option disabled>Select Existing Plan Name</option>
-          
-            <option> select 1 </option>
-            <option> select 1 </option>
-    
-         </select>  </h3>
+          <span> Select Model </span>                  
+            <select class="form-control" (change)="onChangeModelList($event.target.value)">
+              <option disabled>Select Model</option>
+              <ng-container *ngFor="let item of linkedModelListDrp;let i = index">
+                  <option [value]="item.modelId" *ngIf="item.modelType=='A'">{{item.modelName}}/{{item.modelLinkedWith}}</option>
+              </ng-container>
+          </select> 
+         </h3>
       </div>
     
     <div class="box-body">
@@ -44,8 +45,8 @@
                 <span style="color:red;">*</span>
               </label>
               <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty"
-                data-ng-model="asc.analysis.newPlanName" placeholder="Enter Plan Name"
-                data-ng-change="asc.checkNewPlanName(asc.analysis.newPlanName)">
+              [(ngModel)]="simulationName" placeholder="Enter Plan Name"
+              name="simulationname">
               <!-- ngIf: asc.error.newPlanNameError -->
             </div>
           </div>
@@ -59,15 +60,38 @@
                 <span style="color:red;">*</span>
               </label>
     
-              <select _ngcontent-moe-c1="" class="form-control"><option _ngcontent-moe-c1="" disabled="">Select Existing Plan Name</option><option _ngcontent-moe-c1=""> select 1 </option><option _ngcontent-moe-c1=""> select 1 </option></select>
+              <select  class="form-control" [(ngModel)]="simulationTemplateName" name='simulationtemplatename'>
+                <option  disabled >Select Simulation Template Name</option>
+                <option [value]='9'> Standard </option>
+              </select>
     
             </div>
           </div> </div> 
   
           <div class="clearfix"></div>
   
-          <div class="row"><div class="pull-left col-sm-3"><div class="form-group"><label> Price <span style="color:red;">*</span></label><select class="form-control"><option>Select Existing Plan Name</option></select></div></div>
-          <div class="pull-left col-sm-3"><div class="form-group"><label> Media <span   style="color:red;">*</span></label><select class="form-control"><option>Select Existing Plan Name</option></select></div></div>
+          <div class="row">
+            <div class="pull-left col-sm-3">
+            <div class="form-group">
+              <label> Price <span style="color:red;">*</span>
+              </label>
+              <select class="form-control" >                  
+                  <option disabled>Select Existing Plan Name</option>
+                 </select>
+            </div>
+          </div>
+          <div class="pull-left col-sm-3">
+            <div class="form-group">
+              <label> Media <span   style="color:red;">*</span>
+              </label>
+              <select class="form-control" [(ngModel)]="mediaPlanName" name='mediaplanname'>                  
+                  <option disabled>Select Existing Plan Name</option>
+                   <ng-container *ngFor="let item of planList">
+                    <option [value]="item.base_market_plan_id">{{item.base_plan_name}}</option>
+                   </ng-container>
+                 </select>
+            </div>
+          </div>
           <div class="pull-left col-sm-3"><div  class="form-group"><label class="ng-binding"> Distribution <span style="color:red;">*</span></label><select class="form-control"><option>Select Existing Plan Name</option></select></div></div>
           <div class="pull-left col-sm-3"><div  class="form-group"><label class="ng-binding"> Brand Attribute<span style="color:red;">*</span></label><select class="form-control"><option>Select Existing Plan Name</option></select></div></div>
         </div>
@@ -76,7 +100,8 @@
         <div class="btn-group-sim">
             <div class="row">
               <div class="col-md-12">
-              <button type="submit" class="btn btn-primary">Cancel</button> <button type="submit" class="btn btn-primary">Save & Run</button>
+              <button type="submit" class="btn btn-primary">Cancel</button> 
+              <button type="submit" class="btn btn-primary" (click)='onSubmitForm()'>Save & Run</button>
   
         </div></div></div></div>
     

@@ -104,7 +104,9 @@ public ExistingModelPlanIdForConsumer:any;
 
 public SelectedBrandArrForConsumer:any=[];
 
-public SelectedSubBrandArrForConsumer:any=[];b
+public SelectedSubBrandArrForConsumer:any=[];
+
+public returnData:any;
 
 
 
@@ -342,7 +344,7 @@ public showCheckBox: boolean = true;
         for(var i = 0;i<this.eventCategoriesTree.checkedNodes.length;i++) { 
 
 
-              if((this.eventCategoriesTree.checkedNodes[i] > 5000) && (this.eventCategoriesTree.checkedNodes[i] < 8000) ){
+              if((this.eventCategoriesTree.checkedNodes[i] < 999)){
 
 
                 //get the jeson data
@@ -784,7 +786,9 @@ public showCheckBox: boolean = true;
                                                       .subscribe(
                                                       data  => {
                                                       console.log("POST Request is successful for second post ", data);
-                                      
+                                                        
+                                                      this.returnData=data;
+                                                      console.log(this.returnData)
                                                       
                                                       },
                                                       error  => {
