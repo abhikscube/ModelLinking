@@ -28,10 +28,26 @@ export class LinkingSimulationComponent implements OnInit {
   public simulationName:any;
   public simulationTemplateName:any;
   public mediaPlanName:any;
+
+
+
   public advisorpriceBaseMarketPlanId:any;
   public advisorproductattributesBaseMarketPlanId:any;
   public advisordistributionBaseMarketPlanId:any;
   public advisormediaBaseMarketPlanId:any;
+
+
+
+  public consumerpriceBaseMarketPlanId:any;
+  public consumerproductattributesBaseMarketPlanId:any;
+  public consumerdistributionBaseMarketPlanId:any;
+  public consumermediaBaseMarketPlanId:any;
+
+
+
+
+
+
   public returnData:any;
 
   ngOnInit() {
@@ -72,6 +88,10 @@ export class LinkingSimulationComponent implements OnInit {
 
       }
 
+
+      //Get Advisory model base plan id Start
+
+
       this.ModelListService.getBrandListOnModelId(this.selectedModelId).subscribe((ResponseBrandData)=>{
 
 
@@ -101,57 +121,31 @@ export class LinkingSimulationComponent implements OnInit {
                                                           console.log('success!');
 
 
-                                                          console.log(ReturnPlandata['priceplan'][0].id);
+                                                          //console.log(ReturnPlandata['priceplan'][0].id);
 
                                                           this.advisorpriceBaseMarketPlanId=ReturnPlandata['priceplan'][0].id;
-                                                          console.log(this.advisorpriceBaseMarketPlanId);
+                                                          console.log('Price Plan '+this.advisorpriceBaseMarketPlanId);
 
 
 
-                                                          console.log(ReturnPlandata['distributionplan'][0].id);
+                                                         // console.log(ReturnPlandata['distributionplan'][0].id);
 
                                                           this.advisordistributionBaseMarketPlanId=ReturnPlandata['distributionplan'][0].id;
-                                                          console.log(this.advisordistributionBaseMarketPlanId);
+                                                          console.log('Distribute Base Plan '+this.advisordistributionBaseMarketPlanId);
 
 
+                                                          //console.log(ReturnPlandata['mediaplan'][0].id);
+
+                                                          this.advisormediaBaseMarketPlanId=ReturnPlandata['mediaplan'][0].id;
+                                                          console.log('Media Base plan '+this.advisormediaBaseMarketPlanId);
 
 
-                                                          // Object.keys(ReturnPlandata).forEach(function(key) {
+                                                          //console.log(ReturnPlandata['productattributesplan'][0].id);
 
-                                                          //   if(key=='priceplan') {
-                                                          //     var priceplanarr:any=[];
-                                                          //     var pricdPlanId:any;
-                                                          //     priceplanarr=ReturnPlandata[key];
-
-                                                              
-                                                              
-                                                              
-                                                          //     for(let singelObj of priceplanarr){
+                                                          this.advisorproductattributesBaseMarketPlanId=ReturnPlandata['productattributesplan'][0].id;
+                                                          console.log('Product Attribute Base Plan '+this.advisorproductattributesBaseMarketPlanId);
 
 
-                                                          //       if(singelObj.basePlanName=='Price Base Market Plan'){
-
-
-                                                          //        // this.returnData=singelObj.id;
-                                                          //        pricdPlanId=singelObj.id;
-                                                          //        this.returnData=pricdPlanId;
-                                                          //         console.log('this.returnData');
-                                                          //         console.log(singelObj.id);
-
-                                                          //       }
-
-
-                                                          //     }
-
-
-                                                          //   }
-
-                                                              
-
-
-                                                          // });
-
-                                                          
 
                                                     
                                                     },
@@ -193,6 +187,136 @@ export class LinkingSimulationComponent implements OnInit {
 
 
       });
+
+
+
+
+      //Get Advisory model base plan id end
+
+
+
+
+
+
+
+
+
+
+      //Get Consumer  model base plan id Start
+
+
+      this.ModelListService.getBrandListOnModelId(this.selectedConsumerId).subscribe((ConResponseBrandData)=>{
+
+
+        //call for subbrand start
+
+
+
+        this.http.post("http://localhost:8080/prorelevantservice/product/bybrands",
+        ConResponseBrandData)
+              .subscribe(
+                ConResponseSubbrandData  => {
+              //console.log("POST Request is successful for second post ", ConResponseSubbrandData);
+
+
+                //call for plandada start
+
+
+
+                      this.http.post("http://localhost:8080/prorelevantservice/marketsim/getmarketsimplans/"+this.selectedConsumerId,
+                      {"brands": ConResponseBrandData,"products":ConResponseSubbrandData} )
+                            .subscribe(
+                              ConReturnPlandata  => {
+                            console.log("Market Plan Obj for Consumer ID ", ConReturnPlandata);
+                              
+                                  //this.returnData=ReturnPlandata;
+                                  
+                                  //console.log('success!');
+
+
+                                  //console.log(ReturnPlandata['priceplan'][0].id);
+
+                                  this.consumerpriceBaseMarketPlanId=ConReturnPlandata['priceplan'][0].id;
+                                  console.log('Price Plan for Consumer '+this.consumerpriceBaseMarketPlanId);
+
+
+
+                                 // console.log(ReturnPlandata['distributionplan'][0].id);
+
+                                  this.consumerdistributionBaseMarketPlanId=ConReturnPlandata['distributionplan'][0].id;
+                                  console.log('Distribute Base Plan Consumer '+this.consumerdistributionBaseMarketPlanId);
+
+
+                                  //console.log(ReturnPlandata['mediaplan'][0].id);
+
+                                  this.consumermediaBaseMarketPlanId=ConReturnPlandata['mediaplan'][0].id;
+                                  console.log('Media Base plan Consumer '+this.consumermediaBaseMarketPlanId);
+
+
+                                  //console.log(ReturnPlandata['productattributesplan'][0].id);
+
+                                  this.consumerproductattributesBaseMarketPlanId=ConReturnPlandata['productattributesplan'][0].id;
+                                  console.log('Product Attribute Base Plan Consumer '+this.consumerproductattributesBaseMarketPlanId);
+
+
+
+                            
+                            },
+                            error  => {
+            
+                                  console.log("Error in second post Consumer ", error);
+            
+                            }
+            
+                            );
+
+
+
+
+
+
+                //call for plan data end
+
+                
+
+              
+              },
+              error  => {
+
+              console.log("Error in second post", error);
+
+              }
+
+              );
+
+
+
+
+
+
+        //call for subbrand end
+
+
+
+
+});
+
+
+
+
+//Get Consumer  model base plan id end
+
+
+
+
+
+
+
+
+
+
+
+
 
 
    });
