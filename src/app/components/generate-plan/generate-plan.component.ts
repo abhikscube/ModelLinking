@@ -82,7 +82,7 @@ public grpImpression:any;
 
 public valueType:string='P';
 
-public subBrandListselected:any;
+public subBrandListselected: any[];
 
 public selectedConsumerId:any;
 
@@ -107,6 +107,10 @@ public SelectedBrandArrForConsumer:any=[];
 public SelectedSubBrandArrForConsumer:any=[];
 
 public returnData:any;
+
+public loading_icon:number;
+
+public form_validate:number=1;
 
 
 
@@ -487,7 +491,7 @@ public showCheckBox: boolean = true;
       
       var count:number=0;
   
-
+      //console.log(modelResponseData);
       
       for(let singelObj of modelResponseData){
   
@@ -612,7 +616,113 @@ public showCheckBox: boolean = true;
   
   onSubmitForm(){
 
+    // "mediaPlanId": this.selectedPlanId,
+    // "clientId": 1,
+    // "modelId": this.selectedModelId,
+    // "startDateSet": this.start,
+    // "endDateSet": this.end,
+    // "grpsImprsChng": this.grpImpression,
+    // "awarenessProbChng": this.awarenessProbability,
+    // "persuationChange": this.changePersuasion,
+    // "newMediaPlanName": this.newPlanName,
+    // "brand": this.selectedBrandList.join(','),
+    // "subBrand": this.subBrandListselected,
+    // "product": "%",
+    // "mediatreeparam": this.mediaTree.join(','),
+    // "steps": 1,
+    // "type": this.planType,
+    // "changeValueType": this.valueType
 
+
+
+    
+
+    if(this.selectedModelId == undefined){
+
+      this.form_validate=0;
+      alert('Select Model Id');
+
+    }
+
+ 
+    if(this.selectedPlanId == undefined){
+
+      this.form_validate=0;
+      alert('Select Media Plan');
+
+    } 
+
+
+    if(this.newPlanName == undefined){
+
+      this.form_validate=0;
+      alert('Enter Plan Name');
+
+    } 
+
+
+    if(this.grpImpression == undefined){
+
+      this.form_validate=0;
+      alert('Select GRP Impression');
+
+    }
+
+    if(this.awarenessProbability == undefined){
+
+      this.form_validate=0;
+      alert('Enter Persuasion');
+
+    }else if(this.changePersuasion >1 || this.changePersuasion < 0){
+
+      this.form_validate=0;
+      alert('Enter Persuasion value between 0 to 1');
+
+    }
+
+
+
+    if(this.awarenessProbability == undefined){
+
+      this.form_validate=0;
+      alert('Enter Awareness Probability');
+
+    }else if(this.awarenessProbability >1 || this.awarenessProbability < 0){
+
+      this.form_validate=0;
+      alert('Enter Awareness Probability value between 0 to 1');
+
+    }
+
+
+    if(this.selectedBrandList.length==0){
+
+      this.form_validate=0;
+      alert('Select any Brand');
+
+
+    }else{
+
+      if(this.subBrandListselected == undefined){
+
+        this.form_validate=0;
+        alert('Select any SubBrand');
+  
+      }  
+  
+
+    }
+
+
+
+
+
+
+
+    if(this.form_validate==1){
+
+
+    this.loading_icon=1;
    // console.log(this.multiselectSubBrandListssd.value);
   //  console.log(this.subBrandListselected);
     
@@ -788,7 +898,12 @@ public showCheckBox: boolean = true;
                                                       console.log("POST Request is successful for second post ", data);
                                                         
                                                       this.returnData=data;
-                                                      console.log(this.returnData)
+                                                      console.log(this.returnData);
+
+                                                      this.loading_icon=0;
+
+                                                     // this.linkedModelListDrp=[];
+
                                                       
                                                       },
                                                       error  => {
@@ -857,7 +972,7 @@ public showCheckBox: boolean = true;
 
 }
 
-  
+} 
 
    
 }

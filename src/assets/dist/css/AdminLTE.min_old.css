@@ -46,19 +46,19 @@ table.dataTable thead th, table.dataTable thead td{
 
 
 }
-.box table td button{   background-color: #910146;
+.box table td button{   background-color: #910146 !important;
     color: #fff;
     font-size: 12px;
     padding: 0px 15px;
     border-radius: 2px;
-    border: 1px solid #910146;
+    border: 1px solid #910146 !important;
     width: 71px;
     text-transform: uppercase;
     font-weight: 600;
 }
 .box table td button:hover{
-    background:#ebab03;
-        border: 1px solid #ebab03;
+    background:#ebab03!important;
+        border: 1px solid #ebab03 !important;
 
 }
 .box table td .fa-trash-o{
@@ -268,6 +268,3 @@ body{
  .unlink-btn:hover{
      background:#000!important;
  }
-
-
-

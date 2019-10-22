@@ -44,7 +44,8 @@ export class LinkingSimulationComponent implements OnInit {
   public consumermediaBaseMarketPlanId:any;
 
 
-
+public AdvisorySaveSimulationId:any;
+public ConsumerSaveSimulationId:any;
 
 
 
@@ -332,6 +333,136 @@ export class LinkingSimulationComponent implements OnInit {
     console.log('Entered Simulation Name '+this.simulationName);
     console.log('Selected Simulation Template '+ this.simulationTemplateName);
     console.log('Selected Media Plan Name '+ this.mediaPlanName);
+
+
+
+
+
+
+
+
+
+    this.http.post("http://localhost:8080/prorelevantservice/marketsim/savesimulation/1/"+this.selectedModelId+"?userid=1",
+    {
+      "simulationName": this.simulationName,
+      "desc": this.simulationName,
+      "simTempId": 9,
+      "priceBasePlanId": this.advisorpriceBaseMarketPlanId,
+      "mediaBasePlanId": this.advisormediaBaseMarketPlanId,
+      "distBasePlanId": this.advisordistributionBaseMarketPlanId,
+      "attributeBaseplanId": this.advisorproductattributesBaseMarketPlanId
+    } )
+          .subscribe(
+          saveSimultaionReturnData  => {
+          console.log("Save Simulation Return Data ", saveSimultaionReturnData);
+            
+         // this.returnData=data;
+
+        //  Object.entries(saveSimultaionReturnData).forEach(entry => {
+        //   console.log(entry[1])
+        //   })
+
+          //Object.values(object1)[0]
+
+          //console.log(saveSimultaionReturnData['simId']);
+
+          this.AdvisorySaveSimulationId=saveSimultaionReturnData['simId'];
+          console.log('Advisory save simultaion ID '+this.AdvisorySaveSimulationId);
+
+
+
+            //get Consumer simulation id start
+
+                      this.http.post("http://localhost:8080/prorelevantservice/marketsim/savesimulation/1/"+this.selectedConsumerId+"?userid=1",
+                      {
+                        "simulationName": this.simulationName,
+                        "desc": this.simulationName,
+                        "simTempId": 9,
+                        "priceBasePlanId": this.consumerpriceBaseMarketPlanId,
+                        "mediaBasePlanId": this.consumermediaBaseMarketPlanId,
+                        "distBasePlanId": this.consumerdistributionBaseMarketPlanId,
+                        "attributeBaseplanId": this.consumerproductattributesBaseMarketPlanId
+                      } )
+                            .subscribe(
+                              saveConsumerSimultaionReturnData  => {
+                                
+                                this.ConsumerSaveSimulationId=saveConsumerSimultaionReturnData['simId'];
+                                console.log('Consumer save simultaion ID '+this.ConsumerSaveSimulationId);
+
+                            
+
+
+
+                                      //Run advisory Simultaion start
+
+
+
+                                      this.http.get("http://localhost:8080/prorelevantservice/marketsim/runsimulation/"+this.AdvisorySaveSimulationId+"/"+this.selectedModelId,)
+                                            .subscribe(
+                                            returnDataForRunAdvisorySimultaion  => {
+                                            console.log("Run Simultaion Success ", returnDataForRunAdvisorySimultaion);
+ 
+                                          },
+                                            error  => {
+                            
+                                            console.log("Error in Run Simultaion", error);
+                            
+                                            }
+                            
+                                            );
+
+
+
+
+                                      //Run Advisory Simultaion end
+
+
+
+
+
+
+
+
+
+
+
+                            },
+                            error  => {
+            
+                            console.log("Error Consumer save simultaion ID ", error);
+            
+                            }
+            
+                            );
+
+
+            //get Consumer simulation id end
+
+
+
+
+
+          
+          },
+          error  => {
+
+          console.log("Error Advisory save simultaion ID ", error);
+
+          }
+
+          );
+
+
+
+
+
+
+
+
+
+
+
+
 
   }
 

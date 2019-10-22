@@ -1,3 +1,25 @@
+<style>
+ 
+  
+  #loading {
+    display: inline-block;
+      width: 30px;
+      height: 30px;
+      border: 3px solid #920146;
+      border-top-color: #ffc2df;
+    border-radius: 50%; margin-left: 60px;
+    border-top-color: #ffc2df;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
+   </style>
 <div class="generate_plan_bx">
 <div class="box box-primary">
   <div class="box-header with-border">
@@ -49,7 +71,7 @@
 
 
 
-      <div class="pull-left col-sm-6">
+      <div class="pull-left col-sm-4">
         <div class="form-group">
           <label>
             Value Type
@@ -193,7 +215,9 @@
 
     <div>
 
-      
+      <div class="clearfix"></div>
+      <div id="loading" *ngIf="loading_icon==1"></div>
+      <div class="clearfix"></div>     
       <button  class="btn btn-primary" (click)='onSubmitForm()'>Submit</button>
 
     </div>
