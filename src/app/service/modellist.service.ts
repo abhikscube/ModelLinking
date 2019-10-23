@@ -152,6 +152,15 @@ getBrandListOnModelId(modelId): Observable<any>{
   }
 
 
+  getSimulationRunningStatus(): Observable<any>{
+      
+    return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getrunningsimulation');
+  
+  
+  }
+
+
+
 }
 
 

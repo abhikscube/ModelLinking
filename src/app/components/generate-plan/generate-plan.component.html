@@ -69,6 +69,7 @@
       </div>
 
 
+<div class="pull-left col-sm-5"></div>
 
 
       <div class="pull-left col-sm-4">
@@ -123,11 +124,11 @@
       <div class="pull-left col-sm-4">
         <div class="form-group">
           <label class="ng-binding">
-            Change GRPs/Impression value
+            GRPs
             <span style="color:red;">*</span>
           </label>
 
-          <input type="text" class="form-control " [(ngModel)]="grpImpression" name="grpImpression" placeholder="Enter GRPs/Impression value">
+          <input type="text" class="form-control " [(ngModel)]="grpImpression" name="grpImpression" placeholder="Enter GRPs in %">
 
         </div>
       </div> </div>
@@ -187,7 +188,7 @@
           <label>
             Change Awareness Probability
           </label>
-          <input type="text" class="form-control " [(ngModel)]="awarenessProbability" name="awarenessprobability" placeholder="Select the value between 0 to 1">
+          <input type="text" class="form-control " [(ngModel)]="awarenessProbability" name="awarenessprobability" placeholder="Select the value between 0 to 100%">
         </div>
       </div>
 
@@ -197,7 +198,7 @@
           <label>
             Change Persuasion
           </label>
-          <input type="text" [(ngModel)]="changePersuasion" name="changepersuasion" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="Select the value between 0 to 1">
+          <input type="text" [(ngModel)]="changePersuasion" name="changepersuasion" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="Select the value between 0 to 1%">
         </div>
       </div>
       <div class=" pull-left col-sm-4">

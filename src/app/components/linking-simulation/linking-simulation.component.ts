@@ -47,6 +47,9 @@ export class LinkingSimulationComponent implements OnInit {
 public AdvisorySaveSimulationId:any;
 public ConsumerSaveSimulationId:any;
 
+public simulationRunningStatus:any;
+public simulationRunningStatusMsg:any;
+
 
 
   public returnData:any;
@@ -401,6 +404,98 @@ public ConsumerSaveSimulationId:any;
                                             .subscribe(
                                             returnDataForRunAdvisorySimultaion  => {
                                             console.log("Run Simultaion Success ", returnDataForRunAdvisorySimultaion);
+
+
+
+
+                                                    //run simulation status check Start
+
+
+
+
+
+                                                    var counter =0;
+                                                    var setIntervalVar = setInterval(()=>{
+                                        
+                                        
+                                                        counter ++;
+                                        
+                                                       
+                                                        console.log('from inner '+counter);
+                                        
+                                        
+                                        
+                                                        this.ModelListService.getSimulationRunningStatus().subscribe((SimulationRunningStatus)=>{
+ 
+                                        
+                                                           this.simulationRunningStatus= SimulationRunningStatus.current_status;
+
+                                                           console.log(this.simulationRunningStatus); 
+
+                                                           this.simulationRunningStatusMsg='';
+                                                           this.simulationRunningStatusMsg=this.simulationRunningStatus;                                                           
+
+                                                           if(this.simulationRunningStatus=='done'){
+
+
+                                                              clearInterval(setIntervalVar);
+
+
+                                                            //Update Simulation Start
+
+
+                                                            this.http.get("http://localhost:8080/prorelevantservice/marketsim/upadatemarketutl/"+this.selectedModelId+"/"+this.selectedConsumerId)
+                                                                  .subscribe(
+                                                                  UpdateSimulationdata  => {
+                                                                  console.log("Update simulation Data");
+                                                                    
+ 
+                                                                  console.log(UpdateSimulationdata);
+            
+                                                                  alert(" Simulation successfully completed ");
+            
+                                                                  
+                                                                  },
+                                                                  error  => {
+                                                  
+                                                                  console.log("Error in Update simulation ", error);
+                                                  
+                                                                  }
+                                                  
+                                                                  );
+
+
+                                                            //Update Simulation End
+
+
+
+                                                             
+
+                                                           }
+                                        
+                                        
+                                                        });
+                                        
+                                         
+                                                    },(3 * 1000));
+
+
+
+
+
+
+
+
+                                                    //run simulation status check End
+
+
+
+
+
+
+
+
+
  
                                           },
                                             error  => {

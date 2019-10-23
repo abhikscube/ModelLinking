@@ -637,81 +637,81 @@ public showCheckBox: boolean = true;
 
     
 
-    if(this.selectedModelId == undefined){
+    // if(this.selectedModelId == undefined){
 
-      this.form_validate=0;
-      alert('Select Model Id');
+    //   this.form_validate=0;
+    //   alert('Select Model Id');
 
-    }
+    // }
 
  
-    if(this.selectedPlanId == undefined){
+    // if(this.selectedPlanId == undefined){
 
-      this.form_validate=0;
-      alert('Select Media Plan');
+    //   this.form_validate=0;
+    //   alert('Select Media Plan');
 
-    } 
-
-
-    if(this.newPlanName == undefined){
-
-      this.form_validate=0;
-      alert('Enter Plan Name');
-
-    } 
+    // } 
 
 
-    if(this.grpImpression == undefined){
+    // if(this.newPlanName == undefined){
 
-      this.form_validate=0;
-      alert('Select GRP Impression');
+    //   this.form_validate=0;
+    //   alert('Enter Plan Name');
 
-    }
-
-    if(this.awarenessProbability == undefined){
-
-      this.form_validate=0;
-      alert('Enter Persuasion');
-
-    }else if(this.changePersuasion >1 || this.changePersuasion < 0){
-
-      this.form_validate=0;
-      alert('Enter Persuasion value between 0 to 1');
-
-    }
+    // } 
 
 
+    // if(this.grpImpression == undefined){
 
-    if(this.awarenessProbability == undefined){
+    //   this.form_validate=0;
+    //   alert('Select GRP Impression');
 
-      this.form_validate=0;
-      alert('Enter Awareness Probability');
+    // }
 
-    }else if(this.awarenessProbability >1 || this.awarenessProbability < 0){
+    // if(this.changePersuasion == undefined){
 
-      this.form_validate=0;
-      alert('Enter Awareness Probability value between 0 to 1');
+    //   this.form_validate=0;
+    //   alert('Enter Persuasion');
 
-    }
+    // }else if(this.changePersuasion >1 || this.changePersuasion < 1){
 
+    //   this.form_validate=0;
+    //   alert('Enter Persuasion value between 0 to 1');
 
-    if(this.selectedBrandList.length==0){
-
-      this.form_validate=0;
-      alert('Select any Brand');
+    // }
 
 
-    }else{
 
-      if(this.subBrandListselected == undefined){
+    // if(this.awarenessProbability == undefined){
 
-        this.form_validate=0;
-        alert('Select any SubBrand');
+    //   this.form_validate=0;
+    //   alert('Enter Awareness Probability');
+
+    // }else if(this.awarenessProbability >1 || this.awarenessProbability < 100){
+
+    //   this.form_validate=0;
+    //   alert('Enter Awareness Probability value between 0 to 1');
+
+    // }
+
+
+    // if(this.selectedBrandList.length==0){
+
+    //   this.form_validate=0;
+    //   alert('Select any Brand');
+
+
+    // }else{
+
+    //   if(this.subBrandListselected == undefined){
+
+    //     this.form_validate=0;
+    //     alert('Select any SubBrand');
   
-      }  
+    //   }  
   
 
-    }
+    // }
 
 
 
@@ -719,7 +719,7 @@ public showCheckBox: boolean = true;
 
 
 
-    if(this.form_validate==1){
+    if(1){
 
 
     this.loading_icon=1;
@@ -855,7 +855,7 @@ public showCheckBox: boolean = true;
                                   "startDateSet": this.start,
                                   "endDateSet": this.end,
                                   "grpsImprsChng": this.grpImpression,
-                                  "awarenessProbChng": this.awarenessProbability,
+                                  "awarenessProbChng": (this.awarenessProbability/100),
                                   "persuationChange": this.changePersuasion,
                                   "newMediaPlanName": this.newPlanName,
                                   "brand": this.selectedBrandList.join(','),
@@ -882,7 +882,7 @@ public showCheckBox: boolean = true;
                                                   "startDateSet": this.start,
                                                   "endDateSet": this.end,
                                                   "grpsImprsChng": this.grpImpression,
-                                                  "awarenessProbChng": this.awarenessProbability,
+                                                  "awarenessProbChng": (this.awarenessProbability/100),
                                                   "persuationChange": this.changePersuasion,
                                                   "newMediaPlanName": this.newPlanName+'_C@#$',
                                                   "brand": this.SelectedBrandArrForConsumer.join(','),
