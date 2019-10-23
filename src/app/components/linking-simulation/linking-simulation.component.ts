@@ -397,7 +397,7 @@ public ConsumerSaveSimulationId:any;
 
 
 
-                                      this.http.get("http://localhost:8080/prorelevantservice/marketsim/runsimulation/"+this.AdvisorySaveSimulationId+"/"+this.selectedModelId,)
+                                      this.http.post("http://localhost:8080/prorelevantservice/marketsim/runsimulation/"+this.AdvisorySaveSimulationId+"/"+this.selectedModelId,{})
                                             .subscribe(
                                             returnDataForRunAdvisorySimultaion  => {
                                             console.log("Run Simultaion Success ", returnDataForRunAdvisorySimultaion);
@@ -465,6 +465,67 @@ public ConsumerSaveSimulationId:any;
 
 
   }
+
+
+  onCancel(){
+
+    console.log('from cancel '+this.selectedModelId);
+
+            // var a = 1 + 3;
+            // var b;
+            
+            // setTimeout(() => {
+
+
+
+            //     b = a + 4;
+            //   console.log('from inner '+this.selectedModelId);
+
+            // }, (3 * 1000));
+          
+          
+          var counter =0;
+            var i = setInterval(()=>{
+
+
+                counter ++;
+
+                console.log(counter);
+                console.log('from inner '+this.selectedModelId);
+
+
+
+                this.ModelListService.getPlanList(this.selectedModelId).subscribe((ResponseData)=>{
+
+
+
+                    console.log('From service ');
+                    console.log(ResponseData);
+
+
+
+
+                });
+
+
+
+
+
+                if(counter === 10){
+
+                    clearInterval(i);
+
+                }
+
+
+
+            },(3 * 1000));         
+          
+          
+          
+          
+          }
+
 
 
 
