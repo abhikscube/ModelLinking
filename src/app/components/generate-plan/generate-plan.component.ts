@@ -504,16 +504,44 @@ public showCheckBox: boolean = true;
 
 
 
-                 // responseObj.push({ id: singelObj.subchanelid,name: singelObj.subchanel, pid: singelObj.directivesid});
-                
-          
-          
-                if(mediaType.indexOf(singelObj.brandid)== -1){
-                                        
-                    mediaType.push(singelObj.brandid);
-                   // responseObj.push({ id: singelObj.brandid,name: singelObj.brandname,hasChild: true, expanded: false  });
+                     
+          if(singelObj.directivesid!=0){   
+                  
+
+                  
+                  responseObj.push({ id: singelObj.directivesid, pid: singelObj.mediatypeid, name: singelObj.directives});
+
+               
+
+              }else{
+
+
+
+
+
+              } 
+
+              if(singelObj.mediatypeid!=0){
+
+                  if(mediaType.indexOf(singelObj.mediatypeid)== -1){
+
+                      mediaType.push(singelObj.mediatypeid);
+                      responseObj.push({ id: singelObj.mediatypeid, pid: singelObj.brandid, name: singelObj.mediatype,hasChild: true, expanded: false  });
+
+                  }
 
                 }
+
+
+                  if(brandName.indexOf(singelObj.brandid)== -1){
+                    
+                    brandName.push(singelObj.brandid);
+                    responseObj.push({ id: singelObj.brandid,name: singelObj.brandname,hasChild: true, expanded: false  });
+
+                }
+
+
+
 
 
 
@@ -528,16 +556,40 @@ public showCheckBox: boolean = true;
   
   
             
-   
+ 
+            
+                     responseObj.push({ id: singelObj.id,name: singelObj.subchanel, pid: singelObj.directivesid});                       
+                  
+                  
+
+
+                    if(mediaType.indexOf(singelObj.mediatypeid)== -1){
+
+                        mediaType.push(singelObj.mediatypeid);
+                        responseObj.push({ id: singelObj.mediatypeid, pid: singelObj.brandid, name: singelObj.mediatype,hasChild: true, expanded: false  });
+
+                    }
+
+
+                    if(brandName.indexOf(singelObj.brandid)== -1){
+                      
+                      brandName.push(singelObj.brandid);
+                      responseObj.push({ id: singelObj.brandid,name: singelObj.brandname,hasChild: true, expanded: false  });
+
+                  }
 
 
 
-                              if(mediaType.indexOf(singelObj.brandid)== -1){
+
+
+
+
+                             // if(mediaType.indexOf(singelObj.brandid)== -1){
                                 
-                                mediaType.push(singelObj.brandid);
+                              //  mediaType.push(singelObj.brandid);
                                // responseObj.push({ id: singelObj.brandid,name: singelObj.brandname,hasChild: true, expanded: false  });
 
-                            }
+                           // }
 
 
                 }else{

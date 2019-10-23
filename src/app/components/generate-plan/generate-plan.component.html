@@ -1,25 +1,82 @@
 <style>
+  .box-title-select-model{
+    display: flex;
+  
+  }
+  .box-title-select-model span{        width: auto;
+      line-height: 35px;
+      padding-right: 20px;
+  
+  }
+  .box-title-select-model  select{       width: 20%;
+  
+  }
+  .generate_plan_bx .box{
+    box-shadow:none;
+  
+  }
+  .btn-group-sim .btn-primary{
+    margin-left: 0px;
+    margin-right: 10px;
+  }
+
+.btn-center-gp{
+  padding-top: 30px;
+}
+  .btn-center-gp .btn-primary{
+    display:inline!important;
+
+
+  }
+
+  .btn-center-gp  #loading{
+    margin-left: 0px;
+  }
+
+.load_msg_bx{background: #fff2a4;
+
+display: table;
+
+margin: 4px auto 12px auto;
+
+padding: 3px 20px;
+
+width: auto;
+
+border-radius: 3px;
+
+font-size: 15px;
+
+color: #645e3c;
+
+
+}
+
+  </style>
+  
+  <style>
  
+
   
-  #loading {
-    display: inline-block;
-      width: 30px;
-      height: 30px;
-      border: 3px solid #920146;
+    #loading {
+      display: inline-block;
+        width: 30px;
+        height: 30px;
+        border: 3px solid #920146;
+        border-top-color: #ffc2df;
+      border-radius: 50%; margin-left: 60px;
       border-top-color: #ffc2df;
-    border-radius: 50%; margin-left: 60px;
-    border-top-color: #ffc2df;
-    animation: spin 1s ease-in-out infinite;
-    -webkit-animation: spin 1s ease-in-out infinite;
-  }
-  
-  @keyframes spin {
-    to { -webkit-transform: rotate(360deg); }
-  }
-  @-webkit-keyframes spin {
-    to { -webkit-transform: rotate(360deg); }
-  }
-   </style>
+      animation: spin 1s ease-in-out infinite;
+      -webkit-animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { -webkit-transform: rotate(360deg); }
+    }
+    @-webkit-keyframes spin {
+      to { -webkit-transform: rotate(360deg); }
+    }
+     </style>
 <div class="generate_plan_bx">
 <div class="box box-primary">
   <div class="box-header with-border">
@@ -217,9 +274,29 @@
     <div>
 
       <div class="clearfix"></div>
-      <div id="loading" *ngIf="loading_icon==1"></div>
+
+      <div class="btn-group-sim btn-center-gp">
+        <div class="row">
+          <div class="col-md-12 text-center">
+              <div class="clearfix"></div>
+  <div id="loading"></div>
+  <div class="clearfix"></div> 
+  <div class="load_msg_bx"> Messages </div>
+  
+  <div class="clearfix"></div> 
+         <button type="submit" class="btn btn-primary" (click)='onCancel()'>Cancel</button> 
+          <button type="submit" class="btn btn-primary" (click)='onSubmitForm()'>Save & Run</button>
+
+    </div></div></div>
+
+
+
+
+
+
+     <!-- /  <div id="loading" *ngIf="loading_icon==1"></div>
       <div class="clearfix"></div>     
-      <button  class="btn btn-primary" (click)='onSubmitForm()'>Submit</button>
+      <button  class="btn btn-primary" (click)='onSubmitForm()'>Submit</button>-->
 
     </div>
   </form>

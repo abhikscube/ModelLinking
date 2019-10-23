@@ -451,8 +451,44 @@ public simulationRunningStatusMsg:any;
                                                                     
  
                                                                   console.log(UpdateSimulationdata);
+
+
+
+
+                                                                 //Run Consumer Simulation Start
+                                                                 
+ 
+                                                                 this.http.post("http://localhost:8080/prorelevantservice/marketsim/runsimulation/"+this.AdvisorySaveSimulationId+"/"+this.selectedModelId,{})
+                                                                 .subscribe(
+                                                                  returnDataForRunConsumerSimultaion  => {
+                                                                 console.log("Run Consumer simulation ");
+                                                                   
+
+                                                                 console.log(returnDataForRunConsumerSimultaion);
+           
+                                                                 alert(" Simulation successfully completed ");
+           
+                                                                 
+                                                                 },
+                                                                 error  => {
+                                                 
+                                                                 console.log("Consumer simulation ", error);
+                                                 
+                                                                 }
+                                                 
+                                                                 );                                                                 
+
+
+
+
+
+                                                                 //Run Consumer Simulation End
+
+
+
+                                                                  
             
-                                                                  alert(" Simulation successfully completed ");
+                                                                  //alert(" Simulation successfully completed ");
             
                                                                   
                                                                   },
