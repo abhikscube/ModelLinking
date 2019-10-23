@@ -397,7 +397,7 @@ public ConsumerSaveSimulationId:any;
 
 
 
-                                      this.http.get("http://localhost:8080/prorelevantservice/marketsim/runsimulation/"+this.AdvisorySaveSimulationId+"/"+this.selectedModelId,)
+                                      this.http.post("http://localhost:8080/prorelevantservice/marketsim/runsimulation/"+this.AdvisorySaveSimulationId+"/"+this.selectedModelId,{})
                                             .subscribe(
                                             returnDataForRunAdvisorySimultaion  => {
                                             console.log("Run Simultaion Success ", returnDataForRunAdvisorySimultaion);
