@@ -467,6 +467,67 @@ public ConsumerSaveSimulationId:any;
   }
 
 
+  onCancel(){
+
+    console.log('from cancel '+this.selectedModelId);
+
+            // var a = 1 + 3;
+            // var b;
+            
+            // setTimeout(() => {
+
+
+
+            //     b = a + 4;
+            //   console.log('from inner '+this.selectedModelId);
+
+            // }, (3 * 1000));
+          
+          
+          var counter =0;
+            var i = setInterval(()=>{
+
+
+                counter ++;
+
+                console.log(counter);
+                console.log('from inner '+this.selectedModelId);
+
+
+
+                this.ModelListService.getPlanList(this.selectedModelId).subscribe((ResponseData)=>{
+
+
+
+                    console.log('From service ');
+                    console.log(ResponseData);
+
+
+
+
+                });
+
+
+
+
+
+                if(counter === 10){
+
+                    clearInterval(i);
+
+                }
+
+
+
+            },(3 * 1000));         
+          
+          
+          
+          
+          }
+
+
+
 
 
 
