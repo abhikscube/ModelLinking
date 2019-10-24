@@ -19,10 +19,10 @@ export class LinkingSimulationComponent implements OnInit {
 
   public linkedModelListDrp: any[];
   public ModelObjList:any=[];
-  public selectedModelId: any;
+  public selectedAdvisoryModelId: any;
   public planList: any[];
 
-  public selectedConsumerId:any;
+  public selectedConsumerModelId:any;
 
   public newPlanName:any;
   public simulationName:any;
@@ -51,6 +51,12 @@ public simulationRunningStatus:any;
 public simulationRunningStatusMsg:any;
 
 
+public loadLoadingImg:boolean;
+public showStatusMsg:boolean;
+
+public ShowSimulationMsg:string;
+
+
 
   public returnData:any;
 
@@ -74,7 +80,7 @@ public simulationRunningStatusMsg:any;
 
     console.log('OnChangeModel');
 
-    this.selectedModelId=modelId;
+    this.selectedAdvisoryModelId=modelId;
 
     this.ModelListService.getPlanList(modelId).subscribe((ResponseData)=>{
 
@@ -86,8 +92,8 @@ public simulationRunningStatusMsg:any;
 
       for(let singelObj of this.ModelObjList){
 
-          if(singelObj.modelId==this.selectedModelId)
-          this.selectedConsumerId=singelObj.linkmodelId;
+          if(singelObj.modelId==this.selectedAdvisoryModelId)
+          this.selectedConsumerModelId=singelObj.linkmodelId;
 
 
       }
@@ -96,7 +102,7 @@ public simulationRunningStatusMsg:any;
       //Get Advisory model base plan id Start
 
 
-      this.ModelListService.getBrandListOnModelId(this.selectedModelId).subscribe((ResponseBrandData)=>{
+      this.ModelListService.getBrandListOnModelId(this.selectedAdvisoryModelId).subscribe((ResponseBrandData)=>{
 
 
                                 //call for subbrand start
@@ -114,7 +120,7 @@ public simulationRunningStatusMsg:any;
 
 
 
-                                              this.http.post("http://localhost:8080/prorelevantservice/marketsim/getmarketsimplans/"+this.selectedModelId,
+                                              this.http.post("http://localhost:8080/prorelevantservice/marketsim/getmarketsimplans/"+this.selectedAdvisoryModelId,
                                               {"brands": ResponseBrandData,"products":ResponseSubbrandData} )
                                                     .subscribe(
                                                     ReturnPlandata  => {
@@ -155,7 +161,7 @@ public simulationRunningStatusMsg:any;
                                                     },
                                                     error  => {
                                     
-                                                          console.log("Error in second post", error);
+                                                          console.log("Error Advisory Base Plan ID genaration", error);
                                     
                                                     }
                                     
@@ -209,7 +215,7 @@ public simulationRunningStatusMsg:any;
       //Get Consumer  model base plan id Start
 
 
-      this.ModelListService.getBrandListOnModelId(this.selectedConsumerId).subscribe((ConResponseBrandData)=>{
+      this.ModelListService.getBrandListOnModelId(this.selectedConsumerModelId).subscribe((ConResponseBrandData)=>{
 
 
         //call for subbrand start
@@ -227,7 +233,7 @@ public simulationRunningStatusMsg:any;
 
 
 
-                      this.http.post("http://localhost:8080/prorelevantservice/marketsim/getmarketsimplans/"+this.selectedConsumerId,
+                      this.http.post("http://localhost:8080/prorelevantservice/marketsim/getmarketsimplans/"+this.selectedConsumerModelId,
                       {"brands": ConResponseBrandData,"products":ConResponseSubbrandData} )
                             .subscribe(
                               ConReturnPlandata  => {
@@ -287,7 +293,7 @@ public simulationRunningStatusMsg:any;
               },
               error  => {
 
-              console.log("Error in second post", error);
+              console.log("Error in second post customer", error);
 
               }
 
@@ -330,9 +336,10 @@ public simulationRunningStatusMsg:any;
 
   onSubmitForm(){
 
-    
-    console.log('Selected Advisor Model Id '+this.selectedModelId);
-    console.log('Selected Consumer Model Id '+this.selectedConsumerId);
+    this.loadLoadingImg=true;
+    this.showStatusMsg=true;
+    console.log('Selected Advisor Model Id '+this.selectedAdvisoryModelId);
+    console.log('Selected Consumer Model Id '+this.selectedConsumerModelId);
     console.log('Entered Simulation Name '+this.simulationName);
     console.log('Selected Simulation Template '+ this.simulationTemplateName);
     console.log('Selected Media Plan Name '+ this.mediaPlanName);
@@ -345,7 +352,7 @@ public simulationRunningStatusMsg:any;
 
 
 
-    this.http.post("http://localhost:8080/prorelevantservice/marketsim/savesimulation/1/"+this.selectedModelId+"?userid=1",
+    this.http.post("http://localhost:8080/prorelevantservice/marketsim/savesimulation/1/"+this.selectedAdvisoryModelId+"?userid=1",
     {
       "simulationName": this.simulationName,
       "desc": this.simulationName,
@@ -372,11 +379,11 @@ public simulationRunningStatusMsg:any;
           this.AdvisorySaveSimulationId=saveSimultaionReturnData['simId'];
           console.log('Advisory save simultaion ID '+this.AdvisorySaveSimulationId);
 
-
+            this.ShowSimulationMsg='Simulation for Advisory Model is saved.';  
 
             //get Consumer simulation id start
 
-                      this.http.post("http://localhost:8080/prorelevantservice/marketsim/savesimulation/1/"+this.selectedConsumerId+"?userid=1",
+                      this.http.post("http://localhost:8080/prorelevantservice/marketsim/savesimulation/1/"+this.selectedConsumerModelId+"?userid=1",
                       {
                         "simulationName": this.simulationName,
                         "desc": this.simulationName,
@@ -394,13 +401,13 @@ public simulationRunningStatusMsg:any;
 
                             
 
-
+                                this.ShowSimulationMsg='Simulation for Consumer Model is saved.';  
 
                                       //Run advisory Simultaion start
 
 
 
-                                      this.http.post("http://localhost:8080/prorelevantservice/marketsim/runsimulation/"+this.AdvisorySaveSimulationId+"/"+this.selectedModelId,{})
+                                      this.http.post("http://localhost:8080/prorelevantservice/marketsim/runsimulation/"+this.AdvisorySaveSimulationId+"/"+this.selectedAdvisoryModelId,{})
                                             .subscribe(
                                             returnDataForRunAdvisorySimultaion  => {
                                             console.log("Run Simultaion Success ", returnDataForRunAdvisorySimultaion);
@@ -421,19 +428,20 @@ public simulationRunningStatusMsg:any;
                                                         counter ++;
                                         
                                                        
-                                                        console.log('from inner '+counter);
+                                                        //console.log('from inner '+counter);
                                         
-                                        
+                                                        
                                         
                                                         this.ModelListService.getSimulationRunningStatus().subscribe((SimulationRunningStatus)=>{
  
                                         
                                                            this.simulationRunningStatus= SimulationRunningStatus.current_status;
 
-                                                           console.log(this.simulationRunningStatus); 
+                                                           console.log(this.simulationRunningStatus);
+                                                           
+                                                           this.ShowSimulationMsg='Simulation for Advisory Model is running.'; 
 
-                                                           this.simulationRunningStatusMsg='';
-                                                           this.simulationRunningStatusMsg=this.simulationRunningStatus;                                                           
+                                                         
 
                                                            if(this.simulationRunningStatus=='done'){
 
@@ -441,33 +449,84 @@ public simulationRunningStatusMsg:any;
                                                               clearInterval(setIntervalVar);
 
 
+                                                              this.ShowSimulationMsg='Simulation for Advisory Model is Completed.'; 
+
+
                                                             //Update Simulation Start
 
 
-                                                            this.http.get("http://localhost:8080/prorelevantservice/marketsim/upadatemarketutl/"+this.selectedModelId+"/"+this.selectedConsumerId)
+                                                            this.http.get("http://localhost:8080/prorelevantservice/marketsim/upadatemarketutl/"+this.selectedAdvisoryModelId+"/"+this.selectedConsumerModelId)
                                                                   .subscribe(
                                                                   UpdateSimulationdata  => {
                                                                   console.log("Update simulation Data");
                                                                     
  
-                                                                  console.log(UpdateSimulationdata);
+                                                                  //console.log(UpdateSimulationdata);
 
-
+                                                                  this.ShowSimulationMsg='Update Marckesim dada'; 
 
 
                                                                  //Run Consumer Simulation Start
                                                                  
  
-                                                                 this.http.post("http://localhost:8080/prorelevantservice/marketsim/runsimulation/"+this.AdvisorySaveSimulationId+"/"+this.selectedModelId,{})
+                                                                 this.http.post("http://localhost:8080/prorelevantservice/marketsim/runsimulation/"+this.ConsumerSaveSimulationId+"/"+this.selectedConsumerModelId,{})
                                                                  .subscribe(
                                                                   returnDataForRunConsumerSimultaion  => {
-                                                                 console.log("Run Consumer simulation ");
+
+
+
+
+                                                                 //get consumer simulation running status start
+                                                                 
+                                                                 console.log("Run Consumer simulation ");    
+
+                                                                 var setIntervalVarforcunsumer = setInterval(()=>{
+
+                                                                  this.ModelListService.getSimulationRunningStatus().subscribe((SimulationRunningStatusForConsumer)=>{
+
+
+
+                                                                   // this.simulationRunningStatus= SimulationRunningStatusForConsumer.current_status;
+
+                                                                    console.log(SimulationRunningStatusForConsumer.current_status);
+                                                                    
+                                                                    this.ShowSimulationMsg='Simulation for Consumer Model is running.'; 
+         
+                                                                    
+         
+                                                                    if(SimulationRunningStatusForConsumer.current_status=='done'){
+         
+         
+                                                                       clearInterval(setIntervalVarforcunsumer);
+         
+         
+                                                                       this.ShowSimulationMsg='Simulation for Consumer Model is Completed.'; 
+
+                                                                    }
+
+
+
+
+
+                                                                  });
+
+
+
+
+                                                                 },3*100);
+
+
+                                                                 //get consumer simulation running status end
+
+
+
+                                                                 
                                                                    
 
                                                                  console.log(returnDataForRunConsumerSimultaion);
            
-                                                                 alert(" Simulation successfully completed ");
-           
+                                                                 this.ShowSimulationMsg='Simulation Save and Run successfully completed'; 
+                                                                 this.loadLoadingImg=false;     
                                                                  
                                                                  },
                                                                  error  => {
@@ -513,7 +572,7 @@ public simulationRunningStatusMsg:any;
                                                         });
                                         
                                          
-                                                    },(3 * 1000));
+                                                    },3*1000);
 
 
 
@@ -600,7 +659,7 @@ public simulationRunningStatusMsg:any;
 
   onCancel(){
 
-    console.log('from cancel '+this.selectedModelId);
+    console.log('from cancel '+this.selectedAdvisoryModelId);
 
             // var a = 1 + 3;
             // var b;
@@ -622,11 +681,11 @@ public simulationRunningStatusMsg:any;
                 counter ++;
 
                 console.log(counter);
-                console.log('from inner '+this.selectedModelId);
+                console.log('from inner '+this.selectedAdvisoryModelId);
 
 
 
-                this.ModelListService.getPlanList(this.selectedModelId).subscribe((ResponseData)=>{
+                this.ModelListService.getPlanList(this.selectedAdvisoryModelId).subscribe((ResponseData)=>{
 
 
 

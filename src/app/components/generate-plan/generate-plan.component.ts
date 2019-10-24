@@ -491,7 +491,7 @@ public showCheckBox: boolean = true;
       
       var count:number=0;
   
-      //console.log(modelResponseData);
+      console.log(modelResponseData);
       
       for(let singelObj of modelResponseData){
   
@@ -509,6 +509,19 @@ public showCheckBox: boolean = true;
                   
 
                   
+
+                        responseObj.push({ id: singelObj.mediatypeid, pid: singelObj.brandid, name: singelObj.mediatype });
+
+
+
+
+                      if(brandName.indexOf(singelObj.brandid)== -1){
+
+                      brandName.push(singelObj.brandid);
+                      responseObj.push({ id: singelObj.brandid,name: singelObj.brandname,hasChild: true, expanded: false  });
+
+                      }
+
 
 
                

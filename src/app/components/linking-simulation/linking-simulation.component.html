@@ -171,9 +171,9 @@ color: #645e3c;
             <div class="row">
               <div class="col-md-12 text-center">
                   <div class="clearfix"></div>
-      <div id="loading"></div>
+      <div id="loading" *ngIf="loadLoadingImg"></div>
       <div class="clearfix"></div> 
-      <div class="load_msg_bx"> Messages </div>
+      <div class="load_msg_bx" *ngIf="showStatusMsg"> {{ShowSimulationMsg}} </div>
       
       <div class="clearfix"></div> 
               <button type="submit" class="btn btn-primary" (click)='onCancel()'>Cancel</button> 
