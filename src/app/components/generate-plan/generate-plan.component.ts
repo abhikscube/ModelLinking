@@ -108,9 +108,15 @@ public SelectedSubBrandArrForConsumer:any=[];
 
 public returnData:any;
 
-public loading_icon:number;
+public loading_icon:boolean;
+
+public showStatusMsg:boolean=false;
+
+public planGenarationMsg:string;
 
 public form_validate:number=1;
+
+public minDate:any;
 
 
 
@@ -266,11 +272,19 @@ public showCheckBox: boolean = true;
 
     console.log(ResponseData);
 
-    this.start=new Date(ResponseData.start_date);
+    this.minDate=new Date(ResponseData.start_date);
     this.end=new Date(ResponseData.end_date);
 
     // console.log(this.start);
     // console.log(this.end);
+
+
+
+    this.start = new Date(ResponseData.end_date);
+
+    this.start.setFullYear(this.start.getFullYear()-1);
+
+
 
     
  });
@@ -750,7 +764,9 @@ public showCheckBox: boolean = true;
     if(1){
 
 
-    this.loading_icon=1;
+    this.loading_icon=true;
+     this.showStatusMsg=true; 
+    this.planGenarationMsg='Plan genaration running';
    // console.log(this.multiselectSubBrandListssd.value);
   //  console.log(this.subBrandListselected);
     
@@ -928,7 +944,9 @@ public showCheckBox: boolean = true;
                                                       this.returnData=data;
                                                       console.log(this.returnData);
 
-                                                      this.loading_icon=0;
+                                                      this.showStatusMsg=true;
+                                                      this.loading_icon=false;
+                                                      this.planGenarationMsg='Plan genaration completed';
 
                                                      // this.linkedModelListDrp=[];
 

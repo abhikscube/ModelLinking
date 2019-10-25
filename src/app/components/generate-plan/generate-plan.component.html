@@ -261,7 +261,7 @@ color: #645e3c;
       <div class=" pull-left col-sm-4">
         <div class="form-group">
           <label>Period</label>
-          <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'>
+          <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end' [min]='minDate'>
           </ejs-daterangepicker>
         </div>
       </div> </div>
@@ -279,9 +279,9 @@ color: #645e3c;
         <div class="row">
           <div class="col-md-12 text-center">
               <div class="clearfix"></div>
-  <div id="loading"></div>
+  <div id="loading" *ngIf="loading_icon"></div>
   <div class="clearfix"></div> 
-  <div class="load_msg_bx"> Messages </div>
+  <div class="load_msg_bx" *ngIf="showStatusMsg"> {{planGenarationMsg}} </div>
   
   <div class="clearfix"></div> 
           <button type="submit" class="btn btn-primary" (click)='onSubmitForm()'>Submit</button>
