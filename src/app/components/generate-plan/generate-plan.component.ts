@@ -26,6 +26,8 @@ export class GeneratePlanComponent implements OnInit {
   @ViewChild('treeelement') private eventCategoriesTree;
   @ViewChild('multiselectBrandList') private multiselectBrandList;
   @ViewChild('multiselectSubBrandList') private multiselectSubBrandListssd;
+  @ViewChild('daterangepicker') private daterangepicker;
+
   
   constructor(public ModeljsondadaService: ModeljsondadaService,public ModelListService: ModelListService,public datepipe: DatePipe,private http: HttpClient) { }
 
@@ -117,6 +119,10 @@ public planGenarationMsg:string;
 public form_validate:number=1;
 
 public minDate:any;
+
+public daterangeCmp:any;
+
+
 
 
 
@@ -275,9 +281,11 @@ public showCheckBox: boolean = true;
     this.minDate=new Date(ResponseData.start_date);
     this.end=new Date(ResponseData.end_date);
 
+    
+
     // console.log(this.start);
     // console.log(this.end);
-
+    
 
 
     this.start = new Date(ResponseData.end_date);
@@ -676,8 +684,8 @@ public showCheckBox: boolean = true;
     // "changeValueType": this.valueType
 
 
-
-    
+    console.log(this.start.getTime());
+    console.log(this.end.getTime());
 
     if(this.selectedModelId == undefined){
 
@@ -896,8 +904,8 @@ public showCheckBox: boolean = true;
                                   "mediaPlanId": this.selectedPlanId,
                                   "clientId": 1,
                                   "modelId": this.selectedModelId,
-                                  "startDateSet": this.start,
-                                  "endDateSet": this.end,
+                                  "startDateSet": this.start.getTime(),
+                                  "endDateSet": this.end.getTime(),
                                   "grpsImprsChng": this.grpImpression,
                                   "awarenessProbChng": (this.awarenessProbability/100),
                                   "persuationChange": this.changePersuasion,
@@ -923,8 +931,8 @@ public showCheckBox: boolean = true;
                                                   "mediaPlanId": this.ExistingModelPlanIdForConsumer,
                                                   "clientId": 1,
                                                   "modelId": this.selectedConsumerId,
-                                                  "startDateSet": this.start,
-                                                  "endDateSet": this.end,
+                                                  "startDateSet": this.start.getTime(),
+                                                  "endDateSet": this.end.getTime(),
                                                   "grpsImprsChng": this.grpImpression,
                                                   "awarenessProbChng": (this.awarenessProbability/100),
                                                   "persuationChange": this.changePersuasion,
@@ -1019,6 +1027,28 @@ public showCheckBox: boolean = true;
 }
 
 } 
+
+
+
+
+
+changeOnDateRangePicker(element){
+
+  this.start=new Date(this.convertDateToTimestamp(element.value[0]));
+  this.end=new Date(this.convertDateToTimestamp(element.value[1]));
+
+}
+
+convertDateToTimestamp(str) {
+  var date = new Date(str),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+  return [mnth,day,date.getFullYear()].join("/");
+}
+
+
+
+
 
    
 }

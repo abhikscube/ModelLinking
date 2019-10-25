@@ -261,7 +261,7 @@ color: #645e3c;
       <div class=" pull-left col-sm-4">
         <div class="form-group">
           <label>Period</label>
-          <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end' [min]='minDate'>
+          <ejs-daterangepicker #daterangepicker id='daterangepicker' name="daterangecmp" [(ngModel)]="daterangeCmp" placeholder='Select a range' [startDate]='start' [endDate]='end' [min]='minDate'  (change)="changeOnDateRangePicker($event)">
           </ejs-daterangepicker>
         </div>
       </div> </div>
