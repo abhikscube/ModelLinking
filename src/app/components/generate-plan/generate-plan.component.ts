@@ -17,8 +17,9 @@ enableRipple(true);
 export class GeneratePlanComponent implements OnInit {
 
  // @ViewChild('multiselectelement') private refresh;
-  public start: Date = new Date ("02/07/2013"); 
-  public end: Date = new Date ("11/25/2017");
+  public start: Date = new Date(); 
+  public end: Date = new Date();
+  public minDate:Date= new Date();
   public mode:String;
   ModelList: Modeljson[]=[];
   public showMe:boolean=true;
@@ -72,7 +73,7 @@ public mediaTree:any=[];
 
 public mediaJesonsarr: any=[];
 
-public newPlanName:any;
+public newPlanName:string=null;
 
 public planType:string='GEN';
 
@@ -80,7 +81,7 @@ public changePersuasion:any;
 
 public awarenessProbability:any;
 
-public grpImpression:any;
+public grpImpression:number=null;
 
 public valueType:string='P';
 
@@ -118,54 +119,21 @@ public planGenarationMsg:string;
 
 public form_validate:number=1;
 
-public minDate:any;
+
 
 public daterangeCmp:any;
 
+public selectedValueForModel:any=0;
+public selecExistingPlanValue:any=0;
 
 
 
-
-public localData: Object[] = [
-  { id: 1, name: 'Discover Music', hasChild: true, expanded: true },
-  { id: 3, pid: 1, name: 'Rising Artists' },
-  { id: 12, pid: 11, name: 'Songs' },
-  { id: 13, pid: 11, name: 'Bestselling Albums' },
-  { id: 14, pid: 11, name: 'New Releases' },
-  { id: 15, pid: 11, name: 'Bestselling Songs' }, 
-  { id: 4, pid: 1, name: 'Live Music' },
-  { id: 2, pid: 1, name: 'Hot Singles' },
-  { id: 8, pid: 7, name: '100 Albums - $5 Each' },
-  { id: 9, pid: 7, name: 'Hip-Hop and R&B Sale' },  
-  { id: 7, name: 'Sales and Events', hasChild: true },
-  { id: 10, pid: 7, name: 'CD Deals' },
-  { id: 11, name: 'Categories', hasChild: true },
-  { id: 16, name: 'MP3 Albums', hasChild: true },
-  { id: 17, pid: 16, name: 'Rock' },
-  { id: 18, pid: 16, name: 'Gospel' },
-  { id: 19, pid: 16, name: 'Latin Music' },
-  { id: 20, pid: 16, name: 'Jazz' },
-  { id: 21, name: 'More in Music', hasChild: true },
-  { id: 22, pid: 21, name: 'Music Trade-In' },
-  { id: 23, pid: 21, name: 'Redeem a Gift Card' },
-  { id: 24, pid: 21, name: 'Band T-Shirts' }
-  ];
-
-
-
-  public localDataTest:any = [{brandid:1942,brandname:"B_AIG",mediatypeid:194201,mediatype:"Natl_Newspaper",directivesid:19420101,directives:"Annuities"},
-  {brandid:1942,brandname:"B_AIG",mediatypeid:194201,mediatype:"Natl_Newspaper",directivesid:19420102,directives:"Brand"},
-  {brandid:1942,brandname:"B_AIG",mediatypeid:194202,mediatype:"Natl_Spot_radio",directivesid:19420201,directives:"Annuities"},
-  {brandid:1942,brandname:"B_AIG",mediatypeid:194202,mediatype:"Natl_Spot_radio",directivesid:19420202,directives:"Brand"},
-  {brandid:1942,brandname:"B_AIG",mediatypeid:194203,mediatype:"Newspaper",directivesid:19420301,directives:"Annuities"},
-  {brandid:1942,brandname:"B_AIG",mediatypeid:194203,mediatype:"Newspaper",directivesid:19420302,directives:"Brand"}];
 
 
   
 
   // maps the appropriate column to fields property
-  public treefield: Object = { dataSource: this.localData, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
-
+  
 
 public field: Object = { dataSource: this.ModeljsondadaService.brandMediaList,
   id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild',expanded:"expanded" };
@@ -195,6 +163,56 @@ public showCheckBox: boolean = true;
 
   }
 
+
+  onCealr(){
+
+
+   // window.location.reload();
+
+
+    
+    this.selectedValueForModel=0;
+    this.planType='GEN';
+    this.valueType='P'; 
+    this.newPlanName = null;   
+    this.planList=[];
+    this.selecExistingPlanValue=0;
+    this.start=new Date();
+    this.end=new Date();
+    this.minDate=new Date();
+    this.grpImpression=null;
+    this.multiselectBrandList.selectAll(false);
+    this.brandsData=[];
+    this.multiselectSubBrandListssd.selectAll(false);  
+    this.multiselectSubBrandListssd.dataSource=[];
+    this.subBrandsData=[];
+    this.eventCategoriesTree.fields.dataSource=[];
+
+
+
+
+    //this.selectedBrandList=[];
+
+    /*
+    this.subBrandListselected=[];
+    this.planList=[];
+    this.brandsData=[];
+    this.subBrandsData=[];
+  
+    this.multiselectSubBrandListssd.selectAll(false);
+    this.multiselectBrandList.selectAll(false);  
+    this.selectedModelId='';
+    this.selectedConsumerId='';
+
+    this.planType='GEN';
+    this.valueType='P';
+    this.newPlanName = undefined;
+    this.selecExistingPlanValue=0;
+    this.eventCategoriesTree.fields.dataSource=[];
+
+    */
+
+  }
 
   onSelectSubBrand(e){
 
@@ -307,9 +325,13 @@ public showCheckBox: boolean = true;
   public onRemove(e){
 
     console.log(e);
+
+    console.log('Get selected Brand List');
+    console.log(this.selectedBrandList);
     var index =this.selectedBrandList.indexOf(e.itemData.brand_id);
     this.selectedBrandList.splice(index, 1);
-    console.log('selected_brnad_list'+this.selectedBrandList);
+    console.log('selected_brnad_list after remove ');
+    console.log(this.selectedBrandList);
 
     this.subBrandsData=[];
 
@@ -329,11 +351,13 @@ public showCheckBox: boolean = true;
       this.multiselectSubBrandListssd.fields.dataSource = ResponseData;
       
       console.log(ResponseData);
+      console.log('after response data');
+      this.createMediaTree(this.selectedPlanId,this.selectedModelId,this.selectedBrandList.join(','));
   
       
    });
 
-   this.createMediaTree(this.selectedPlanId,this.selectedModelId,this.selectedBrandList.join(','));
+   
 
     }else{
 
@@ -445,11 +469,12 @@ public showCheckBox: boolean = true;
   // console.log(ResponseData);
 
     this.multiselectSubBrandListssd.fields.dataSource = ResponseData;
+    this.createMediaTree(this.selectedPlanId,this.selectedModelId,this.selectedBrandList.join(','));  
 
  });
 
 
-  this.createMediaTree(this.selectedPlanId,this.selectedModelId,this.selectedBrandList.join(','));
+  
 
 
 
@@ -513,7 +538,7 @@ public showCheckBox: boolean = true;
       
       var count:number=0;
   
-      console.log(modelResponseData);
+     // console.log(modelResponseData);
       
       for(let singelObj of modelResponseData){
   
@@ -633,7 +658,7 @@ public showCheckBox: boolean = true;
 
     this.eventCategoriesTree.fields.dataSource = responseObj;
     
-      console.log(responseObj);
+     // console.log(responseObj);
       
       //console.log(this.localData);
       //console.log('hioooo');
@@ -649,7 +674,7 @@ public showCheckBox: boolean = true;
 
   
     
-  //console.log(responseObj);
+  console.log(responseObj);
 
 
   }
@@ -687,6 +712,8 @@ public showCheckBox: boolean = true;
     console.log(this.start.getTime());
     console.log(this.end.getTime());
 
+    this.form_validate=1;
+
     if(this.selectedModelId == undefined){
 
       this.form_validate=0;
@@ -703,7 +730,7 @@ public showCheckBox: boolean = true;
     } 
 
 
-    if(this.newPlanName == undefined){
+    if(this.newPlanName == null){
 
       this.form_validate=0;
       alert('Enter Plan Name');
@@ -711,7 +738,7 @@ public showCheckBox: boolean = true;
     } 
 
 
-    if(this.grpImpression == undefined){
+    if(this.grpImpression == null){
 
       this.form_validate=0;
       alert('Select GRP Impression');
@@ -957,6 +984,16 @@ public showCheckBox: boolean = true;
                                                       this.planGenarationMsg='Plan genaration completed';
 
                                                      // this.linkedModelListDrp=[];
+
+
+
+
+                                                     //reset Fields Starts
+
+
+
+                                                     
+                                                     //reset Fields End
 
                                                       
                                                       },

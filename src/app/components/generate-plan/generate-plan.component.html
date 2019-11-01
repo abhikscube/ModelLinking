@@ -92,8 +92,8 @@ color: #645e3c;
           <label>
             Model
           </label>
-          <select class="form-control" (change)="onChangeModelList($event.target.value)">
-              <option disabled>Select Model</option>
+          <select class="form-control" (change)="onChangeModelList($event.target.value)" [(ngModel)]="selectedValueForModel" name="selectedValueForModel">
+              <option disabled value="0" >Select Model</option>
               <ng-container *ngFor="let item of linkedModelListDrp;let i = index">
                   <option [value]="item.modelId" *ngIf="item.modelType=='A'">{{item.modelName}}/{{item.modelLinkedWith}}</option>
               </ng-container>
@@ -154,8 +154,8 @@ color: #645e3c;
           <label>
             Existing Plan Name
           </label>
-          <select class="form-control" (change)="onChangePlanlList($event.target.value)">                  
-            <option disabled>Select Existing Plan Name</option>
+          <select class="form-control" (change)="onChangePlanlList($event.target.value)" [(ngModel)]="selecExistingPlanValue" name="selecExistingPlanValue">                  
+            <option disabled value="0">Select Existing Plan Name</option>
              <ng-container *ngFor="let item of planList">
               <option [value]="item.base_market_plan_id">{{item.base_plan_name}}</option>
              </ng-container>
@@ -285,7 +285,7 @@ color: #645e3c;
   
   <div class="clearfix"></div> 
           <button type="submit" class="btn btn-primary" (click)='onSubmitForm()'>Submit</button>
-
+          <button type="submit" class="btn btn-primary" (click)='onCealr()'>Clear</button>
     </div></div></div>
 
 
