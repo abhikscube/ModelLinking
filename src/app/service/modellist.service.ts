@@ -30,42 +30,9 @@ export class ModelListService{
 
 getModelList(): Observable<Modelint>{
    
-    /*
-    
-    
-    this.http.get<Modelint>('http://localhost:8080/prorelevantservice/model/byclient/1').subscribe(data => {
  
-        //this.modellist=Object.keys(data).map(e=>data[e]);
 
-        console.log(data.name);
-
-      });
-*/
-   /*  
-
-this.http.get('http://localhost:8080/prorelevantservice/model/byclient/1').subscribe(data => {
-    console.log('kii',data);
-    this.modellist=data;
-    console.log('huiii',this.modellist);
-    return data;
-    });
-
-    */
-    //console.log('from service', this.http.get('http://localhost:8080/prorelevantservice/model/byclient/1',{responseType: 'json'}));
-
-    
-    
-    
-    //return this.http.get('http://localhost:8080/prorelevantservice/model/byclient/1',{responseType: 'json'});
-
-    /*
-    return this.http.get('http://localhost:8080/prorelevantservice/model/byclient/1').map(res => {
-
-        return res;
-      });
-      */
-
-     return this.http.get<Modelint>('http://192.168.1.20:8080/prorelevantservice/model/byclient/1');
+     return this.http.get<Modelint>('http://localhost:8080/prorelevantservice/model/byclient/1');
 
 }
 

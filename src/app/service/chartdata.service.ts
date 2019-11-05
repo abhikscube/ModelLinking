@@ -21,7 +21,7 @@ export class ChartDataService{
 
     getChartdata(ModelID: number): Observable<any>{
 
-        return this.http.get<any>('http://192.168.1.20:8080/prorelevantservice/marketsim/getgrpvsbranddata/1/'+ModelID)
+        return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getgrpvsbranddata/1/'+ModelID)
 
     }
 

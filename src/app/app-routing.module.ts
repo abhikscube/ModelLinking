@@ -7,6 +7,10 @@ import { LandingpageComponentComponent } from './components/dashboard/landingpag
 import { GeneratePlanComponent } from './components/generate-plan/generate-plan.component';
 import { ProjectLinkModulesComponent } from './components/project-link-modules/project-link-modules.component';
 import {LinkingSimulationComponent} from './components/linking-simulation/linking-simulation.component'
+import { BrandvsgrpgraphComponent } from './components/brandvsgrpgraph/brandvsgrpgraph.component';
+import { MediavsgrpgraphComponent } from './components/mediavsgrpgraph/mediavsgrpgraph.component';
+
+
 
 const routes: Routes = [
   { path: '', component: LandingpageComponentComponent, pathMatch: 'full' },
@@ -14,6 +18,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'plan', component: GeneratePlanComponent },
   { path: 'modulelist', component: ProjectLinkModulesComponent},
+  { path: 'brandvsgrpgraph', component: BrandvsgrpgraphComponent},
+  { path: 'mediavsgrpgraph', component: MediavsgrpgraphComponent}, 
   { path: 'linksim', component: LinkingSimulationComponent}
 ];
 

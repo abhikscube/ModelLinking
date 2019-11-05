@@ -37,6 +37,8 @@ import { ProjectLinkModalComponent } from './components/project-link-modal/proje
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { from } from 'rxjs';
 import { LinkingSimulationComponent } from './components/linking-simulation/linking-simulation.component';
+import { BrandvsgrpgraphComponent } from './components/brandvsgrpgraph/brandvsgrpgraph.component';
+import { MediavsgrpgraphComponent } from './components/mediavsgrpgraph/mediavsgrpgraph.component';
 
 
 
@@ -59,7 +61,9 @@ import { LinkingSimulationComponent } from './components/linking-simulation/link
     GeneratePlanComponent,
     ProjectLinkModulesComponent,
     ProjectLinkModalComponent,
-    LinkingSimulationComponent
+    LinkingSimulationComponent,
+    BrandvsgrpgraphComponent,
+    MediavsgrpgraphComponent
     
   ],
   imports: [
