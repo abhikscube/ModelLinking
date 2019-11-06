@@ -39,6 +39,7 @@ import { from } from 'rxjs';
 import { LinkingSimulationComponent } from './components/linking-simulation/linking-simulation.component';
 import { BrandvsgrpgraphComponent } from './components/brandvsgrpgraph/brandvsgrpgraph.component';
 import { MediavsgrpgraphComponent } from './components/mediavsgrpgraph/mediavsgrpgraph.component';
+import { TimeserisegrpvsmediatypegrpComponent } from './components/timeserisegrpvsmediatypegrp/timeserisegrpvsmediatypegrp.component';
 
 
 
@@ -63,7 +64,8 @@ import { MediavsgrpgraphComponent } from './components/mediavsgrpgraph/mediavsgr
     ProjectLinkModalComponent,
     LinkingSimulationComponent,
     BrandvsgrpgraphComponent,
-    MediavsgrpgraphComponent
+    MediavsgrpgraphComponent,
+    TimeserisegrpvsmediatypegrpComponent
     
   ],
   imports: [

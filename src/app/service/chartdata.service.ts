@@ -28,7 +28,7 @@ export class ChartDataService{
 
     getChartdata_media(ModelID: number,brand_string: string): Observable<any>{
 
-        return this.http.get<any>('http://192.168.1.20:8080/prorelevantservice/marketsim/getmediavsgrpdata/1/'+ModelID+'/'+brand_string)
+        return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getmediavsgrpdata/1/'+ModelID+'/'+brand_string)
 
     }
 
@@ -40,7 +40,7 @@ export class ChartDataService{
 
     getChartdata_time_media_grp(ModelID: number,brand_string: string): Observable<any>{
 
-        return this.http.get<any>('http://192.168.1.20:8080/prorelevantservice/marketsim/getgrpvsmediabytime/1/'+ModelID+'/'+brand_string)
+        return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getgrpvsmediabytime/1/'+ModelID+'/'+brand_string)
 
     }
 
@@ -49,7 +49,7 @@ export class ChartDataService{
 
     getBrand_list(ModelID: number): Observable<any>{
 
-        return this.http.get<any>('http://192.168.1.20:8080/prorelevantservice/marketsim/getbrandlist/1/'+ModelID)
+        return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getbrandlist/1/'+ModelID)
 
     }
 

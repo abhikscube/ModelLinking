@@ -9,6 +9,7 @@ import { ProjectLinkModulesComponent } from './components/project-link-modules/p
 import {LinkingSimulationComponent} from './components/linking-simulation/linking-simulation.component'
 import { BrandvsgrpgraphComponent } from './components/brandvsgrpgraph/brandvsgrpgraph.component';
 import { MediavsgrpgraphComponent } from './components/mediavsgrpgraph/mediavsgrpgraph.component';
+import { TimeserisegrpvsmediatypegrpComponent } from './components/timeserisegrpvsmediatypegrp/timeserisegrpvsmediatypegrp.component';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'modulelist', component: ProjectLinkModulesComponent},
   { path: 'brandvsgrpgraph', component: BrandvsgrpgraphComponent},
   { path: 'mediavsgrpgraph', component: MediavsgrpgraphComponent}, 
+  { path: 'timeserisegrpvsmediatypegrp', component: TimeserisegrpvsmediatypegrpComponent},  
   { path: 'linksim', component: LinkingSimulationComponent}
 ];
 

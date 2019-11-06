@@ -163,7 +163,7 @@
   <div class="frm-bx">
   <label> Model</label> 
   <select class="form-control" (change)="onChangeModelList($event.target.value)">                  
-      <option disabled value="0" >Select a Model</option>
+      <option disabled value="0">Select a Model</option>
        <ng-container *ngFor="let item of modelList">
         <option [value]="item.id">{{item.name}}</option>
        </ng-container>
@@ -221,7 +221,7 @@
   
       <div class="chart">
           <div>
-            <nvd3 [options]="options_Media_GRP" [data]="data_Media_GRP" *ngIf="load_media_grp==2"></nvd3>          </div>
+            <nvd3 [options]="options_time_line_grp_media" [data]="data_time_line_grp_media" *ngIf="load_media_grp==2"></nvd3>          </div>
           <div id="loading" *ngIf="load_media_grp==1"> </div>    
       </div>
   
@@ -230,7 +230,7 @@
   <div class="clearfix"></div>
   <section class="graph-bx-bottom">
   
-  <p> Media VS GRP </p>
+  <p> TimeSeries : GRP(s) by Media Type </p>
   
   </section>
   
