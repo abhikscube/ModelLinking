@@ -6,7 +6,7 @@ import { DataTablesModule } from 'angular-datatables';
 
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars'; //date picker syncfusion.com/kb/9967/how-to-create-an-angular-7-daterangepicker-component
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
-import { MultiSelectModule, CheckBoxSelectionService } from '@syncfusion/ej2-angular-dropdowns';
+import { MultiSelectModule, CheckBoxSelectionService,DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 
 import { AppComponent } from './app.component';
 import { AppheaderComponent } from './components/appheader/appheader.component';
@@ -78,7 +78,8 @@ import { TimeserisegrpvsmediatypegrpComponent } from './components/timeserisegrp
     DateRangePickerModule,
     TreeViewModule,
     NgbModule,
-    MultiSelectModule
+    MultiSelectModule,
+    DropDownListModule
   ],
   providers: [ModelListService,
     PlanlistService,

@@ -149,16 +149,11 @@
     color:#fff;
   }
   
-  
-  
-  
-  
-  
    
      </style>
   
   <section class="graph-bx-a">
-  <div class="col-lg-3 pull-left">
+  <!-- <div class="col-lg-3 pull-left">
   
   <div class="frm-bx">
   <label> Model</label> 
@@ -170,8 +165,41 @@
      </select>
   </div>
   
+  <div class="frm-bx">
+  <div style="width:100%;">
+  <label> Select Model</label> 
+  <div id="modellist">
+     <ejs-dropdownlist id='selectModelList' #selectModelList [dataSource]='modelList' placeholder = 'Select a Model' [fields]='modelsField' (change)="onChangeModelList($event)"></ejs-dropdownlist>
   </div>
+    </div>
+  </div>
+  </div> -->
+ 
   
+
+  <div class="col-lg-3 pull-left">
+  
+      <div class="frm-bx">
+          <div style="width:100%;">
+            <label>
+                Select Model
+            </label>
+             <div id="modellist">
+              <ejs-dropdownlist 
+                  #selectModelList 
+                  id='selectModelList'
+                  [dataSource]='modelList' 
+                  [fields]='modelsField'
+                  placeholder='Select a Model' 
+                  (change)="onChangeModelList($event)">
+                  </ejs-dropdownlist>
+             </div>
+          </div>
+      </div>     
+  </div>
+
+
+
   
   <div class="col-lg-3 pull-left">
   
@@ -186,7 +214,7 @@
                 id='multiselectBrandList'
                 [dataSource]='brand_list' 
                 [fields]='brandsField'
-                [placeholder]='placeholder' 
+                placeholder='Select Brand(s)' 
                 (change)="onChangeMultiBrandListForMediaVsGRP($event)"
                 (removed)="onChangeMultiBrandListForMediaVsGRPTest($event)">
                 </ejs-multiselect>

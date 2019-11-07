@@ -31,9 +31,10 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
   public subBrandListselected:any;
 
   public brandsField: Object = { text: 'value', value: 'id' };
+  public modelsField: Object = { text: 'name', value: 'id' };
 
   @ViewChild('multiselectBrandList') private multiselectBrandList;
-
+  @ViewChild('selectModelList') private selectModelList;
 
   constructor(public ModelListService: ModelListService,public ChartDataService: ChartDataService) { }
 
@@ -66,7 +67,8 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
             axisLabel: 'Time',
             showMaxMin: false,
             tickFormat: function(d){
-                 return d3.time.format('%x')(new Date(d));
+                // return d3.time.format('%x')(new Date(d));
+                return d3.time.format('%B, %y')(new Date(d));
             }
         },
         yAxis: {
@@ -122,10 +124,10 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
 
   }
 
-  onChangeModelList(modelId: number){
+  onChangeModelList(options: any){
 
     this.load_brand_list=1;
-    this.selected_model_id=modelId;
+    this.selected_model_id=this.selectModelList.value;
 
 
     this.multiselectBrandList.selectAll(false);  
@@ -133,7 +135,7 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
     this.brand_list=[];
     this.load_media_grp=0; 
 
-    this.ChartDataService.getBrand_list(modelId).subscribe((brandResponseData)=>{
+    this.ChartDataService.getBrand_list(this.selected_model_id).subscribe((brandResponseData)=>{
       this.brand_list=brandResponseData; 
       this.load_brand_list=2; 
                   
