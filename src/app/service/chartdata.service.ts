@@ -38,6 +38,12 @@ export class ChartDataService{
 
     }
 
+    getChartdata_time_media_grp_weekly(ModelID: number,brand_string: string): Observable<any>{
+
+        return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getgrpvsmediabytime/1/'+ModelID+'/'+brand_string)
+
+    }
+
     getChartdata_time_media_grp(ModelID: number,brand_string: string): Observable<any>{
 
         return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getgrpvsmediabytime/1/'+ModelID+'/'+brand_string)
@@ -45,6 +51,12 @@ export class ChartDataService{
     }
 
 
+
+    getChartdata_time_media_grp_four_weekly(ModelID: number,brand_string: string): Observable<any>{
+
+        return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getgrpvsmediabyfourweek/1/'+ModelID+'/'+brand_string)
+
+    }
 
 
     getBrand_list(ModelID: number): Observable<any>{
@@ -120,7 +132,7 @@ export class ChartDataService{
 
         //return this.http.get<any>('http://localhost:8012/restapi/marketsim_api.php?api_pr_name=romi_simulation&model_id='+ModelID)
 
-       return this.http.get<any>('http://192.168.1.20:8080/prorelevantservice/marketsim/getromivssimulation/1/'+ModelID)
+       return this.http.get<any>('http://localhost:8080/prorelevantservice/marketsim/getromivssimulation/1/'+ModelID)
 
 
     }

@@ -10,6 +10,7 @@ import {LinkingSimulationComponent} from './components/linking-simulation/linkin
 import { BrandvsgrpgraphComponent } from './components/brandvsgrpgraph/brandvsgrpgraph.component';
 import { MediavsgrpgraphComponent } from './components/mediavsgrpgraph/mediavsgrpgraph.component';
 import { TimeserisegrpvsmediatypegrpComponent } from './components/timeserisegrpvsmediatypegrp/timeserisegrpvsmediatypegrp.component';
+import { RomivssimulationComponent } from './components/romivssimulation/romivssimulation.component';
 
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'brandvsgrpgraph', component: BrandvsgrpgraphComponent},
   { path: 'mediavsgrpgraph', component: MediavsgrpgraphComponent}, 
   { path: 'timeserisegrpvsmediatypegrp', component: TimeserisegrpvsmediatypegrpComponent},  
+  { path: 'romivssimulation', component: RomivssimulationComponent},   
   { path: 'linksim', component: LinkingSimulationComponent}
 ];
 

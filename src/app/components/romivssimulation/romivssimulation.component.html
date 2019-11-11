@@ -163,7 +163,7 @@
   <div class="frm-bx">
   <label> Model</label> 
   <select class="form-control" (change)="onChangeModelList($event.target.value)">                  
-      <option disabled value="0" >Select a Model</option>
+      <option value='-1' >Select a Model</option>
        <ng-container *ngFor="let item of modelList">
         <option [value]="item.id">{{item.name}}</option>
        </ng-container>
@@ -176,22 +176,7 @@
   <div class="col-lg-3 pull-left">
   
     <div class="frm-bx">
-        <div style="width:100%;">
-          <label>
-           Select Brand(s)
-          </label>
-           <div id="brandslist">
-            <ejs-multiselect 
-                #multiselectBrandList 
-                id='multiselectBrandList'
-                [dataSource]='brand_list' 
-                [fields]='brandsField'
-                [placeholder]='placeholder' 
-                (change)="onChangeMultiBrandListForMediaVsGRP($event)"
-                (removed)="onChangeMultiBrandListForMediaVsGRPTest($event)">
-                </ejs-multiselect>
-           </div>
-        </div>
+
     </div>
     
     </div>
@@ -221,8 +206,9 @@
   
       <div class="chart">
           <div>
-            <nvd3 [options]="options_Media_GRP" [data]="data_Media_GRP" *ngIf="load_media_grp==2"></nvd3>          </div>
-          <div id="loading" *ngIf="load_media_grp==1"> </div>    
+            <nvd3 [options]="options_romi_simulation" [data]="data_romi_simulation" *ngIf="load_romi_simulation_grp==2"></nvd3>
+          </div>
+          <div id="loading" *ngIf="load_romi_simulation_grp==1"> </div>    
       </div>
   
   </section>
@@ -230,7 +216,7 @@
   <div class="clearfix"></div>
   <section class="graph-bx-bottom">
   
-  <p> Media VS GRP(s) </p>
+  <p> ROMI VS Simulation </p>
   
   </section>
   

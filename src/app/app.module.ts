@@ -40,6 +40,7 @@ import { LinkingSimulationComponent } from './components/linking-simulation/link
 import { BrandvsgrpgraphComponent } from './components/brandvsgrpgraph/brandvsgrpgraph.component';
 import { MediavsgrpgraphComponent } from './components/mediavsgrpgraph/mediavsgrpgraph.component';
 import { TimeserisegrpvsmediatypegrpComponent } from './components/timeserisegrpvsmediatypegrp/timeserisegrpvsmediatypegrp.component';
+import { RomivssimulationComponent } from './components/romivssimulation/romivssimulation.component';
 
 
 
@@ -65,7 +66,8 @@ import { TimeserisegrpvsmediatypegrpComponent } from './components/timeserisegrp
     LinkingSimulationComponent,
     BrandvsgrpgraphComponent,
     MediavsgrpgraphComponent,
-    TimeserisegrpvsmediatypegrpComponent
+    TimeserisegrpvsmediatypegrpComponent,
+    RomivssimulationComponent
     
   ],
   imports: [

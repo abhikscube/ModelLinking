@@ -153,57 +153,44 @@
      </style>
   
   <section class="graph-bx-a">
-  <!-- <div class="col-lg-3 pull-left">
-  
-  <div class="frm-bx">
-  <label> Model</label> 
-  <select class="form-control" (change)="onChangeModelList($event.target.value)">                  
-      <option disabled value="0">Select a Model</option>
-       <ng-container *ngFor="let item of modelList">
-        <option [value]="item.id">{{item.name}}</option>
-       </ng-container>
-     </select>
-  </div>
-  
-  <div class="frm-bx">
-  <div style="width:100%;">
-  <label> Select Model</label> 
-  <div id="modellist">
-     <ejs-dropdownlist id='selectModelList' #selectModelList [dataSource]='modelList' placeholder = 'Select a Model' [fields]='modelsField' (change)="onChangeModelList($event)"></ejs-dropdownlist>
-  </div>
+  <div class="row">
+    <div class="col-lg-3 pull-left">
+      <div class="form-group">
+     
+          <label>
+            Time Seclection
+          </label>
+          
+          <label class="radio-inline">
+            <input type="radio" [(ngModel)]="graph_time" name="graph_time" value="w" (click)="SetTime('w')">WeekLy
+          </label>
+          <label class="radio-inline">
+            <input type="radio" [(ngModel)]="graph_time" name="graph_time" value="fw" (click)="SetTime('fw')">Four Weekly
+          </label>
+       
+      </div>
     </div>
-  </div>
-  </div> -->
- 
-  
-
-  <div class="col-lg-3 pull-left">
-  
+    <div class="col-lg-3 pull-left">
       <div class="frm-bx">
-          <div style="width:100%;">
-            <label>
-                Select Model
-            </label>
-             <div id="modellist">
-              <ejs-dropdownlist 
-                  #selectModelList 
-                  id='selectModelList'
-                  [dataSource]='modelList' 
-                  [fields]='modelsField'
-                  placeholder='Select a Model' 
-                  (change)="onChangeModelList($event)">
-                  </ejs-dropdownlist>
-             </div>
-          </div>
-      </div>     
-  </div>
-
-
-
-  
-  <div class="col-lg-3 pull-left">
-  
-    <div class="frm-bx">
+        <div style="width:100%;">
+          <label>
+              Select Model
+          </label>
+           <div id="modellist">
+            <ejs-dropdownlist 
+                #selectModelList 
+                id='selectModelList'
+                [dataSource]='modelList' 
+                [fields]='modelsField'
+                placeholder='Select a Model' 
+                (change)="onChangeModelList($event)">
+                </ejs-dropdownlist>
+           </div>
+        </div>
+    </div>
+    </div>
+    <div class="col-lg-3 pull-left">
+      <div class="frm-bx">
         <div style="width:100%;">
           <label>
            Select Brand(s)
@@ -221,22 +208,39 @@
            </div>
         </div>
     </div>
-    
     </div>
-  
-  
     <div class="col-lg-3 pull-left">
-  
-      <div class="frm-bx">
-
-      </div>
-  
-      </div>
-  
-      <div class="col-lg-3 pull-left">
       <button type="button" class="help" aria-label="Download Graph as PDF File"> <img class="ic-pdf" src="assets/images/pdf.png">  </button>
-      </div>
+    </div>
+  </div>
   
+    <!-- <div class="col-lg-3 pull-left">
+  
+    
+
+    </div>   -->
+
+  <!-- <div class="col-lg-3 pull-left">
+  
+           
+  </div> -->
+
+
+
+  
+  <!-- <div class="col-lg-3 pull-left">
+  
+    
+    
+    </div> -->
+  
+  
+
+  
+      <!-- <div class="col-lg-3 pull-left">
+      
+      </div>
+   -->
   
   
   

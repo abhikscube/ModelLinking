@@ -29,6 +29,7 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
   public data_time_line_grp_media:any;
   public selected_model_id:any;
   public subBrandListselected:any;
+  public graph_time:any='w';
 
   public brandsField: Object = { text: 'value', value: 'id' };
   public modelsField: Object = { text: 'name', value: 'id' };
@@ -49,7 +50,7 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
         margin : {
           top: 90,
           right: 60,
-          bottom: 50,
+          bottom: 90,
           left: 155
           },          
         useInteractiveGuideline: true,
@@ -66,9 +67,11 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
         xAxis: {
             axisLabel: 'Time',
             showMaxMin: false,
+            ticks:10,
+            rotateLabels: 30,        
             tickFormat: function(d){
-                // return d3.time.format('%x')(new Date(d));
-                return d3.time.format('%B, %y')(new Date(d));
+                 return d3.time.format('%x')(new Date(d));
+                // return d3.time.format('%b, %y')(new Date(d));
             }
         },
         yAxis: {
@@ -77,7 +80,6 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
             tickFormat: function(d){
             return d3.format(',.f')(d*100);
             }
-
         },
         interactiveLayer: {
           dispatch: {},
@@ -146,40 +148,20 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
         
   } 
 
+  SetTime(grapth_time:any){
+   this.graph_time=grapth_time;
+  
+    if(this.multiselectBrandList.value.length){
+        this.geterateGraph();
+    }
+  }
+
+
+
 
   onChangeMultiBrandListForMediaVsGRP(options: any){
 
-    var arr_option=new Array();
-    var brand_string;
-    this.load_media_grp=1
-
-
-  //  console.log(this.multiselectBrandList);
-
-  
-  
-          if(this.multiselectBrandList.value.length){
-
-
-          this.subBrandListselected=this.multiselectBrandList.value.join('~') 
-          console.log('From has value');
-          console.log(this.multiselectBrandList);
-
-          this.ChartDataService.getChartdata_time_media_grp(this.selected_model_id,this.multiselectBrandList.value.join('~')).subscribe((chartMediaResponseData)=>{
-            this.data_time_line_grp_media=chartMediaResponseData;
-            //console.log(chartMediaResponseData);  
-            
-            this.load_media_grp=2;
-          });
-        }else{
-            
-          console.log('From has no value');
-          console.log(this.multiselectBrandList);
-          
-            this.data_time_line_grp_media=[];
-            this.load_media_grp=1; 
-
-        }
+    this.geterateGraph();
   
   }
 
@@ -191,6 +173,60 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
   }
 
 
+public geterateGraph(){
 
+
+  var arr_option=new Array();
+  var brand_string;
+  this.load_media_grp=1
+  console.log(this.graph_time);
+
+//  console.log(this.multiselectBrandList);
+
+
+
+        if(this.multiselectBrandList.value.length){
+
+
+        this.subBrandListselected=this.multiselectBrandList.value.join('~') 
+        console.log('From has value');
+        console.log(this.multiselectBrandList);
+
+        if(this.graph_time=='w'){
+              console.log('Graph Time'+this.graph_time);
+              this.ChartDataService.getChartdata_time_media_grp_weekly(this.selected_model_id,this.multiselectBrandList.value.join('~')).subscribe((chartMediaResponseData)=>{
+                this.data_time_line_grp_media=chartMediaResponseData;
+                //console.log(chartMediaResponseData);  
+                
+                this.load_media_grp=2;
+              });
+
+          }
+
+          if(this.graph_time=='fw'){
+            console.log('Graph Time'+this.graph_time);
+            this.ChartDataService.getChartdata_time_media_grp_four_weekly(this.selected_model_id,this.multiselectBrandList.value.join('~')).subscribe((chartMediaResponseData)=>{
+              this.data_time_line_grp_media=chartMediaResponseData;
+              //console.log(chartMediaResponseData);  
+              
+              this.load_media_grp=2;
+            });
+
+        }
+
+
+
+      }else{
+          
+        console.log('From has no value');
+        console.log(this.multiselectBrandList);
+        
+          this.data_time_line_grp_media=[];
+          this.load_media_grp=1; 
+
+      }
+
+
+}
 
 }
