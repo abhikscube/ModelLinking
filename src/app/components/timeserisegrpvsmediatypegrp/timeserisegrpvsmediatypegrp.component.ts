@@ -2,10 +2,13 @@ import { Component, OnInit,ViewEncapsulation,ViewChild } from '@angular/core';
 import { ChartDataService } from '../../service/chartdata.service';
 import { ModelListService } from '../../service/modellist.service';
 import { enableRipple } from '@syncfusion/ej2-base';
+import * as jsPDF from 'jspdf';
 
 import { Observable } from 'rxjs/Observable';
 
 import { Modelint } from '../../model/modelint';
+
+import * as svg from 'save-svg-as-png';
 
 declare let d3: any;
 
@@ -34,6 +37,9 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
   public brandsField: Object = { text: 'value', value: 'id' };
   public modelsField: Object = { text: 'name', value: 'id' };
 
+  public show_download_grp_loading:number=0;
+  public show_download_grp_btn:number=0;
+
   @ViewChild('multiselectBrandList') private multiselectBrandList;
   @ViewChild('selectModelList') private selectModelList;
 
@@ -49,9 +55,9 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
         height: 456,
         margin : {
           top: 90,
-          right: 60,
+          right: 20,
           bottom: 90,
-          left: 155
+          left: 120
           },          
         useInteractiveGuideline: true,
         //transitionDuration: 350,
@@ -114,7 +120,11 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
           height: null,
           showGuideLine: true,
           svgContainer: null
-        },                   
+        }                        
+    },
+    title: {
+      enable: true,
+      text: "Title for Line Chart"
     }
     }
 
@@ -173,6 +183,97 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
   }
 
 
+
+
+  get_image(){
+
+    //alert('Hiiii');
+
+    this.show_download_grp_btn=0;
+    this.show_download_grp_loading=1;
+
+
+    var svge = document.getElementById("myGraphSvg").getElementsByTagName("svg")[0];
+    //svg.saveSvgAsPng(document.getElementsByClassName("nvd3-svg"), "diagram.png", {scale: 0.5});
+    // svg.saveSvgAsPng(svg, "diagram.png", {scale: 0.5});
+    //svg.saveSvgAsPng(svge, "diagram.png", {scale: 1});
+
+
+    //var svge = document.getElementById("myGraphSvg").getElementsByTagName("svg")[0];
+
+    svg.svgAsPngUri(svge, {}, (uri) => {
+    //console.log('png base 64 encoded', uri);
+
+    this.get_pdf(uri);
+    this.show_download_grp_btn=1;
+    this.show_download_grp_loading=0;
+
+     });
+
+
+  }
+
+
+
+public get_pdf(b64Image){
+
+  var image = new Image();
+
+ 
+  image.src = b64Image;
+
+    var orient={
+      orientation: 'l',
+      unit: 'px',
+      format: 'a3',
+      putOnlyUsedFonts:true
+    };
+
+  var pdf = new jsPDF(orient);
+
+      var margins = {
+        top: 20,
+        bottom: 20,
+        left: 30,
+        right: 20
+    };
+
+    var pdfWidth = pdf.internal.pageSize.width;
+    var pdfHeight = pdf.internal.pageSize.height;
+    var footer_height =  30;
+    var htmlPageRightOffset = 0;
+
+    var outerRacBorder = 2;
+    //var imageDrawableHeight = pdfHeight - margins.top - margins.bottom - footer_height - outerRacBorder;
+   // var imageDrawableWidth = pdfWidth - margins.left - margins.right - outerRacBorder;
+   var imageDrawableHeight = pdf.internal.pageSize.height;
+   var imageDrawableWidth = pdf.internal.pageSize.width;
+  
+
+ 
+
+    var imageSize = this.calculateAspectRatioFit(image.width, image.height, imageDrawableWidth, imageDrawableHeight);    
+    pdf.addImage(image, 'png', 10, 10, 700, 280);
+    
+    pdf.text("Timeseries : GRPs by Brand by Media ", 310, 300);
+    //pdf.autoPrint();
+    pdf.save('Timeseries_GRPs_by_Brand_by_Media.pdf');
+  //pdf.output('dataurlnewwindow');
+
+
+}
+
+public calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
+  if(srcHeight == 0 || srcWidth == 0){
+    return {width: maxWidth, height: maxHeight};
+  }
+
+  var ratio = [maxWidth / srcWidth, maxHeight / srcHeight];
+  var ratio_i = Math.min(ratio[0], ratio[1]);
+
+  return {width: srcWidth * ratio_i, height: srcHeight * ratio_i};
+}
+
 public geterateGraph(){
 
 
@@ -199,6 +300,7 @@ public geterateGraph(){
                 //console.log(chartMediaResponseData);  
                 
                 this.load_media_grp=2;
+                this.show_download_grp_btn=1;
               });
 
           }
@@ -210,6 +312,7 @@ public geterateGraph(){
               //console.log(chartMediaResponseData);  
               
               this.load_media_grp=2;
+              this.show_download_grp_btn=1;
             });
 
         }
@@ -228,5 +331,21 @@ public geterateGraph(){
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

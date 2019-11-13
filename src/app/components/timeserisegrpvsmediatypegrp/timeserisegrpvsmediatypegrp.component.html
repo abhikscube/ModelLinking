@@ -58,7 +58,7 @@
   
   }
   .ic-pdf{
-    width: 50px;
+    width: 30px;
     float: right;
     margin-bottom: 1px;
   
@@ -160,11 +160,12 @@
           <label>
             Time Seclection
           </label>
+          <div style="clear: both;"></div>
           
-          <label class="radio-inline">
-            <input type="radio" [(ngModel)]="graph_time" name="graph_time" value="w" (click)="SetTime('w')">WeekLy
+          <label class="radio-inline pull-left">
+            <input type="radio" [(ngModel)]="graph_time" name="graph_time" value="w" (click)="SetTime('w')">Weekly
           </label>
-          <label class="radio-inline">
+          <label class="radio-inline pull-left">
             <input type="radio" [(ngModel)]="graph_time" name="graph_time" value="fw" (click)="SetTime('fw')">Four Weekly
           </label>
        
@@ -210,40 +211,10 @@
     </div>
     </div>
     <div class="col-lg-3 pull-left">
-      <button type="button" class="help" aria-label="Download Graph as PDF File"> <img class="ic-pdf" src="assets/images/pdf.png">  </button>
+      <button type="button" class="help" aria-label="Download Graph as PDF File" (click)="get_image()"> <img class="ic-pdf" src="assets/images/pdf.png" >  </button>
+      
     </div>
   </div>
-  
-    <!-- <div class="col-lg-3 pull-left">
-  
-    
-
-    </div>   -->
-
-  <!-- <div class="col-lg-3 pull-left">
-  
-           
-  </div> -->
-
-
-
-  
-  <!-- <div class="col-lg-3 pull-left">
-  
-    
-    
-    </div> -->
-  
-  
-
-  
-      <!-- <div class="col-lg-3 pull-left">
-      
-      </div>
-   -->
-  
-  
-  
   </section>
    
   <div class="clearfix"></div>
@@ -253,7 +224,7 @@
   
       <div class="chart">
           <div>
-            <nvd3 [options]="options_time_line_grp_media" [data]="data_time_line_grp_media" *ngIf="load_media_grp==2"></nvd3>          </div>
+            <nvd3 id="myGraphSvg" [options]="options_time_line_grp_media" [data]="data_time_line_grp_media" *ngIf="load_media_grp==2"></nvd3>          </div>
           <div id="loading" *ngIf="load_media_grp==1"> </div>    
       </div>
   
@@ -262,7 +233,7 @@
   <div class="clearfix"></div>
   <section class="graph-bx-bottom">
   
-  <p> TimeSeries : GRP(s) by Media Type </p>
+  <p>Timeseries : GRPs by Brand by Media </p>
   
   </section>
   

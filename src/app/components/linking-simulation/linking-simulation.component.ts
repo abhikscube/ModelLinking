@@ -27,7 +27,7 @@ export class LinkingSimulationComponent implements OnInit {
   public newPlanName:any;
   public simulationName:any;
   public simulationTemplateName:any;
-  public mediaPlanName:any;
+  public mediaPlanName:number;
 
 
 
@@ -358,7 +358,8 @@ public ShowSimulationMsg:string;
       "desc": this.simulationName,
       "simTempId": 9,
       "priceBasePlanId": this.advisorpriceBaseMarketPlanId,
-      "mediaBasePlanId": this.advisormediaBaseMarketPlanId,
+      //"mediaBasePlanId": this.advisormediaBaseMarketPlanId,
+      "mediaBasePlanId": this.mediaPlanName,
       "distBasePlanId": this.advisordistributionBaseMarketPlanId,
       "attributeBaseplanId": this.advisorproductattributesBaseMarketPlanId
     } )
@@ -389,7 +390,8 @@ public ShowSimulationMsg:string;
                         "desc": this.simulationName,
                         "simTempId": 9,
                         "priceBasePlanId": this.consumerpriceBaseMarketPlanId,
-                        "mediaBasePlanId": this.consumermediaBaseMarketPlanId,
+                       // "mediaBasePlanId": this.consumermediaBaseMarketPlanId,
+                        "mediaBasePlanId": this.mediaPlanName,
                         "distBasePlanId": this.consumerdistributionBaseMarketPlanId,
                         "attributeBaseplanId": this.consumerproductattributesBaseMarketPlanId
                       } )
