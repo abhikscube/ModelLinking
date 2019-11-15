@@ -148,29 +148,22 @@
     white-space:nowrap;
     color:#fff;
   }
-  
+.nv-axislabel{
+  font-weight: bold!Important;
+  fill: rgb(146, 1, 70);
+    font-size: 15px!important;
+
+}
+.tick text{
+  fill:red;
+
+}
+     
    
      </style>
   
   <section class="graph-bx-a">
   <div class="row">
-    <div class="col-lg-3 pull-left">
-      <div class="form-group">
-     
-          <label>
-            Time Seclection
-          </label>
-          <div style="clear: both;"></div>
-          
-          <label class="radio-inline pull-left">
-            <input type="radio" [(ngModel)]="graph_time" name="graph_time" value="w" (click)="SetTime('w')">Weekly
-          </label>
-          <label class="radio-inline pull-left">
-            <input type="radio" [(ngModel)]="graph_time" name="graph_time" value="fw" (click)="SetTime('fw')">Four Weekly
-          </label>
-       
-      </div>
-    </div>
     <div class="col-lg-3 pull-left">
       <div class="frm-bx">
         <div style="width:100%;">
@@ -211,7 +204,24 @@
     </div>
     </div>
     <div class="col-lg-3 pull-left">
-      <button type="button" class="help" aria-label="Download Graph as PDF File" (click)="get_image()"> <img class="ic-pdf" src="assets/images/pdf.png" >  </button>
+      <div class="form-group">
+     
+          <label>
+            Frequency
+          </label>
+          <div style="clear: both;"></div>
+          
+          <label class="radio-inline pull-left">
+            <input type="radio" [(ngModel)]="graph_time" name="graph_time" value="w" (click)="SetTime('w')">Weekly
+          </label>
+          <label class="radio-inline pull-left">
+            <input type="radio" [(ngModel)]="graph_time" name="graph_time" value="fw" (click)="SetTime('fw')">Four Weekly
+          </label>
+       
+      </div>
+    </div>  
+    <div class="col-lg-3 pull-left">
+      <button type="button" class="help" aria-label="Download Graph as PDF File" (click)="get_image()" *ngIf="show_download_grp_btn==1"> <img class="ic-pdf" src="assets/images/pdf.png">  </button>
       
     </div>
   </div>
@@ -233,7 +243,7 @@
   <div class="clearfix"></div>
   <section class="graph-bx-bottom">
   
-  <p>Timeseries : GRPs by Brand by Media </p>
+  
   
   </section>
   

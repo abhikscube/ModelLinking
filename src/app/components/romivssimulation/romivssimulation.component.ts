@@ -38,8 +38,8 @@ export class RomivssimulationComponent implements OnInit {
 
             top: 62,
             right: 60,
-            bottom: 218,
-            left: 90
+            bottom: 100,
+            left: 150
 
         },
           type: 'discreteBarChart',
@@ -47,7 +47,24 @@ export class RomivssimulationComponent implements OnInit {
           y: function(d){return d.value;},
           showValues: true,
           valueFormat: function(d){
-              return d3.format(',.4f')(d);
+            //  return d3.format(',.4f')(d);
+
+            // var numberF=d3.format(',.4s');
+
+            // document.write(numberF(1e9).replace(/T/,"B"));
+
+            // return numberF(d);
+
+           var  fcopy = d3.format;   
+           
+           d3.format = function myFormat(){ 
+           var function_ret = fcopy.apply(d3, arguments) 
+                  return (function(args){return function (){ 
+                        return args.apply(d3, arguments).replace(/G/, "B");
+                  }})(function_ret) 
+           } 
+
+            return d3.format(',.4s')(d);
           },
           duration: 500,
           xAxis: {
@@ -56,6 +73,9 @@ export class RomivssimulationComponent implements OnInit {
           },
           yAxis: {
               axisLabel: 'ROMI',
+              tickFormat: function(d){
+                return d3.format(',.4s')(d);
+              },
               axisLabelDistance: -10
           }
       }

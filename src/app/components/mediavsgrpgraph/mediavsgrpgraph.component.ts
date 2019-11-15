@@ -45,12 +45,12 @@ export class MediavsgrpgraphComponent implements OnInit {
     this.options_Media_GRP = {
       chart: {
         type: 'multiBarChart', //multiBarHorizontalChart
-        height: 500,
+        height: 600,
         margin: { 
 
             top: 62,
             right: 20,
-            bottom: 50,
+            bottom: 150,
             left:90
 
         },          
@@ -67,7 +67,7 @@ export class MediavsgrpgraphComponent implements OnInit {
         },
         yAxis: {
             showMaxMin: false,  
-            axisLabel: 'GRP',
+            axisLabel: 'GRPs',
             tickFormat: function(d){
                 return d3.format(',.f')(d);
             }
@@ -86,6 +86,10 @@ export class MediavsgrpgraphComponent implements OnInit {
             return d3.format(',.1f')(d);
           },
           fixedTop: null,
+          offset: {
+            left: 0,
+            top: 0
+          },          
           hidden: false,
           data: null,
           id: "nvtooltip-26623"

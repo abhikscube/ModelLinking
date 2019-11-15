@@ -63,15 +63,27 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
         //transitionDuration: 350,
         x: function(d){return d.x;},
         y: function(d){return d.y;},
-        //yErr: function(d){ return [-Math.abs(d.value * Math.random() * 0.3), Math.abs(d.value * Math.random() * 0.3)] },
         showControls: true,
         showValues: true,
+        valueFormat: function(d){
+
+         var  fcopy = d3.format;   
+         
+         d3.format = function myFormat(){ 
+         var function_ret = fcopy.apply(d3, arguments) 
+                return (function(args){return function (){ 
+                      return args.apply(d3, arguments).replace(/G/, "B");
+                }})(function_ret) 
+         } 
+
+          return d3.format(',.4s')(d);
+        },        
        // duration: 500,
         showLegend: true,
         showYAxis: true,
         showXAxis: true,
         xAxis: {
-            axisLabel: 'Time',
+            axisLabel: 'Date',
             showMaxMin: false,
             ticks:10,
             rotateLabels: 30,        
@@ -81,7 +93,7 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
             }
         },
         yAxis: {
-            axisLabel: 'GRP',
+            axisLabel: 'GRPs',
             showMaxMin: false,
             tickFormat: function(d){
             return d3.format(',.f')(d*100);
@@ -99,6 +111,9 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
             enabled: true,
             hideDelay: 0,
             headerEnabled: true,
+            headerFormatter:function(d, i) {
+              return 'Media values on '+d3.time.format('%x')(new Date(d));
+              },
             valueFormatter: function(d,i){
                 return d3.format(',.1f')(d*100,i);
 
@@ -173,6 +188,8 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
 
     this.geterateGraph();
   
+
+    console.log(this.multiselectBrandList);
   }
 
   onRemoveb(options: any){
@@ -188,9 +205,9 @@ export class TimeserisegrpvsmediatypegrpComponent implements OnInit {
   get_image(){
 
     //alert('Hiiii');
-
+    console.log(this.show_download_grp_btn);
     this.show_download_grp_btn=0;
-    this.show_download_grp_loading=1;
+    //this.show_download_grp_loading=1;
 
 
     var svge = document.getElementById("myGraphSvg").getElementsByTagName("svg")[0];
@@ -250,16 +267,39 @@ public get_pdf(b64Image){
    var imageDrawableWidth = pdf.internal.pageSize.width;
   
 
- 
+   pdf.setFontSize(22);
+   if(this.graph_time=='w')
+   pdf.text("Timeseries : GRPs by Brand by Media ( Weekly )", 320,30);
+   else
+   pdf.text("Timeseries : GRPs by Brand by Media ( Four Weekly )", 320,30); 
 
     var imageSize = this.calculateAspectRatioFit(image.width, image.height, imageDrawableWidth, imageDrawableHeight);    
-    pdf.addImage(image, 'png', 10, 10, 700, 280);
+    pdf.addImage(image, 'png', 50, 40, 700, 280);
     
-    pdf.text("Timeseries : GRPs by Brand by Media ", 310, 300);
-    //pdf.autoPrint();
-    pdf.save('Timeseries_GRPs_by_Brand_by_Media.pdf');
-  //pdf.output('dataurlnewwindow');
+    //pdf.text("Timeseries : GRPs by Brand by Media ", 310, 300);
 
+    pdf.setFontSize(10);
+    pdf.text("Selected Model : "+this.selectModelList.text, 30, 330);
+    pdf.text("Selected Brand(s) :  "+this.multiselectBrandList.text, 30, 350);
+
+
+    // if(this.graph_time=='w')
+    // pdf.text("Time Seclection Weekly ", 310, 360);
+    // else
+    // pdf.text("Time Seclection Four Weekly ", 310, 360); 
+
+    //pdf.autoPrint();
+   // pdf.save('Timeseries_GRPs_by_Brand_by_Media.pdf');
+  // pdf.output('dataurlnewwindow');
+
+
+//   let dataSrc = pdf.output("datauristring");
+// let win = window.open("", "myWindow");
+// win.document.write("<html><head><title>jsPDF</title></head><body><embed src=" + 
+//     dataSrc + "></embed></body></html>");
+
+
+window.open(URL.createObjectURL(pdf.output("blob")));
 
 }
 

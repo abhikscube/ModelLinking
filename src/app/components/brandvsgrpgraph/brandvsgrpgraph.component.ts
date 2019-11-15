@@ -55,7 +55,7 @@ export class BrandvsgrpgraphComponent implements OnInit {
             rotateLabels: 10      
         },
         yAxis: {
-            axisLabel: 'GRP',
+            axisLabel: 'GRPs',
             showMaxMin: false,
             tickFormat: function(d){
                 return d3.format(',.f')(d);
