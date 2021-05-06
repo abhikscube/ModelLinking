@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-
+//test
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   modeldataList: any;
